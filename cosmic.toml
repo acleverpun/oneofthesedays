@@ -1,0 +1,9 @@
+[actions]
+build = "moonc -t dist ."
+clean = "rm -r ./dist"
+run = "love dist"
+start = "moonc -w -t dist ."
+
+[dependencies.git.hump]
+path = "./vendor/hump"
+version = "https://github.com/vrld/hump.git"

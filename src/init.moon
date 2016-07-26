@@ -1,3 +1,5 @@
+gamestate = require 'vendor.hump.gamestate'
+
 love.load = () ->
 	love.graphics.setNewFont(12)
 	love.graphics.setBackgroundColor(0 ,0, 0)

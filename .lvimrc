@@ -1,1 +1,1 @@
-let g:makeprg = 'love .'
+let g:makeprg = 'cpm run'
