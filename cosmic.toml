@@ -1,9 +1,12 @@
 [actions]
-build = "moonc -t dist ."
-clean = "rm -r ./dist"
-run = "love dist"
-start = "moonc -w -t dist ."
+build = "build/build.sh"
+clean = "build/clean.sh"
+run = "build/run.sh"
+watch = "build/run.sh"
 
 [dependencies.git.hump]
-path = "./vendor/hump"
+path = "vendor/hump"
 version = "https://github.com/vrld/hump.git"
+
+[devDependencies.luarocks]
+luasocket = "*"
