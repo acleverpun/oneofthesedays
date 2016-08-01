@@ -1,35 +1,26 @@
 gamestate = require 'vendor/hump/gamestate'
 suit = require 'vendor/SUIT'
-State = require 'lib/states/state'
 GameState = require 'lib/states/game'
+GuiState = require 'lib/states/gui'
 
-class TitleState extends State
+class TitleState extends GuiState
 	update: () =>
-		if super.draw then super()
-
-		suit.layout\reset(0, 0)
+		super()
 
 		suit.layout\row(0, 200)
 
-		buttonStart = suit.Button('Start', suit.layout\row(200, 20))
-		suit.layout\row(0, 20)
-		buttonQuit = suit.Button('Quit', suit.layout\row(200, 20))
+		self.buttonStart = suit.Button('Start', suit.layout\row(200, 20))
+		self.buttonQuit = suit.Button('Quit', suit.layout\row(200, 20))
 
-		if buttonStart.hit then gamestate.push(GameState())
-		if buttonQuit.hit then love.event.quit()
+		if self.buttonStart.hit then gamestate.switch(GameState())
+		if self.buttonQuit.hit then love.event.quit()
 
 	draw: () =>
-		if super.draw then super()
-
-		suit.draw()
+		super()
 
 		love.graphics.print({ { 0, 150, 200 }, 'One of these days...' }, 200, 100)
 
 	keypressed: (key) =>
-		if super.keypressed then super(key)
-		suit.keypressed(key)
-		if key == 'escape' then love.event.quit()
+		super(key)
 
-	textinput: (text) =>
-		if super.textinput then super(text)
-		suit.textinput(key)
+		if key == 'escape' then love.event.quit()
