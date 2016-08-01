@@ -1,15 +1,13 @@
-gamestate = require 'vendor/hump/gamestate'
-suit = require 'vendor/SUIT'
 GuiState = require 'lib/states/gui'
 
 class GameState extends GuiState
 	update: () =>
 		super()
 
-		suit.layout\row(0, 200)
+		@gui.layout\row(0, 200)
 
-		@buttonResume = suit.Button('Resume', suit.layout\row(200, 20))
-		@buttonQuit = suit.Button('Quit', suit.layout\row(200, 20))
+		@buttonResume = @gui\Button('Resume', @gui.layout\row(200, 20))
+		@buttonQuit = @gui\Button('Quit', @gui.layout\row(200, 20))
 
 		if @buttonResume.hit then @unpause()
 		if @buttonQuit.hit then love.event.quit()
@@ -24,4 +22,4 @@ class GameState extends GuiState
 		if key == 'escape' then @unpause()
 
 	unpause: () =>
-		gamestate.pop()
+		@gamestate.pop()

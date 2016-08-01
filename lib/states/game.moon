@@ -1,4 +1,3 @@
-gamestate = require 'vendor/hump/gamestate'
 State = require('lib/states/state')
 PauseState = require('lib/states/pause')
 
@@ -8,4 +7,4 @@ class GameState extends State
 
 	keypressed: (key) =>
 		super(key)
-		if key == 'escape' then gamestate.push(PauseState())
+		if key == 'escape' then @gamestate.push(PauseState())

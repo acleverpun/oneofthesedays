@@ -2,15 +2,18 @@ suit = require 'vendor/SUIT'
 State = require 'lib/states/state'
 
 class GuiState extends State
+	enter: () =>
+		@gui = suit.new()
+
 	update: () =>
-		suit.layout\reset(0, 0, 20, 20)
+		@gui.layout\reset(0, 0, 20, 20)
 
 	draw: () =>
-		suit.draw()
+		@gui\draw()
 
 	keypressed: (key) =>
 		super(key)
-		suit.keypressed(key)
+		@gui\keypressed(key)
 
 	textinput: (text) =>
-		suit.textinput(text)
+		@gui\textinput(text)
