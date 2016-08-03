@@ -1,3 +1,6 @@
+require 'src/debug'
+require 'vendor/lovetoys/lovetoys'
+
 gamestate = require 'vendor/hump/gamestate'
 TitleState = require 'lib/states/title'
 

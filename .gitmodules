@@ -4,3 +4,6 @@
 [submodule "vendor/SUIT"]
 	path = vendor/SUIT
 	url = https://github.com/vrld/SUIT.git
+[submodule "vendor/lovetoys"]
+	path = vendor/lovetoys
+	url = https://github.com/lovetoys/lovetoys.git
