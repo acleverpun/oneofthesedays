@@ -1,4 +1,5 @@
 gamestate = require 'vendor/hump/gamestate'
+{ :EventManager } = require('vendor/lovetoys/lovetoys')
 
 class State
 	new: () =>
