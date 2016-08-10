@@ -19,7 +19,7 @@ class TitleState extends GuiState
 
 	keypressed: (key) =>
 		super(key)
-		if key == 'enter' then @\startGame()
+		if key == 'return' then @\startGame()
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>

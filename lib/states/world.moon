@@ -1,7 +1,11 @@
 State = require('lib/states/state')
 PauseState = require('lib/states/pause')
+Player = require('lib/entities/player')
 
 class GameState extends State
+	init: () =>
+		player = Player()
+
 	draw: () =>
 		love.graphics.print('hi', 200, 100)
 
