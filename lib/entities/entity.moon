@@ -1,12 +1,4 @@
 { Entity: ToysEntity } = require('vendor/lovetoys/lovetoys')
+ToysProxy = require('lib/toys-proxy')
 
-class Entity
-	new: (parent) =>
-		@proxy = ToysEntity(parent)
-
-for key, value in pairs ToysEntity.__instanceDict
-	if type(value) == 'function'
-		Entity.__base[key] = (...) =>
-			@proxy[key](@proxy, ...)
-
-return Entity
+class Entity extends ToysProxy(ToysEntity)
