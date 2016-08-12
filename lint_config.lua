@@ -1,7 +1,8 @@
 return {
   whitelist_globals = {
     ['.'] = {
-      'love'
+      'love',
+      'p'
     }
   }
 }
