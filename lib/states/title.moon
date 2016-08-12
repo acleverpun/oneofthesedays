@@ -1,5 +1,5 @@
 GuiState = require 'lib/states/gui'
-WorldState = require 'lib/states/world'
+GameState = require 'lib/states/game'
 
 class TitleState extends GuiState
 	update: () =>
@@ -23,7 +23,7 @@ class TitleState extends GuiState
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
-		@gamestate.switch(WorldState())
+		@gamestate.switch(GameState())
 
 	quitGame: () =>
 		love.event.quit()

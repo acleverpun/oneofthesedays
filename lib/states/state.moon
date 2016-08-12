@@ -1,5 +1,5 @@
 gamestate = require 'vendor/hump/gamestate'
-{ :EventManager } = require('vendor/lovetoys/lovetoys')
+EventManager = require('lib/event-manager')
 
 class State
 	new: () =>
