@@ -9,7 +9,7 @@ class State
 		@events = EventManager()
 		@states = states
 
-		debugSystem = DebugSystem()
+		debugSystem = DebugSystem(@)
 		@engine\addSystem(debugSystem, 'update')
 		@engine\addSystem(debugSystem, 'draw')
 		@engine\startSystem('DebugSystem')

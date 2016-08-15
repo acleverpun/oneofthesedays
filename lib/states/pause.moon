@@ -1,8 +1,8 @@
 GuiState = require 'lib/states/gui'
 
-class GameState extends GuiState
-	update: () =>
-		super()
+class PauseState extends GuiState
+	update: (dt) =>
+		super(dt)
 
 		@gui.layout\row(0, love.graphics.getHeight() / 2)
 
