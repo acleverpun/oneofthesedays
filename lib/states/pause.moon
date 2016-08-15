@@ -21,4 +21,4 @@ class GameState extends GuiState
 		super(key)
 
 	unpause: () =>
-		@gamestate.pop()
+		@states.pop()

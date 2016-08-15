@@ -2,7 +2,7 @@ require 'src/debug'
 lovetoys = require 'vendor/lovetoys/lovetoys'
 lovetoys.initialize()
 
-gamestate = require 'vendor/hump/gamestate'
+states = require 'vendor/hump/gamestate'
 TitleState = require 'lib/states/title'
 
 love.load = () ->
@@ -10,6 +10,5 @@ love.load = () ->
 	love.graphics.setBackgroundColor(0 ,0, 0)
 	love.graphics.setColor(255, 255, 255)
 
-	gamestate.registerEvents()
-	state = TitleState()
-	gamestate.switch(state)
+	states.registerEvents()
+	states.switch(TitleState())

@@ -23,7 +23,7 @@ class TitleState extends GuiState
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
-		@gamestate.switch(GameState())
+		@states.switch(GameState())
 
 	quitGame: () =>
 		love.event.quit()
