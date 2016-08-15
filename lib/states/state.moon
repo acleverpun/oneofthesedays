@@ -1,6 +1,7 @@
 states = require 'vendor/hump/gamestate'
 Engine = require('lib/engine')
 EventManager = require('lib/event-manager')
+DebugSystem = require('lib/systems/debug')
 
 class State
 	new: () =>
@@ -8,11 +9,16 @@ class State
 		@events = EventManager()
 		@states = states
 
-	draw: () =>
-		@engine\draw(dt)
+		debugSystem = DebugSystem()
+		@engine\addSystem(debugSystem, 'update')
+		@engine\addSystem(debugSystem, 'draw')
+		@engine\startSystem('DebugSystem')
 
 	update: (dt) =>
 		@engine\update(dt)
+
+	draw: () =>
+		@engine\draw()
 
 	keypressed: (key) =>
 		if key == 'q' then love.event.quit()
