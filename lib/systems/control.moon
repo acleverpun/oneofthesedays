@@ -3,12 +3,11 @@ System = require('lib/systems/system')
 class ControlSystem extends System
 	update: (dt) =>
 		for entity in *@getTargets()
-			{ :controllable, :movable, :position } = entity\getAll()
+			{ :controllable } = entity\getAll()
 
-			for _, control in pairs(controllable.controls)
-				control\update()
+			for name, control in pairs(controllable.controls)
+				control\update(dt)
 
-			position.x += movable.velocity * controllable.controls.horizontal() * dt
-			position.y += movable.velocity * controllable.controls.vertical() * dt
+			entity\control(dt)
 
-	requires: () => { 'Controllable', 'Movable', 'Position' }
+	requires: () => { 'Controllable' }

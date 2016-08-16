@@ -9,7 +9,7 @@ class Player extends Entity
 	new: (x, y) =>
 		super()
 
-		velocity = 100
+		velocity = 200
 		width = 50
 		height = 50
 
@@ -28,3 +28,8 @@ class Player extends Entity
 					\addButtonPair(tactile.keys('h'), tactile.keys('l'))
 			}),
 		})
+
+	control: (dt) =>
+		{ :controllable, :movable, :position } = @getAll()
+		position.x += movable.velocity * controllable.controls.horizontal() * dt
+		position.y += movable.velocity * controllable.controls.vertical() * dt
