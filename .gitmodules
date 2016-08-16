@@ -7,3 +7,6 @@
 [submodule "vendor/lovetoys"]
 	path = vendor/lovetoys
 	url = https://github.com/rosshadden/lovetoys.git
+[submodule "vendor/tactile"]
+	path = vendor/tactile
+	url = https://github.com/tesselode/tactile.git

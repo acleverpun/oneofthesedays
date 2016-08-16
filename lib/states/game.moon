@@ -2,6 +2,7 @@ State = require('lib/states/state')
 PauseState = require('lib/states/pause')
 Player = require('lib/entities/player')
 DrawSystem = require('lib/systems/draw')
+ControlSystem = require('lib/systems/control')
 
 class GameState extends State
 	new: () =>
@@ -10,6 +11,7 @@ class GameState extends State
 		@player = Player(400, 400)
 
 		@engine\addSystem(DrawSystem())
+		@engine\addSystem(ControlSystem())
 		@engine\addEntity(@player)
 
 	draw: () =>

@@ -1,6 +1,7 @@
 [actions]
 build = "build/build.sh"
 clean = "build/clean.sh"
+lint = "build/lint.sh"
 run = "build/run.sh"
 watch = "build/run.sh"
 
