@@ -1,4 +1,4 @@
 { Entity: ToysEntity } = require('vendor/lovetoys/lovetoys')
-ToysProxy = require('lib/toys-proxy')
+ToysProxy = require('lib/utils/shims/lovetoys-proxy')
 
 class Entity extends ToysProxy(ToysEntity)

@@ -1,11 +1,10 @@
-(ProxyClass) ->
-	ToysProxy = class
-		@__inherited: (child) =>
-			child.name = child.__name
+Middleclass = require('lib/utils/shims/middleclass')
 
-		new: (parent) =>
-			@proxy = ProxyClass(parent)
-			@class = @@
+(ProxyClass) ->
+	ToysProxy = class extends Middleclass
+		new: (...) =>
+			super()
+			@proxy = ProxyClass(...)
 
 	for key, value in pairs ProxyClass.__instanceDict
 		if type(value) == 'function'

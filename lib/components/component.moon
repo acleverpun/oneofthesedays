@@ -1,4 +1,3 @@
-{ Component: ToysComponent } = require('vendor/lovetoys/lovetoys')
-ToysProxy = require('lib/toys-proxy')
+Middleclass = require('lib/utils/shims/middleclass')
 
-class Component extends ToysProxy(ToysComponent)
+class Component extends Middleclass
