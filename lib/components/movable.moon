@@ -1,5 +1,5 @@
 Component = require('lib/components/component')
 
 class Movable extends Component
-	new: (@velocity) =>
+	new: (@speed, @runSpeed) =>
 		super()

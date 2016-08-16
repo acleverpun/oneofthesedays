@@ -9,14 +9,15 @@ class Player extends Entity
 	new: (x, y) =>
 		super()
 
-		velocity = 200
+		speed = 100
+		runSpeed = speed * 4
 		width = 50
 		height = 50
 
 		@addMultiple({
 			Position(x, y),
 			Drawable(width, height, { 255, 100, 100 }),
-			Movable(velocity),
+			Movable(speed, runSpeed),
 			Controllable({
 				vertical: with tactile.newControl()
 					\addButtonPair(tactile.keys('up'), tactile.keys('down'))
@@ -26,10 +27,21 @@ class Player extends Entity
 					\addButtonPair(tactile.keys('left'), tactile.keys('right'))
 					\addButtonPair(tactile.keys('a'), tactile.keys('d'))
 					\addButtonPair(tactile.keys('h'), tactile.keys('l'))
+				run: with tactile.newControl()
+					\addButton(tactile.keys('lshift', 'rshift'))
+				attack: with tactile.newControl()
+					\addButton(tactile.keys('space'))
+				use: with tactile.newControl()
+					\addButton(tactile.keys('return'))
 			}),
 		})
 
 	control: (dt) =>
 		{ :controllable, :movable, :position } = @getAll()
-		position.x += movable.velocity * controllable.controls.horizontal() * dt
-		position.y += movable.velocity * controllable.controls.vertical() * dt
+
+		controls = controllable.controls
+		speed = movable.speed
+
+		if controls.run\isDown() then speed = movable.runSpeed
+		position.x += speed * controls.horizontal() * dt
+		position.y += speed * controls.vertical() * dt
