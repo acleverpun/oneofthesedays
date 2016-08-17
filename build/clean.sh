@@ -2,4 +2,4 @@
 
 rm -r dist
 mkdir dist
-ln -s ../vendor dist/vendor
+ln -s ../{assets,vendor} dist/

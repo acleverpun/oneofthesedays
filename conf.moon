@@ -7,8 +7,5 @@ love.conf = (conf) ->
 
 	conf.window.title = 'One of these days'
 
-	conf.modules.audio = false
-	conf.modules.joystick = false
-
 	localConf = 'local-conf'
 	if testFile(localConf .. '.lua') then require(localConf)(conf)

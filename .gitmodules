@@ -10,3 +10,6 @@
 [submodule "vendor/tactile"]
 	path = vendor/tactile
 	url = https://github.com/tesselode/tactile.git
+[submodule "vendor/wave"]
+	path = vendor/wave
+	url = https://github.com/Ulydev/wave.git
