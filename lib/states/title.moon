@@ -1,15 +1,15 @@
-audio = require 'vendor/wave/wave'
+Audio = require 'lib/audio'
 GuiState = require 'lib/states/gui'
 GameState = require 'lib/states/game'
 
 class TitleState extends GuiState
 	new: () =>
 		super()
-		@song = audio\newSource('assets/foo.wav', 'stream')
+		@music = Audio('assets/music.wav', 'stream')
 
 	enter: () =>
 		super()
-		status, err = pcall(() -> @song\play())
+		@music\play()
 
 	update: () =>
 		super()
