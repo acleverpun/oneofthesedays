@@ -5,7 +5,8 @@ GameState = require 'lib/states/game'
 class TitleState extends GuiState
 	new: () =>
 		super()
-		@music = Audio('assets/music.wav', 'stream')
+		@music = Audio('vendor/wave/music.wav', 'stream')
+		@sound = Audio('vendor/wave/sound.wav', 'static')
 
 	enter: () =>
 		super()
@@ -33,6 +34,7 @@ class TitleState extends GuiState
 
 	startGame: () =>
 		@states.switch(GameState())
+		@sound\play()
 
 	quitGame: () =>
 		love.event.quit()
