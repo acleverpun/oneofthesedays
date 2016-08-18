@@ -6,6 +6,7 @@ class TitleState extends GuiState
 	new: () =>
 		super()
 		@music = Audio('vendor/wave/music.wav', 'stream')
+		@music\getSound()\setLooping(true)
 		@sound = Audio('vendor/wave/sound.wav', 'static')
 
 	enter: () =>
@@ -33,7 +34,7 @@ class TitleState extends GuiState
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
-		@states.switch(GameState())
+		@states.switch(GameState('assets/maps/sample_map.lua'))
 		@sound\play()
 
 	quitGame: () =>
