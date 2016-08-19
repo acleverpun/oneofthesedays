@@ -11,12 +11,15 @@ class GameState extends State
 		super()
 
 		@map = STI(@mapName)
-		@player = Player(400, 400)
 
-		spriteLayer = MapLayer(@map, 'sprites')
-		spriteLayer.engine\addSystem(DrawSystem())
-		spriteLayer.engine\addSystem(ControlSystem())
-		spriteLayer.engine\addEntity(@player)
+		for entity in *@map.layers.entities.objects
+			if entity.name == 'player'
+				@player = Player(entity.x, entity.y - @map.tileheight)
+
+		entityLayer = MapLayer(@map, 3)
+		entityLayer.engine\addSystem(DrawSystem())
+		entityLayer.engine\addSystem(ControlSystem())
+		entityLayer.engine\addEntity(@player)
 
 	update: (dt) =>
 		super(dt)

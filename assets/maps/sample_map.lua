@@ -8,7 +8,7 @@ return {
   height = 100,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 1,
+  nextobjectid = 2,
   properties = {},
   tilesets = {
     {
@@ -63,6 +63,32 @@ return {
       encoding = "base64",
       compression = "zlib",
       data = "eJzt2QFOgmAYgGGUtrIu0jFKO0frHtUxirpGF2l5omjCoj9IRMhv9Tzbtwnq5v53PzrJMgAAAAAAGM9inmWn1ZzNvz73PDvMZ/rPlmWDVTVXPXo85eX5xjCOel+sGnOR7JE+PTTZT93hMmnRtkf0mN6yo0M9d+WsZ5t51GNyt9WanyQdjsu5H/D9occ46i71pC0+6BGLHrHoEYsesegRix6x6BGLHrGkPW7KtS+q9dfj96U91uXaX9sfB9N2vXrLN12aw3fF7PN/wJeW/z6GcD9quCnWTo/hxlq75j57bTzuGtqN1cOeGIcesegRS9913Pa69PnFUZad591Du6l6MEzXOqbn7Y/pFT/8Nk3Pp8cPyXHbfXR2s881Ztt77Y/dTdmD3ekRix6x6BGLHrHo8XfoAQAAAAAAAAAAAAAAAAAAAAAAAADU3gEBFX5U"
+    },
+    {
+      type = "objectgroup",
+      name = "entities",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 1,
+          name = "player",
+          type = "Player",
+          shape = "rectangle",
+          x = 512,
+          y = 704,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 1766,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "tilelayer",
