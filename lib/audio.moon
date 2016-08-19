@@ -8,7 +8,7 @@ class Audio
 
 	proxy: (method, ...) =>
 		args = ...
-		pcall(() -> @sound\play(args))
+		-- pcall(() -> @sound\play(args))
 
 	play: (...) => @proxy('play', ...)
 	stop: (...) => @proxy('stop', ...)

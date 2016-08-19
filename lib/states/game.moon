@@ -1,21 +1,21 @@
 STI = require('vendor/sti/sti')
 State = require('lib/states/state')
+MapLayer = require('lib/map-layer')
 PauseState = require('lib/states/pause')
 Player = require('lib/entities/player')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
 
 class GameState extends State
-	new: (mapName) =>
+	new: (@mapName) =>
 		super()
 
-		@map = STI(mapName)
+		@map = STI(@mapName)
 
-		@player = Player(400, 400)
-
-		@engine\addSystem(DrawSystem())
-		@engine\addSystem(ControlSystem())
-		@engine\addEntity(@player)
+		spriteLayer = MapLayer(@map, 'sprites')
+		spriteLayer.engine\addSystem(DrawSystem())
+		spriteLayer.engine\addSystem(ControlSystem())
+		spriteLayer.engine\addEntity(Player(400, 400))
 
 		@windowWidth = love.graphics.getWidth()
 		@windowHeight = love.graphics.getHeight()
