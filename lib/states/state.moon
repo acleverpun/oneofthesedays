@@ -12,6 +12,7 @@ class State
 		debugSystem = DebugSystem(@)
 		@engine\addSystem(debugSystem, 'update')
 		@engine\addSystem(debugSystem, 'draw')
+		@engine\stopSystem(DebugSystem.name)
 
 	update: (dt) =>
 		@engine\update(dt)
@@ -21,4 +22,6 @@ class State
 
 	keypressed: (key) =>
 		if key == 'q' then love.event.quit()
-		if key == '`' then @engine\toggleSystem('DebugSystem')
+		if key == '`'
+			@engine\toggleSystem(DebugSystem.name)
+			export DEBUG = not DEBUG
