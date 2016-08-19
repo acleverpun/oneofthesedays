@@ -2,6 +2,7 @@ STI = require('vendor/sti/sti')
 State = require('lib/states/state')
 MapLayer = require('lib/map-layer')
 PauseState = require('lib/states/pause')
+entities = require('lib/entities')
 Player = require('lib/entities/player')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
@@ -12,9 +13,10 @@ class GameState extends State
 
 		@map = STI(@mapName)
 
-		for entity in *@map.layers.entities.objects
-			if entity.name == 'player'
-				@player = Player(entity.x, entity.y - @map.tileheight)
+		for object in *@map.layers.entities.objects
+			entity = entities(object.type)(object.x, object.y - @map.tileheight)
+			if object.name == 'player'
+				@player = entity
 
 		entityLayer = MapLayer(@map, 3)
 		entityLayer.engine\addSystem(DrawSystem())

@@ -1,5 +1,5 @@
 require('src/debug')
-export _ = require('vendor/lodash/src/lodash')
+export _ = require('lib/utils/lodash')
 lovetoys = require('vendor/lovetoys/lovetoys')
 lovetoys.initialize()
 

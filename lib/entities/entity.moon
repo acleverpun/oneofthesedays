@@ -7,9 +7,6 @@ class Entity extends ToysProxy(ToysEntity)
 		result = {}
 
 		for key, value in pairs(components)
-			first = string.lower(string.sub(key, 1, 1))
-			rest = string.sub(key, 2)
-			lowerKey = "#{first}#{rest}"
-			result[lowerKey] = value
+			result[_.lowerFirst(key)] = value
 
 		return result
