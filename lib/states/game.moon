@@ -25,9 +25,11 @@ class GameState extends State
 		@map\update(dt)
 
 	draw: () =>
-		super()
 		@map\setDrawRange(-0, -0, @windowWidth, @windowHeight)
 		@map\draw()
+
+		super()
+
 		love.graphics.print({ { 255, 255, 255 }, 'hi' }, 200, 100)
 
 	keypressed: (key) =>
