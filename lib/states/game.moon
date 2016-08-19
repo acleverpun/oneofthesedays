@@ -40,7 +40,7 @@ class GameState extends State
 		love.graphics.push()
 		love.graphics.scale(scale)
 		love.graphics.translate(-tx, -ty)
-		@map\setDrawRange(0, 0, windowWidth, windowHeight)
+		@map\setDrawRange(tx, ty, windowWidth, windowHeight)
 		@map\draw()
 
 		if DEBUG
