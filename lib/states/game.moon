@@ -3,7 +3,6 @@ State = require('lib/states/state')
 MapLayer = require('lib/map-layer')
 PauseState = require('lib/states/pause')
 entities = require('lib/entities')
-Player = require('lib/entities/player')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
 
@@ -14,7 +13,7 @@ class GameState extends State
 		@map = STI(@mapName)
 
 		for object in *@map.layers.entities.objects
-			entity = entities[object.type](object.x, object.y - @map.tileheight)
+			entity = entities\get(object.type)(object.x, object.y - @map.tileheight)
 			if object.name == 'player'
 				@player = entity
 
