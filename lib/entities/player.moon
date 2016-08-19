@@ -10,9 +10,9 @@ class Player extends Entity
 		super()
 
 		speed = 100
-		runSpeed = speed * 4
-		width = 50
-		height = 50
+		runSpeed = speed * 8
+		width = 16
+		height = 16
 
 		@addMultiple({
 			Position(x, y),

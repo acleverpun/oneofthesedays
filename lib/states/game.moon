@@ -11,26 +11,33 @@ class GameState extends State
 		super()
 
 		@map = STI(@mapName)
+		@player = Player(400, 400)
 
 		spriteLayer = MapLayer(@map, 'sprites')
 		spriteLayer.engine\addSystem(DrawSystem())
 		spriteLayer.engine\addSystem(ControlSystem())
-		spriteLayer.engine\addEntity(Player(400, 400))
-
-		@windowWidth = love.graphics.getWidth()
-		@windowHeight = love.graphics.getHeight()
+		spriteLayer.engine\addEntity(@player)
 
 	update: (dt) =>
 		super(dt)
 		@map\update(dt)
 
 	draw: () =>
-		@map\setDrawRange(-0, -0, @windowWidth, @windowHeight)
+		scale = 2
+		windowWidth = love.graphics.getWidth()
+		windowHeight = love.graphics.getHeight()
+		playerPosition = @player\get('Position')
+
+		tx = math.floor(playerPosition.x - windowWidth / scale / 2)
+		ty = math.floor(playerPosition.y - windowHeight / scale / 2)
+
+		love.graphics.scale(scale)
+		love.graphics.translate(-tx, -ty)
+
+		@map\setDrawRange(0, 0, windowWidth, windowHeight)
 		@map\draw()
 
 		super()
-
-		love.graphics.print({ { 255, 255, 255 }, 'hi' }, 200, 100)
 
 	keypressed: (key) =>
 		super(key)

@@ -7,7 +7,7 @@ Middleclass = require('lib/utils/shims/middleclass')
 			@proxy = ProxyClass(...)
 
 	for key, value in pairs ProxyClass.__instanceDict
-		if type(value) == 'function'
+		if _.isFunction(value)
 			ToysProxy.__base[key] = (...) =>
 				@proxy[key](@proxy, ...)
 
