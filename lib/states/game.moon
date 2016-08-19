@@ -14,7 +14,7 @@ class GameState extends State
 		@map = STI(@mapName)
 
 		for object in *@map.layers.entities.objects
-			entity = entities(object.type)(object.x, object.y - @map.tileheight)
+			entity = entities[object.type](object.x, object.y - @map.tileheight)
 			if object.name == 'player'
 				@player = entity
 
