@@ -17,3 +17,7 @@
 [submodule "vendor/sti"]
 	path = vendor/sti
 	url = https://github.com/karai17/Simple-Tiled-Implementation.git
+[submodule "vendor/lodash"]
+	path = vendor/lodash
+	url = https://github.com/rosshadden/lodash.lua.git
+	branch = fix/pack-and-unpack

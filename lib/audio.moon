@@ -1,4 +1,4 @@
-wave = require 'vendor/wave/wave'
+wave = require('vendor/wave/wave')
 
 class Audio
 	new: (@path, @type = 'stream') =>

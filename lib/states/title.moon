@@ -1,6 +1,6 @@
-Audio = require 'lib/audio'
-GuiState = require 'lib/states/gui'
-GameState = require 'lib/states/game'
+Audio = require('lib/audio')
+GuiState = require('lib/states/gui')
+GameState = require('lib/states/game')
 
 class TitleState extends GuiState
 	new: () =>

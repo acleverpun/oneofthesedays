@@ -1,4 +1,3 @@
-export p
-import p from require 'moon'
+export p = require('moon').p
 
-export log = (...) -> print(...)
+export log = (...) -> _.print(...)

@@ -1,9 +1,9 @@
-STI = require 'vendor/sti/sti'
-State = require 'lib/states/state'
-PauseState = require 'lib/states/pause'
-Player = require 'lib/entities/player'
-DrawSystem = require 'lib/systems/draw'
-ControlSystem = require 'lib/systems/control'
+STI = require('vendor/sti/sti')
+State = require('lib/states/state')
+PauseState = require('lib/states/pause')
+Player = require('lib/entities/player')
+DrawSystem = require('lib/systems/draw')
+ControlSystem = require('lib/systems/control')
 
 class GameState extends State
 	new: (mapName) =>

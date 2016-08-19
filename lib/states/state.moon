@@ -1,4 +1,4 @@
-states = require 'vendor/hump/gamestate'
+states = require('vendor/hump/gamestate')
 Engine = require('lib/engine')
 EventManager = require('lib/event-manager')
 DebugSystem = require('lib/systems/debug')

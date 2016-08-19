@@ -1,5 +1,5 @@
-suit = require 'vendor/SUIT'
-State = require 'lib/states/state'
+suit = require('vendor/SUIT')
+State = require('lib/states/state')
 
 class GuiState extends State
 	enter: () =>

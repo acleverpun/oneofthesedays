@@ -1,4 +1,4 @@
-GuiState = require 'lib/states/gui'
+GuiState = require('lib/states/gui')
 
 class PauseState extends GuiState
 	update: (dt) =>

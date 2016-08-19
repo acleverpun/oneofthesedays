@@ -1,9 +1,10 @@
-require 'src/debug'
-lovetoys = require 'vendor/lovetoys/lovetoys'
+require('src/debug')
+export _ = require('vendor/lodash/src/lodash')
+lovetoys = require('vendor/lovetoys/lovetoys')
 lovetoys.initialize()
 
-states = require 'vendor/hump/gamestate'
-TitleState = require 'lib/states/title'
+states = require('vendor/hump/gamestate')
+TitleState = require('lib/states/title')
 
 love.load = () ->
 	love.graphics.setNewFont(12)
