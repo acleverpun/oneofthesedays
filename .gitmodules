@@ -19,8 +19,7 @@
 	url = https://github.com/karai17/Simple-Tiled-Implementation.git
 [submodule "vendor/lodash"]
 	path = vendor/lodash
-	url = https://github.com/rosshadden/lodash.lua.git
-	branch = fix/pack-and-unpack
+	url = https://github.com/axmat/lodash.lua.git
 [submodule "vendor/bump"]
 	path = vendor/bump
 	url = https://github.com/kikito/bump.lua.git

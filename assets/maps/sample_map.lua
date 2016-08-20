@@ -120,7 +120,7 @@ return {
       offsetx = 0,
       offsety = 0,
       properties = {
-        ["collidable"] = true
+        ["collidable"] = false
       },
       encoding = "base64",
       compression = "zlib",
