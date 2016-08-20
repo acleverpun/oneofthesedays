@@ -21,3 +21,6 @@
 	path = vendor/lodash
 	url = https://github.com/rosshadden/lodash.lua.git
 	branch = fix/pack-and-unpack
+[submodule "vendor/bump"]
+	path = vendor/bump
+	url = https://github.com/kikito/bump.lua.git

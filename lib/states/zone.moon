@@ -1,4 +1,5 @@
 STI = require('vendor/sti/sti')
+bump = require('vendor/bump/bump')
 State = require('lib/states/state')
 MapLayer = require('lib/map-layer')
 PauseState = require('lib/states/pause')
@@ -10,12 +11,14 @@ class ZoneState extends State
 	new: (@mapName) =>
 		super()
 
-		@world = love.physics.newWorld(0, 0)
-		@map = STI(@mapName, { 'box2d' })
-		@map\box2d_init(@world)
+		@boxWorld = love.physics.newWorld(0, 0)
+		@map = STI(@mapName, { 'bump' })
+		@world = bump.newWorld(@map.tilewidth)
+		@map\bump_init(@world)
 
 		for object in *@map.layers.entities.objects
-			entity = entities\get(object.type)(object.x, object.y - @map.tileheight)
+			entity = entities\get(object.type)(@world, object)
+			@world\add(entity, object.x, object.y, object.width, object.height)
 			if object.name == 'player'
 				@player = entity
 
@@ -45,7 +48,7 @@ class ZoneState extends State
 
 		if DEBUG
 			love.graphics.setColor(255, 0, 0, 255)
-			@map\box2d_draw()
+			@map\bump_draw(@world)
 			love.graphics.setColor(255, 255, 255, 255)
 
 		love.graphics.pop()
