@@ -1,6 +1,6 @@
 Audio = require('lib/audio')
 GuiState = require('lib/states/gui')
-GameState = require('lib/states/game')
+ZoneState = require('lib/states/zone')
 
 class TitleState extends GuiState
 	new: () =>
@@ -34,7 +34,7 @@ class TitleState extends GuiState
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
-		@states.switch(GameState('assets/maps/sample_map.lua'))
+		@states.switch(ZoneState('assets/maps/sample_map.lua'))
 		@sound\play()
 
 	quitGame: () =>

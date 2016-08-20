@@ -6,7 +6,7 @@ entities = require('lib/entities')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
 
-class GameState extends State
+class ZoneState extends State
 	new: (@mapName) =>
 		super()
 
