@@ -19,10 +19,10 @@ class ZoneState extends State
 		for object in *@map.layers.entities.objects
 			entity = entities\get(object.type)(@world, object)
 			@world\add(entity, object.x, object.y, object.width, object.height)
-			if object.name == 'player'
+			if object.type == 'Player'
 				@player = entity
 
-		entityLayer = MapLayer(@map, 3)
+		entityLayer = MapLayer(@map, 'entities')
 		entityLayer.engine\addSystem(DrawSystem())
 		entityLayer.engine\addSystem(ControlSystem())
 		entityLayer.engine\addEntity(@player)

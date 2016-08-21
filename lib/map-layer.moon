@@ -5,10 +5,12 @@ class MapLayer
 		exists = false
 
 		-- Support using an existing layer
-		if _.isNumber(@name)
-			exists = true
-			index = @name
+		for l, layer in ipairs @map.layers
+			if layer.name == @name
+				exists = true
+				index = l
 
+		-- Default to adding to the top
 		if not _.isNumber(index) then index = #@map.layers + 1
 
 		-- Create STI layer, and store properties here
