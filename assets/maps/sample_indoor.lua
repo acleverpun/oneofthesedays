@@ -8,7 +8,7 @@ return {
   height = 32,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 1,
+  nextobjectid = 3,
   backgroundcolor = { 0, 0, 0 },
   properties = {},
   tilesets = {
@@ -74,7 +74,36 @@ return {
       offsety = 0,
       draworder = "topdown",
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 1,
+          name = "player",
+          type = "Player",
+          shape = "rectangle",
+          x = 289,
+          y = 287,
+          width = 14,
+          height = 14,
+          rotation = 0,
+          gid = 1766,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 2,
+          name = "",
+          type = "tiles/WarpTile",
+          shape = "rectangle",
+          x = 289,
+          y = 303,
+          width = 14,
+          height = 14,
+          rotation = 0,
+          gid = 1706,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "tilelayer",
@@ -87,7 +116,9 @@ return {
       opacity = 1,
       offsetx = 0,
       offsety = 0,
-      properties = {},
+      properties = {
+        ["collidable"] = true
+      },
       encoding = "base64",
       compression = "zlib",
       data = "eJxjYBgFo2AUjILBCSwYGRjmAulTDBCaAYkmBB4zQuhIII4g0/5CqBnMjAgxdSYEewEOGgZkgVgOiskBTQTkb+Kgu7Go7SPTDcSAZUzYxQ8DcSYjdjliACH/EwOkgFiCCubgAvuRMLXBfAJ8EDgGxMeB2BIazl041GPTSwjcIMAHgQNIGJ9+bHpHwdAFuNITOemMHICcnhRxiI+CUTAKRsEowA4AI4wdsA=="

@@ -2,6 +2,9 @@
 ToysProxy = require('lib/utils/shims/lovetoys-proxy')
 
 class Entity extends ToysProxy(ToysEntity)
+	new: (@world, @tile) =>
+		super()
+
 	getAll: () =>
 		components = @getComponents()
 		result = {}

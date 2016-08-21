@@ -6,15 +6,15 @@ Movable = require('lib/components/movable')
 Controllable = require('lib/components/controllable')
 
 class Player extends Entity
-	new: (@world, data) =>
-		super()
+	new: (...) =>
+		super(...)
 
 		speed = 100
 		runSpeed = speed * 8
 
 		@addMultiple({
-			Position(data.x, data.y),
-			Drawable(data.width, data.height, { 255, 100, 100 }),
+			Position(@tile.x, @tile.y),
+			Drawable(@tile.width, @tile.height, { 255, 100, 100 }),
 			Movable(speed, runSpeed),
 			Controllable({
 				vertical: with tactile.newControl()
@@ -44,4 +44,12 @@ class Player extends Entity
 
 		position.x += speed * controls.horizontal() * dt
 		position.y += speed * controls.vertical() * dt
-		position.x, position.y = @world\move(@, position.x, position.y)
+		position.x, position.y, cols, num = @world\move(@, position.x, position.y, (other) =>
+			if _.isFunction(other.onEnter) then return 'cross'
+			return 'slide'
+		)
+
+		if num > 0
+			for { :other, :type } in *cols
+				if type == 'cross' and _.isFunction(other.onEnter)
+					other\onEnter(@)

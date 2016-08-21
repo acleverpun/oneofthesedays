@@ -8,7 +8,7 @@ return {
   height = 100,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 2,
+  nextobjectid = 3,
   properties = {},
   tilesets = {
     {
@@ -87,6 +87,22 @@ return {
           gid = 1766,
           visible = true,
           properties = {}
+        },
+        {
+          id = 2,
+          name = "",
+          type = "tiles/WarpTile",
+          shape = "rectangle",
+          x = 481,
+          y = 639,
+          width = 14,
+          height = 14,
+          rotation = 0,
+          gid = 1707,
+          visible = true,
+          properties = {
+            ["map"] = "sample_indoor"
+          }
         }
       }
     },
