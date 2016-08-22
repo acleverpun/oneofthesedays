@@ -14,6 +14,8 @@ class State
 		@engine\addSystem(debugSystem, 'draw')
 		@engine\stopSystem(DebugSystem.name)
 
+	enter: (@previous) =>
+
 	update: (dt) =>
 		@engine\update(dt)
 
@@ -25,3 +27,12 @@ class State
 		if key == '`'
 			@engine\toggleSystem(DebugSystem.name)
 			export DEBUG = not DEBUG
+
+	switch: (state, ...) =>
+		@states.switch(state, ...)
+
+	push: (state, ...) =>
+		@states.push(state, ...)
+
+	pop: (...) =>
+		@states.pop(...)

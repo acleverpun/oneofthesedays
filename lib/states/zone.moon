@@ -8,13 +8,16 @@ DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
 
 class ZoneState extends State
-	new: (@mapName, spawnPoint) =>
+	new: (@mapName) =>
 		super()
 
 		@boxWorld = love.physics.newWorld(0, 0)
 		@map = STI("assets/maps/#{@mapName}", { 'bump' })
 		@world = bump.newWorld(@map.tilewidth)
 		@map\bump_init(@world)
+
+	enter: (previous, spawnPoint) =>
+		super(previous)
 
 		for tile in *@map.layers.entities.objects
 			entity = entities[tile.type](@world, tile)
@@ -62,4 +65,4 @@ class ZoneState extends State
 
 	keypressed: (key) =>
 		super(key)
-		if key == 'escape' then @states.push(PauseState())
+		if key == 'escape' then @push(PauseState())

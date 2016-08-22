@@ -3,18 +3,18 @@ GuiState = require('lib/states/gui')
 ZoneState = require('lib/states/zone')
 
 class TitleState extends GuiState
-	new: () =>
-		super()
+	new: (...) =>
+		super(...)
 		@music = Audio('vendor/wave/music.wav', 'stream')
 		@music\getSound()\setLooping(true)
 		@sound = Audio('vendor/wave/sound.wav', 'static')
 
-	enter: () =>
-		super()
+	enter: (...) =>
+		super(...)
 		@music\play()
 
-	update: () =>
-		super()
+	update: (...) =>
+		super(...)
 
 		@gui.layout\row(0, 200)
 
@@ -24,8 +24,8 @@ class TitleState extends GuiState
 		if self.buttonStart.hit then @\startGame()
 		if self.buttonQuit.hit then @\quitGame()
 
-	draw: () =>
-		super()
+	draw: (...) =>
+		super(...)
 		love.graphics.print({ { 0, 150, 200 }, 'One of these days...' }, 200, 100)
 
 	keypressed: (key) =>
@@ -34,7 +34,7 @@ class TitleState extends GuiState
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
-		@states.switch(ZoneState('sample_map.lua'))
+		@switch(ZoneState('sample_map.lua'))
 		@sound\play()
 
 	quitGame: () =>

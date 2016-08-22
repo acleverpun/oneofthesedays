@@ -2,7 +2,8 @@ suit = require('vendor/SUIT')
 State = require('lib/states/state')
 
 class GuiState extends State
-	enter: () =>
+	new: () =>
+		super()
 		@gui = suit.new()
 
 	update: (dt) =>
