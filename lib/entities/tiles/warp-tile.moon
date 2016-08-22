@@ -6,4 +6,4 @@ class WarpTile extends Tile
 		super(...)
 
 	onEnter: (entity) =>
-		if entity.class != entities\get('Player') then return
+		if entity.class != entities.Player then return

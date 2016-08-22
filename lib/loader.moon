@@ -1,10 +1,29 @@
-class Loader
-	new: (@handler) =>
-		@cache = {}
+-- class Loader
+-- 	new: (@handler) =>
+-- 		@cache = {}
+--
+-- 	__index: (key) =>
+-- 		print 'hi'
+--
+-- 	get: (key, force = false) =>
+-- 		if @cache[key] and not force then return @cache[key]
+--
+-- 		value = @handler(key)
+-- 		@cache[key] = value
+-- 		return value
 
-	get: (name, force = false) =>
-		if @cache[name] and not force then return @cache[name]
+return (handler) ->
+	cache = {}
+	__cache = {}
 
-		value = @handler(name)
-		@cache[name] = value
-		return value
+	setmetatable(cache, {
+		__index: (key) =>
+			if __cache[key] then return __cache[key]
+
+			value = handler(key)
+			cache[key] = value
+			__cache[key] = value
+			return value
+	})
+
+	return cache

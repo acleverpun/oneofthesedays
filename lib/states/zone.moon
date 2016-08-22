@@ -17,7 +17,7 @@ class ZoneState extends State
 		@map\bump_init(@world)
 
 		for object in *@map.layers.entities.objects
-			entity = entities\get(object.type)(@world, object)
+			entity = entities[object.type](@world, object)
 			@world\add(entity, object.x, object.y, object.width, object.height)
 			if object.type == 'Player'
 				@player = entity

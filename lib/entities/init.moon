@@ -1,6 +1,6 @@
 Loader = require('lib/loader')
 
-Loader((name) =>
-	file = _.kebabCase(name)
+Loader((key) ->
+	file = _.kebabCase(key)
 	return require("lib/entities/#{file}")
 )
