@@ -1,12 +1,12 @@
 entities = require('lib/entities')
-Tile = require('lib/entities/tiles/tile')
+Zone = require('lib/entities/zones/zone')
 
-class WarpTile extends Tile
+class DoorZone extends Zone
 	onEnter: (entity) =>
 		if entity.class == entities.Player
 			@warp()
 
 	warp: () =>
-		{ :map } = @tile.properties
+		{ :map } = @data.properties
 		if not map then map = @state.previous.mapName
 		@state\switch(@state.__class(map))

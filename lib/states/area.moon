@@ -7,7 +7,7 @@ entities = require('lib/entities')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
 
-class ZoneState extends State
+class AreaState extends State
 	new: (@mapName) =>
 		super()
 
@@ -18,16 +18,16 @@ class ZoneState extends State
 	enter: (previous, spawnPoint) =>
 		super(previous)
 
-		for tile in *@map.layers.entities.objects
-			entity = entities[tile.type](@, tile)
+		for object in *@map.layers.entities.objects
+			entity = entities[object.type](@, object)
 
-			if tile.type == 'Player'
+			if object.type == 'Player'
 				@player = entity
 				if spawnPoint
-					if spawnPoint.x then tile.x = spawnPoint.x
-					if spawnPoint.y then tile.y = spawnPoint.y
+					if spawnPoint.x then object.x = spawnPoint.x
+					if spawnPoint.y then object.y = spawnPoint.y
 
-			@world\add(entity, tile.x, tile.y, tile.width, tile.height)
+			@world\add(entity, object.x, object.y, object.width, object.height)
 
 		entityLayer = MapLayer(@map, 'entities')
 		entityLayer.engine\addSystem(DrawSystem())

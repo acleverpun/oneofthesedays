@@ -91,7 +91,7 @@ return {
         {
           id = 2,
           name = "",
-          type = "tiles/WarpTile",
+          type = "zones/DoorZone",
           shape = "rectangle",
           x = 481,
           y = 639,

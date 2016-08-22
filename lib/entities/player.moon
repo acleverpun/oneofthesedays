@@ -13,8 +13,8 @@ class Player extends Entity
 		runSpeed = speed * 8
 
 		@addMultiple({
-			Position(@tile.x, @tile.y),
-			Drawable(@tile.width, @tile.height, { 255, 100, 100 }),
+			Position(@data.x, @data.y),
+			Drawable(@data.width, @data.height, { 255, 100, 100 }),
 			Movable(speed, runSpeed),
 			Controllable({
 				vertical: with tactile.newControl()

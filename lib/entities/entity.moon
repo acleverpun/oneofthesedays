@@ -2,7 +2,7 @@
 ToysProxy = require('lib/utils/shims/lovetoys-proxy')
 
 class Entity extends ToysProxy(ToysEntity)
-	new: (@state, @tile) =>
+	new: (@state, @data) =>
 		super()
 
 	getAll: () =>
