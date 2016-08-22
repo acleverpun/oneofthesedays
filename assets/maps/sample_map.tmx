@@ -17,7 +17,8 @@
   <object id="1" name="player" type="Player" gid="1766" x="513" y="703" width="14" height="14"/>
   <object id="2" type="tiles/WarpTile" gid="1707" x="481" y="639" width="14" height="14">
    <properties>
-    <property name="map" value="sample_indoor"/>
+    <property name="enter" type="bool" value="true"/>
+    <property name="map" type="file" value="sample_indoor.lua"/>
    </properties>
   </object>
  </objectgroup>

@@ -101,7 +101,9 @@ return {
           rotation = 0,
           gid = 1706,
           visible = true,
-          properties = {}
+          properties = {
+            ["exit"] = true
+          }
         }
       }
     },

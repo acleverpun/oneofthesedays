@@ -101,7 +101,8 @@ return {
           gid = 1707,
           visible = true,
           properties = {
-            ["map"] = "sample_indoor"
+            ["enter"] = true,
+            ["map"] = "sample_indoor.lua"
           }
         }
       }

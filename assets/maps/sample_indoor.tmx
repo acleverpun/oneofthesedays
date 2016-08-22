@@ -15,7 +15,11 @@
  </layer>
  <objectgroup name="entities">
   <object id="1" name="player" type="Player" gid="1766" x="289" y="287" width="14" height="14"/>
-  <object id="2" type="tiles/WarpTile" gid="1706" x="289" y="303" width="14" height="14"/>
+  <object id="2" type="tiles/WarpTile" gid="1706" x="289" y="303" width="14" height="14">
+   <properties>
+    <property name="exit" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="objects" width="32" height="32">
   <properties>

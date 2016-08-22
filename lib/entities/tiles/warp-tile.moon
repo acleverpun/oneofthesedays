@@ -12,5 +12,10 @@ class WarpTile extends Tile
 			@warp()
 
 	warp: () =>
-		if map = @tile.properties.map
-			states.switch(ZoneState(map))
+		{ :map, :enter, :exit } = @tile.properties
+		if map
+			method = if enter then 'push' else 'switch'
+			states[method](ZoneState(map))
+		elseif exit
+			states.pop()
+

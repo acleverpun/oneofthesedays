@@ -34,7 +34,7 @@ class TitleState extends GuiState
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
-		@states.switch(ZoneState('sample_map'))
+		@states.switch(ZoneState('sample_map.lua'))
 		@sound\play()
 
 	quitGame: () =>
