@@ -1,5 +1,12 @@
-export DEBUG = false
+inspect = require('vendor/inspect/inspect')
 
-export p = require('moon').p
+export p = (...) ->
+	depth = 2
+	output = ''
+	for value in *{ ... }
+		if #output > 0 then output ..= '\t'
+		output ..= inspect(value, { :depth })
+	print output
 
-export log = (...) -> _.print(...)
+export d = (value, depth = 2) ->
+	print inspect(value, { :depth })

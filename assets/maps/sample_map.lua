@@ -79,7 +79,7 @@ return {
           name = "player",
           type = "Player",
           shape = "rectangle",
-          x = 513,
+          x = 481,
           y = 703,
           width = 14,
           height = 14,

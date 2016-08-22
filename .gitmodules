@@ -23,3 +23,6 @@
 [submodule "vendor/bump"]
 	path = vendor/bump
 	url = https://github.com/kikito/bump.lua.git
+[submodule "vendor/inspect"]
+	path = vendor/inspect
+	url = https://github.com/kikito/inspect.lua.git
