@@ -11,7 +11,6 @@ class ZoneState extends State
 	new: (@mapName) =>
 		super()
 
-		@boxWorld = love.physics.newWorld(0, 0)
 		@map = STI("assets/maps/#{@mapName}", { 'bump' })
 		@world = bump.newWorld(@map.tilewidth)
 		@map\bump_init(@world)
@@ -20,7 +19,7 @@ class ZoneState extends State
 		super(previous)
 
 		for tile in *@map.layers.entities.objects
-			entity = entities[tile.type](@world, tile)
+			entity = entities[tile.type](@, tile)
 
 			if tile.type == 'Player'
 				@player = entity
