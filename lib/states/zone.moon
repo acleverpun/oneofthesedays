@@ -12,7 +12,7 @@ class ZoneState extends State
 		super()
 
 		@boxWorld = love.physics.newWorld(0, 0)
-		@map = STI(@mapName, { 'bump' })
+		@map = STI("assets/maps/#{@mapName}.lua", { 'bump' })
 		@world = bump.newWorld(@map.tilewidth)
 		@map\bump_init(@world)
 
