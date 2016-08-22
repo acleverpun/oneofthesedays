@@ -8,7 +8,7 @@ DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
 
 class ZoneState extends State
-	new: (@mapName) =>
+	new: (@mapName, spawnPoint) =>
 		super()
 
 		@boxWorld = love.physics.newWorld(0, 0)
@@ -16,11 +16,16 @@ class ZoneState extends State
 		@world = bump.newWorld(@map.tilewidth)
 		@map\bump_init(@world)
 
-		for object in *@map.layers.entities.objects
-			entity = entities[object.type](@world, object)
-			@world\add(entity, object.x, object.y, object.width, object.height)
-			if object.type == 'Player'
+		for tile in *@map.layers.entities.objects
+			entity = entities[tile.type](@world, tile)
+
+			if tile.type == 'Player'
 				@player = entity
+				if spawnPoint
+					if spawnPoint.x then tile.x = spawnPoint.x
+					if spawnPoint.y then tile.y = spawnPoint.y
+
+			@world\add(entity, tile.x, tile.y, tile.width, tile.height)
 
 		entityLayer = MapLayer(@map, 'entities')
 		entityLayer.engine\addSystem(DrawSystem())
