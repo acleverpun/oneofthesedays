@@ -45,11 +45,11 @@ class Player extends Entity
 		position.x += speed * controls.horizontal() * dt
 		position.y += speed * controls.vertical() * dt
 		position.x, position.y, cols, num = @state.world\move(@, position.x, position.y, (other) =>
-			if _.isFunction(other.onEnter) then return 'cross'
+			if _.isFunction(other.onTouch) then return 'cross'
 			return 'slide'
 		)
 
 		if num > 0
 			for { :other, :type } in *cols
-				if type == 'cross' and _.isFunction(other.onEnter)
-					other\onEnter(@)
+				if type == 'cross' and _.isFunction(other.onTouch)
+					other\onTouch(@)

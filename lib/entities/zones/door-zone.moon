@@ -2,11 +2,11 @@ entities = require('lib/entities')
 Zone = require('lib/entities/zones/zone')
 
 class DoorZone extends Zone
-	onEnter: (entity) =>
+	onTouch: (entity) =>
 		if entity.class == entities.Player
-			@warp()
+			@enter()
 
-	warp: () =>
+	enter: () =>
 		{ :map } = @data.properties
 		if not map then map = @state.previous.mapName
 		@state\switch(@state.__class(map))

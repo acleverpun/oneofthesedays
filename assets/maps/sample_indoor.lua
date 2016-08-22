@@ -94,12 +94,11 @@ return {
           name = "",
           type = "zones/DoorZone",
           shape = "rectangle",
-          x = 289,
-          y = 303,
-          width = 14,
-          height = 14,
+          x = 288,
+          y = 304,
+          width = 16,
+          height = 16,
           rotation = 0,
-          gid = 1706,
           visible = true,
           properties = {}
         }

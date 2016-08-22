@@ -90,15 +90,14 @@ return {
         },
         {
           id = 2,
-          name = "",
+          name = "building",
           type = "zones/DoorZone",
           shape = "rectangle",
-          x = 481,
-          y = 639,
-          width = 14,
-          height = 14,
+          x = 480,
+          y = 624,
+          width = 16,
+          height = 16,
           rotation = 0,
-          gid = 1707,
           visible = true,
           properties = {
             ["map"] = "sample_indoor.lua"
