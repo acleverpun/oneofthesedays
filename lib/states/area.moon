@@ -53,7 +53,7 @@ class AreaState extends State
 		@map\setDrawRange(tx, ty, windowWidth, windowHeight)
 		@map\draw()
 
-		if DEBUG
+		if @DEBUG
 			love.graphics.setColor(255, 0, 0, 255)
 			@map\bump_draw(@world)
 			love.graphics.setColor(255, 255, 255, 255)

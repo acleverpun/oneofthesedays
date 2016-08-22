@@ -26,7 +26,7 @@ class State
 		if key == 'q' then love.event.quit()
 		if key == '`'
 			@engine\toggleSystem(DebugSystem.name)
-			export DEBUG = not DEBUG
+			@DEBUG = not @DEBUG
 
 	switch: (state, ...) =>
 		@states.switch(state, ...)
