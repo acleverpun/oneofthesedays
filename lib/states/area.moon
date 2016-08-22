@@ -19,13 +19,15 @@ class AreaState extends State
 		super(previous)
 
 		for object in *@map.layers.entities.objects
-			entity = entities[object.type](@, object)
-
 			if object.type == 'Player'
-				@player = entity
 				if spawnPoint
 					if spawnPoint.x then object.x = spawnPoint.x
 					if spawnPoint.y then object.y = spawnPoint.y
+					if spawnPoint.offsetX then object.x += spawnPoint.offsetX
+					if spawnPoint.offsetY then object.y += spawnPoint.offsetY - object.height
+
+			entity = entities[object.type](@, object)
+			if object.type == 'Player' then @player = entity
 
 			@world\add(entity, object.x, object.y, object.width, object.height)
 
