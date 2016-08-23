@@ -1,5 +1,6 @@
 states = require('vendor/hump/gamestate')
 Engine = require('lib/engine')
+Transition = require('lib/transition')
 EventManager = require('lib/event-manager')
 DebugSystem = require('lib/systems/debug')
 
@@ -28,11 +29,13 @@ class State
 			@engine\toggleSystem(DebugSystem.name)
 			@DEBUG = not @DEBUG
 
-	switch: (state, ...) =>
-		@states.switch(state, ...)
+	switch: (state, data, ...) =>
+		transition = Transition(@, state, data)
+		@states.switch(state, transition, ...)
 
-	push: (state, ...) =>
-		@states.push(state, ...)
+	push: (state, data, ...) =>
+		transition = Transition(@, state, data)
+		@states.push(state, transition, ...)
 
 	pop: (...) =>
 		@states.pop(...)
