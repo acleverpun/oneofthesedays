@@ -5,6 +5,7 @@ Position = require('lib/components/position')
 Drawable = require('lib/components/drawable')
 Movable = require('lib/components/movable')
 Controllable = require('lib/components/controllable')
+Color = require('lib/utils/color')
 
 class Player extends Entity
 	new: (...) =>
@@ -15,7 +16,7 @@ class Player extends Entity
 
 		@addMultiple({
 			Position(Point(@data.x, @data.y)),
-			Drawable(@data.width, @data.height, { 255, 100, 100 }),
+			Drawable(@data.width, @data.height, Color(255, 100, 100)),
 			Movable(speed, runSpeed),
 			Controllable({
 				vertical: with tactile.newControl()

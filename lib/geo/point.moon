@@ -1,17 +1,20 @@
 class Point
-	new: (x, y) =>
-		if x and y
+	new: (x, y = 0) =>
+		value = x
+		if not _.isNumber(value) then x = 0
+
+		if _.isArray(x)
+			@x = x[1]
+			@y = x[2]
+		elseif _.isTable(x)
+			@x = x.x
+			@y = x.y
+		else
 			@x = x
 			@y = y
-		elseif not y
-			if _.isTable(x)
-				if x.x then @x = x.x
-				elseif x[1] then @x = x[1]
-				if x.y then @y = x.y
-				elseif x[2] then @y = x[2]
-		else
-			@x = 0
-			@y = 0
+
+		@[1] = @x
+		@[2] = @y
 
 	__tostring: () => "Point(#{@x}, #{@y})"
 

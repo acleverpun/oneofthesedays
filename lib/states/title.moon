@@ -1,6 +1,7 @@
 Audio = require('lib/utils/audio')
 GuiState = require('lib/states/gui')
 AreaState = require('lib/states/area')
+Color = require('lib/utils/color')
 
 class TitleState extends GuiState
 	new: (...) =>
@@ -26,7 +27,7 @@ class TitleState extends GuiState
 
 	draw: (...) =>
 		super(...)
-		love.graphics.print({ { 0, 150, 200 }, 'One of these days...' }, 200, 100)
+		love.graphics.print({ Color(0, 150, 200), 'One of these days...' }, 200, 100)
 
 	keypressed: (key) =>
 		super(key)

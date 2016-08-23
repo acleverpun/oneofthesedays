@@ -37,4 +37,18 @@ _.kebabCase = (value) ->
 	value = string.gsub(value, '([a-z])([A-Z])', '%1-%2')
 	return _.lowerCase(value)
 
+-- LANG
+
+_.isArray = (value) ->
+	if not _.isTable(value) then return false
+	for key in pairs(value) do
+		if type(key) != 'number' then return false
+	return true
+
+_.isPlainTable = (value) ->
+	if not _.isTable(value) then return false
+	for key in pairs(value) do
+		if type(key) == 'number' then return false
+	return true
+
 return _

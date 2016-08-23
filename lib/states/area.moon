@@ -6,6 +6,7 @@ PauseState = require('lib/states/pause')
 entities = require('lib/entities')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
+Color = require('lib/utils/color')
 
 class AreaState extends State
 	new: (@mapName) =>
@@ -79,9 +80,9 @@ class AreaState extends State
 		@map\draw()
 
 		if @DEBUG
-			love.graphics.setColor(255, 0, 0, 255)
+			love.graphics.setColor(Color(255, 0, 0, 255))
 			@map\bump_draw(@world)
-			love.graphics.setColor(255, 255, 255, 255)
+			love.graphics.setColor(Color(255, 255, 255, 255))
 
 		love.graphics.pop()
 
