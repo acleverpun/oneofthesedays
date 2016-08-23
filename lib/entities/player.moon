@@ -34,6 +34,14 @@ class Player extends Entity
 			}),
 		})
 
+	getData: () =>
+		{ :x, :y } = @get('Position')
+		{ :width, :height } = @get('Drawable')
+		return { :x, :y, :width, :height }
+
+	clone: (state) =>
+		return @@(state, @getData())
+
 	control: (dt) =>
 		{ :controllable, :movable, :position } = @getAll()
 

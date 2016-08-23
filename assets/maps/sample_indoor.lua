@@ -76,20 +76,6 @@ return {
       properties = {},
       objects = {
         {
-          id = 1,
-          name = "player",
-          type = "Player",
-          shape = "rectangle",
-          x = 289,
-          y = 287,
-          width = 14,
-          height = 14,
-          rotation = 0,
-          gid = 1766,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 2,
           name = "",
           type = "zones/DoorZone",

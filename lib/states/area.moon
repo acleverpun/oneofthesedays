@@ -15,26 +15,49 @@ class AreaState extends State
 		@world = bump.newWorld(@map.tilewidth)
 		@map\bump_init(@world)
 
-	enter: (previous, spawnPoint) =>
+	enter: (previous, transition) =>
 		super(previous)
 
+		if transition.player
+			@player = transition.player\clone(@)
+		needsDoor = not not transition.player
+
+		doors = {}
 		for object in *@map.layers.entities.objects
-			if object.type == 'Player'
-				if spawnPoint
-					if spawnPoint.x then object.x = spawnPoint.x
-					if spawnPoint.y then object.y = spawnPoint.y
-					if spawnPoint.offsetX then object.x += spawnPoint.offsetX
-					if spawnPoint.offsetY then object.y += spawnPoint.offsetY - object.height
+			if object.type == 'Player' and @player then continue
+			if object.type == 'zones/DoorZone' then _.push(doors, object)
 
 			entity = entities[object.type](@, object)
-			if object.type == 'Player' then @player = entity
+			if object.type == 'Player'
+				@player = entity
+				continue
+			@addEntityToWorld(entity, object)
 
-			@world\add(entity, object.x, object.y, object.width, object.height)
+		assert @player
+		playerData = @player\getData()
+		door = doors[1]
+		if needsDoor
+			playerData.x = door.x
+			playerData.y = door.y
+
+		-- Handle specific spawn points
+		if toPoint = transition.toPoint
+			if toPoint.x then playerData.x = toPoint.x
+			if toPoint.y then playerData.y = toPoint.y
+		-- Handle door offsets
+		if fromDoor = transition.fromDoor
+			if fromDoor.offsetX then playerData.x += fromDoor.offsetX
+			if fromDoor.offsetY then playerData.y += fromDoor.offsetY - 4 * playerData.height
+
+		@addEntityToWorld(@player, playerData)
 
 		entityLayer = MapLayer(@map, 'entities')
 		entityLayer.engine\addSystem(DrawSystem())
 		entityLayer.engine\addSystem(ControlSystem())
 		entityLayer.engine\addEntity(@player)
+
+	addEntityToWorld: (entity, data) =>
+		@world\add(entity, data.x, data.y, data.width, data.height)
 
 	update: (dt) =>
 		super(dt)

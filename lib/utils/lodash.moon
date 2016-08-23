@@ -1,5 +1,13 @@
 _ = require('vendor/lodash/src/lodash')
 
+-- ARRAYS
+
+_.push = (array, value) -> table.insert(array, value)
+
+_.join = (value, delimiter) -> table.concat(value, delimiter)
+
+-- STRINGS
+
 _.split = (value, delimiter) ->
 	result = {}
 	fromIndex = 1
@@ -11,14 +19,9 @@ _.split = (value, delimiter) ->
 	table.insert(result, string.sub(value, fromIndex))
 	return result
 
-_.join = (value, delimiter) ->
-	table.concat(value, delimiter)
+_.lowerCase = (value) -> string.lower(value)
 
-_.lowerCase = (value) ->
-	string.lower(value)
-
-_.upperCase = (value) ->
-	string.lower(value)
+_.upperCase = (value) -> string.lower(value)
 
 _.lowerFirst = (value) ->
 	first = string.lower(string.sub(value, 1, 1))
@@ -32,6 +35,6 @@ _.upperFirst = (value) ->
 
 _.kebabCase = (value) ->
 	value = string.gsub(value, '([a-z])([A-Z])', '%1-%2')
-	_.lowerCase(value)
+	return _.lowerCase(value)
 
 return _
