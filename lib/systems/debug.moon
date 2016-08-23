@@ -16,8 +16,9 @@ class DebugSystem extends System
 		if @state.mapName then @debug('map', @state.mapName)
 
 		if player = @state.player
-			x = math.floor(player\get('Position').x)
-			y = math.floor(player\get('Position').y)
+			point = player\get('Position')
+			x = math.floor(point.x)
+			y = math.floor(point.y)
 			@debug('position', "#{x}, #{y}")
 
 	debug: (key, value) =>

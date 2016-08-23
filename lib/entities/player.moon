@@ -1,5 +1,6 @@
 tactile = require('vendor/tactile/tactile')
 Entity = require('lib/entities/entity')
+Point = require('lib/geo/point')
 Position = require('lib/components/position')
 Drawable = require('lib/components/drawable')
 Movable = require('lib/components/movable')
@@ -13,7 +14,7 @@ class Player extends Entity
 		runSpeed = speed * 8
 
 		@addMultiple({
-			Position(@data.x, @data.y),
+			Position(Point(@data.x, @data.y)),
 			Drawable(@data.width, @data.height, { 255, 100, 100 }),
 			Movable(speed, runSpeed),
 			Controllable({
@@ -35,7 +36,7 @@ class Player extends Entity
 		})
 
 	getData: () =>
-		{ :x, :y } = @get('Position')
+		{ :x, :y } = @get('Position').point
 		{ :width, :height } = @get('Drawable')
 		return { :x, :y, :width, :height }
 
@@ -50,9 +51,10 @@ class Player extends Entity
 
 		if controls.run\isDown() then speed = movable.runSpeed
 
-		position.x += speed * controls.horizontal() * dt
-		position.y += speed * controls.vertical() * dt
-		position.x, position.y, cols, num = @state.world\move(@, position.x, position.y, (other) =>
+		point = position.point
+		point.x += speed * controls.horizontal() * dt
+		point.y += speed * controls.vertical() * dt
+		point.x, point.y, cols, num = @state.world\move(@, point.x, point.y, (other) =>
 			if _.isFunction(other.onTouch) then return 'cross'
 			return 'slide'
 		)

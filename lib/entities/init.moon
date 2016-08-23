@@ -1,4 +1,4 @@
-Loader = require('lib/loader')
+Loader = require('lib/utils/loader')
 
 Loader((key) ->
 	file = _.kebabCase(key)

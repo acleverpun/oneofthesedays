@@ -4,3 +4,4 @@ class Transition
 		@fromDoor = data.fromDoor
 		@toDoor = data.toDoor
 		@toPoint = data.toPoint
+		@offset = data.offset

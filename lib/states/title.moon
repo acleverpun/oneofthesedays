@@ -1,4 +1,4 @@
-Audio = require('lib/audio')
+Audio = require('lib/utils/audio')
 GuiState = require('lib/states/gui')
 AreaState = require('lib/states/area')
 

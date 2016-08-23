@@ -45,9 +45,9 @@ class AreaState extends State
 			if toPoint.x then playerData.x = toPoint.x
 			if toPoint.y then playerData.y = toPoint.y
 		-- Handle door offsets
-		if fromDoor = transition.fromDoor
-			if fromDoor.offsetX then playerData.x += fromDoor.offsetX
-			if fromDoor.offsetY then playerData.y += fromDoor.offsetY - 4 * playerData.height
+		if transition.offset
+			if transition.offset.x then playerData.x += transition.offset.x
+			if transition.offset.y then playerData.y += transition.offset.y - 4 * playerData.height
 
 		@addEntityToWorld(@player, playerData)
 
@@ -67,7 +67,7 @@ class AreaState extends State
 		scale = 2
 		windowWidth = love.graphics.getWidth()
 		windowHeight = love.graphics.getHeight()
-		playerPosition = @player\get('Position')
+		playerPosition = @player\get('Position').point
 
 		tx = math.floor(playerPosition.x - windowWidth / scale / 2)
 		ty = math.floor(playerPosition.y - windowHeight / scale / 2)
