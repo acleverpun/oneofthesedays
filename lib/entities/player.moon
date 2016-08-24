@@ -36,8 +36,13 @@ class Player extends Entity
 			}),
 		})
 
+	getPoint: () => @get('Position').point
+	getCenter: () =>
+		{ :width, :height } = @get('Drawable')
+		(@getPoint() + (@getPoint() + Point(width, height))) / 2
+
 	getData: () =>
-		{ :x, :y } = @get('Position').point
+		{ :x, :y } = @getPoint()
 		{ :width, :height } = @get('Drawable')
 		return { :x, :y, :width, :height }
 
@@ -56,11 +61,10 @@ class Player extends Entity
 		point.x += speed * controls.horizontal() * dt
 		point.y += speed * controls.vertical() * dt
 		point.x, point.y, cols, num = @state.world\move(@, point.x, point.y, (other) =>
-			if _.isFunction(other.onTouch) then return 'cross'
+			if _.isFunction(other.collision) then return 'cross'
 			return 'slide'
 		)
 
-		if num > 0
-			for { :other, :type } in *cols
-				if type == 'cross' and _.isFunction(other.onTouch)
-					other\onTouch(@)
+		for col in *cols
+			if col.type == 'cross' and _.isFunction(col.other.collision)
+				col.other\collision(@, col)

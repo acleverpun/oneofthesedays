@@ -1,9 +1,13 @@
 inspect = require('vendor/inspect/inspect')
 
-dump = (value, depth) ->
+dump = (value, depth, hideMeta = false) ->
 	output = ''
 	if _.isTable(value) and value.__class then output ..= "#{value.__class.__name}:"
-	output ..= inspect(value, { :depth })
+
+	options = { :depth }
+	if hideMeta then options.process = (item, path) -> if path[#path] != inspect.METATABLE then return item
+
+	output ..= inspect(value, options)
 	return output
 
 export p = (...) ->
@@ -12,7 +16,7 @@ export p = (...) ->
 	output = ''
 	for value in *args
 		if #output > 0 then output ..= '\t'
-		output ..= dump(value, depth)
+		output ..= dump(value, depth, true)
 	print output
 
 export d = (value, depth = 2) ->

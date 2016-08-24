@@ -2,7 +2,7 @@ entities = require('lib/entities')
 Zone = require('lib/entities/zones/zone')
 
 class DoorZone extends Zone
-	onTouch: (entity) =>
+	onEnter: (entity) =>
 		if entity.class == entities.Player
 			@enter(entity)
 
