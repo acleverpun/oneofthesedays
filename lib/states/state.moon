@@ -1,10 +1,11 @@
+Base = require('lib/base')
 states = require('vendor/hump/gamestate')
 Engine = require('lib/engine')
 Transition = require('lib/transition')
 EventManager = require('lib/event-manager')
 DebugSystem = require('lib/systems/debug')
 
-class State
+class State extends Base
 	new: () =>
 		@engine = Engine()
 		@events = EventManager()

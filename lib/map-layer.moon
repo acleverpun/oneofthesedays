@@ -1,6 +1,7 @@
+Base = require('lib/base')
 Engine = require('lib/engine')
 
-class MapLayer
+class MapLayer extends Base
 	new: (@map, @name, index) =>
 		exists = false
 
