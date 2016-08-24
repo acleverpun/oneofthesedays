@@ -9,5 +9,8 @@ watch = "scripts/run.sh"
 path = "vendor/hump"
 version = "https://github.com/vrld/hump.git"
 
+[devDependencies]
+tiled = "0.17.0"
+
 [devDependencies.luarocks]
 luasocket = "*"

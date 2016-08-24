@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-build/build.sh
+scripts/build.sh
 love dist

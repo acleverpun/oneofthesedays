@@ -1,3 +1,4 @@
 dist
 local-*
 vendor
+assets/maps/*.lua

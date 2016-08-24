@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-build/clean.sh
+scripts/clean.sh
 moonc -t dist -w .
