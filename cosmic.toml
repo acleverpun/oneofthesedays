@@ -1,9 +1,9 @@
 [actions]
-build = "build/build.sh"
-clean = "build/clean.sh"
-lint = "build/lint.sh"
-run = "build/run.sh"
-watch = "build/run.sh"
+build = "scripts/build.sh"
+clean = "scripts/clean.sh"
+lint = "scripts/lint.sh"
+run = "scripts/run.sh"
+watch = "scripts/run.sh"
 
 [dependencies.git.hump]
 path = "vendor/hump"
