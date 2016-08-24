@@ -1,7 +1,7 @@
 Audio = require('lib/utils/audio')
 GuiState = require('lib/states/gui')
 AreaState = require('lib/states/area')
-Color = require('lib/utils/color')
+Color = require('lib/structs/color')
 
 class TitleState extends GuiState
 	new: (...) =>

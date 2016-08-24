@@ -1,4 +1,6 @@
-class Color
+TupleStruct = require('lib/structs/tuple-struct')
+
+class Color extends TupleStruct
 	new: (r, g = 0, b = 0, a = 255) =>
 		value = r
 		if not _.isNumber(value) then r = 0
@@ -24,7 +26,7 @@ class Color
 		@[3] = @b
 		@[4] = @a
 
-	toEnum: () => @r, @g, @b, @a
+	toTuple: () => @r, @g, @b, @a
 	toArray: () => { @r, @g, @b, @a }
 	toTable: () => { r: @r, g: @g, b: @b, a: @a }
 

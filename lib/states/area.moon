@@ -6,7 +6,7 @@ PauseState = require('lib/states/pause')
 entities = require('lib/entities')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
-Color = require('lib/utils/color')
+Color = require('lib/structs/color')
 
 class AreaState extends State
 	new: (@mapName) =>

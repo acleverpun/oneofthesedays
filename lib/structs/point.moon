@@ -1,4 +1,6 @@
-class Point
+TupleStruct = require('lib/structs/tuple-struct')
+
+class Point extends TupleStruct
 	new: (x, y = 0) =>
 		value = x
 		if not _.isNumber(value) then x = 0
@@ -15,6 +17,10 @@ class Point
 
 		@[1] = @x
 		@[2] = @y
+
+	toTuple: () => @x, @y
+	toArray: () => { @x, @y }
+	toTable: () => { x: @x, y: @y }
 
 	__tostring: () => "Point(#{@x}, #{@y})"
 
