@@ -36,14 +36,15 @@ class Player extends Entity
 			}),
 		})
 
-	getPoint: () => @get('Position').point
+	getPoint: () => @position.point
 	getCenter: () =>
-		{ :width, :height } = @get('Drawable')
+		{ :width, :height } = @drawable
+		p width, height
 		(@getPoint() + (@getPoint() + Point(width, height))) / 2
 
 	getData: () =>
 		{ :x, :y } = @getPoint()
-		{ :width, :height } = @get('Drawable')
+		{ :width, :height } = @drawable
 		return { :x, :y, :width, :height }
 
 	clone: (state) =>
