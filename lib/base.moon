@@ -4,4 +4,5 @@ class Base
 
 	new: () =>
 		@class = @@
+		@className = @@__name
 		@type = _.lowerFirst(@@__name)
