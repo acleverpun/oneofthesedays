@@ -48,7 +48,7 @@ class AreaState extends State
 		-- Handle door offsets
 		if transition.offset
 			if transition.offset.x then playerData.x += transition.offset.x
-			if transition.offset.y then playerData.y += transition.offset.y - 4 * playerData.height
+			if transition.offset.y then playerData.y += transition.offset.y - playerData.height
 
 		@addEntityToWorld(@player, playerData)
 

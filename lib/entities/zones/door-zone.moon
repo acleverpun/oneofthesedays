@@ -11,5 +11,6 @@ class DoorZone extends Zone
 		{ :map } = @data.properties
 		if not map then map = @state.previous.mapName
 
+		-- TODO: Wat?
 		offset = entity\get('Position').point - @data
 		@state\switch(@state.__class(map), { :offset })
