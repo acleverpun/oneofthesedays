@@ -1,12 +1,11 @@
 bump = require('vendor/bump/bump')
 Entity = require('lib/entities/entity')
-Position = require('lib/components/position')
 Point = require('lib/geo/point')
 
 class Zone extends Entity
 	new: (...) =>
 		super(...)
-		@add(Position(Point(@data.x, @data.y)))
+		@add(Point(@data.x, @data.y))
 
 		@entities = {}
 

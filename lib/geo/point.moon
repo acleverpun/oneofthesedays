@@ -2,6 +2,8 @@ TupleStruct = require('lib/utils/structs/tuple-struct')
 
 class Point extends TupleStruct
 	new: (x, y = 0) =>
+		super()
+
 		value = x
 		if not _.isNumber(value) then x = 0
 

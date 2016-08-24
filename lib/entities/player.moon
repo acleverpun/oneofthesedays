@@ -1,7 +1,6 @@
 tactile = require('vendor/tactile/tactile')
 Entity = require('lib/entities/entity')
 Point = require('lib/geo/point')
-Position = require('lib/components/position')
 Drawable = require('lib/components/drawable')
 Movable = require('lib/components/movable')
 Controllable = require('lib/components/controllable')
@@ -15,7 +14,7 @@ class Player extends Entity
 		runSpeed = speed * 8
 
 		@addMultiple({
-			Position(Point(@data.x, @data.y)),
+			Point(@data.x, @data.y),
 			Drawable(@data.width, @data.height, Color(255, 100, 100)),
 			Movable(speed, runSpeed),
 			Controllable({
@@ -36,14 +35,13 @@ class Player extends Entity
 			}),
 		})
 
-	getPoint: () => @position.point
 	getCenter: () =>
 		{ :width, :height } = @drawable
 		p width, height
-		(@getPoint() + (@getPoint() + Point(width, height))) / 2
+		(@point + (@point + Point(width, height))) / 2
 
 	getData: () =>
-		{ :x, :y } = @getPoint()
+		{ :x, :y } = @point
 		{ :width, :height } = @drawable
 		return { :x, :y, :width, :height }
 
@@ -51,14 +49,13 @@ class Player extends Entity
 		return @@(state, @getData())
 
 	control: (dt) =>
-		{ :controllable, :movable, :position } = @getAll()
+		{ :controllable, :movable, :point } = @getAll()
 
 		controls = controllable.controls
 		speed = movable.speed
 
 		if controls.run\isDown() then speed = movable.runSpeed
 
-		point = position.point
 		point.x += speed * controls.horizontal() * dt
 		point.y += speed * controls.vertical() * dt
 		point.x, point.y, cols, num = @state.world\move(@, point.x, point.y, (other) =>

@@ -68,10 +68,9 @@ class AreaState extends State
 		scale = 2
 		windowWidth = love.graphics.getWidth()
 		windowHeight = love.graphics.getHeight()
-		playerPosition = @player.position.point
 
-		tx = math.floor(playerPosition.x - windowWidth / scale / 2)
-		ty = math.floor(playerPosition.y - windowHeight / scale / 2)
+		tx = math.floor(@player.point.x - windowWidth / scale / 2)
+		ty = math.floor(@player.point.y - windowHeight / scale / 2)
 
 		love.graphics.push()
 		love.graphics.scale(scale)

@@ -15,14 +15,11 @@ class Entity extends ToysProxy(ToysEntity)
 		super(component)
 
 	addMultiple: (components) =>
-		if _.isArray(components)
-			for component in *components
+		for key, component in pairs(components)
+			if _.isNumber(key)
 				@add(component)
-		elseif _.isPlainTable(components)
-			for key, component in pairs(components)
+			else
 				@add(key, component)
-		else
-			super(components)
 
 	getAll: () =>
 		components = @getComponents()
