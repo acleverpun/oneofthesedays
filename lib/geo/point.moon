@@ -1,4 +1,4 @@
-TupleStruct = require('lib/structs/tuple-struct')
+TupleStruct = require('lib/utils/structs/tuple-struct')
 
 class Point extends TupleStruct
 	new: (x, y = 0) =>

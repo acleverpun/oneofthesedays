@@ -1,7 +1,7 @@
-Middleclass = require('lib/utils/shims/middleclass')
+Base = require('lib/base')
 
 (ProxyClass) ->
-	ToysProxy = class extends Middleclass
+	ToysProxy = class extends Base
 		new: (...) =>
 			super()
 			@proxy = ProxyClass(...)

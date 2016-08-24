@@ -1,3 +1,3 @@
-Middleclass = require('lib/utils/shims/middleclass')
+Base = require('lib/base')
 
-class Component extends Middleclass
+class Component extends Base

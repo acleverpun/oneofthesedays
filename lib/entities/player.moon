@@ -1,11 +1,11 @@
 tactile = require('vendor/tactile/tactile')
 Entity = require('lib/entities/entity')
-Point = require('lib/structs/point')
+Point = require('lib/geo/point')
 Position = require('lib/components/position')
 Drawable = require('lib/components/drawable')
 Movable = require('lib/components/movable')
 Controllable = require('lib/components/controllable')
-Color = require('lib/structs/color')
+Color = require('lib/display/color')
 
 class Player extends Entity
 	new: (...) =>

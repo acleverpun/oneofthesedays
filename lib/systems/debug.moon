@@ -1,5 +1,5 @@
 System = require('lib/systems/system')
-Color = require('lib/structs/color')
+Color = require('lib/display/color')
 
 class DebugSystem extends System
 	new: (@state) =>

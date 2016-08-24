@@ -1,4 +1,4 @@
-TupleStruct = require('lib/structs/tuple-struct')
+TupleStruct = require('lib/utils/structs/tuple-struct')
 
 class Color extends TupleStruct
 	new: (r, g = 0, b = 0, a = 255) =>
