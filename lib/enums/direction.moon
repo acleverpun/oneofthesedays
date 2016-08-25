@@ -1,4 +1,5 @@
 Enum = require('lib/enums/enum')
+Vector = require('lib/geo/vector')
 
 class Direction extends Enum
 	@NORTH: @('NORTH')
@@ -22,6 +23,16 @@ class Direction extends Enum
 		assert(false)
 
 	new: (@value) =>
+
+	toVector: () =>
+		if @ == @@NORTH then return Vector(0, 1)
+		if @ == @@SOUTH then return Vector(0, -1)
+		if @ == @@EAST then return Vector(1, 0)
+		if @ == @@WEST then return Vector(-1, 0)
+		if @ == @@NORTH_EAST then return Vector(1, 1)
+		if @ == @@NORTH_WEST then return Vector(-1, 1)
+		if @ == @@SOUTH_EAST then return Vector(1, -1)
+		if @ == @@SOUTH_WEST then return Vector(-1, -1)
 
 	__tostring: () => @value
 

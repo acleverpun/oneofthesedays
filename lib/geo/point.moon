@@ -1,11 +1,8 @@
 TupleStruct = require('lib/utils/structs/tuple-struct')
 
 class Point extends TupleStruct
-	new: (x, y = 0) =>
+	new: (x, y) =>
 		super()
-
-		value = x
-		if not _.isNumber(value) then x = 0
 
 		if _.isArray(x)
 			@x = x[1]
@@ -23,6 +20,9 @@ class Point extends TupleStruct
 	toTuple: () => @x, @y
 	toArray: () => { @x, @y }
 	toTable: () => { x: @x, y: @y }
+	toVector: () =>
+		Vector = require('lib/geo/vector')
+		Vector(@)
 
 	__tostring: () => "Point(#{@x}, #{@y})"
 
@@ -40,4 +40,5 @@ class Point extends TupleStruct
 		if _.isNumber(other) then return @@(@x / other, @y / other)
 		-- cross product
 		-- TODO
+
 	__unm: () => @@(-@x, -@y)

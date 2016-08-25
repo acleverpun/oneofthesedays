@@ -17,7 +17,7 @@ class AreaState extends State
 		@map = STI("assets/maps/#{@mapName}", { 'bump' })
 		@world = bump.newWorld(@map.tilewidth)
 		@map\bump_init(@world)
-		@scale = 2
+		@scale = 1
 
 	enter: (previous, transition) =>
 		super(previous)
@@ -49,9 +49,9 @@ class AreaState extends State
 			if toPoint.x then playerData.x = toPoint.x
 			if toPoint.y then playerData.y = toPoint.y
 		-- Handle door offsets
-		if transition.offset
-			if transition.offset.x then playerData.x += transition.offset.x
-			if transition.offset.y then playerData.y += transition.offset.y
+		-- if transition.offset
+		-- 	if transition.offset.x then playerData.x += transition.offset.x
+		-- 	if transition.offset.y then playerData.y += transition.offset.y
 		-- Handle direction
 		if transition.direction
 			if transition.direction == Direction.NORTH then playerData.y -= playerData.height
