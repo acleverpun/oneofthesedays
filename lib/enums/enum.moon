@@ -1,6 +1,6 @@
-Base = require('lib/base')
+Class = require('lib/class')
 
-class Enum extends Base
+class Enum extends Class
 	-- new: (values) =>
 	-- 	assert _.isTable(values)
 	-- 	if _.isArray(values)

@@ -1,6 +1,6 @@
-Base = require('lib/base')
+Class = require('lib/class')
 
-class Transition extends Base
+class Transition extends Class
 	new: (@fromState, @toState, data = {}) =>
 		@player = data.player or @fromState.player
 		@fromDoor = data.fromDoor

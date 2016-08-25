@@ -1,7 +1,7 @@
-Base = require('lib/base')
+Class = require('lib/class')
 
 (ProxyClass) ->
-	ToysProxy = class extends Base
+	ToysProxy = class extends Class
 		new: (...) =>
 			super()
 			@proxy = ProxyClass(...)

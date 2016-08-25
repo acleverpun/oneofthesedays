@@ -1,3 +1,3 @@
-Base = require('lib/base')
+Class = require('lib/class')
 
-class Component extends Base
+class Component extends Class

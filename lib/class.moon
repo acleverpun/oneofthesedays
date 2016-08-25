@@ -1,4 +1,4 @@
-class Base
+class Class
 	@__inherited: (child) =>
 		child.name = child.__name
 

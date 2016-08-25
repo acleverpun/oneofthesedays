@@ -1,4 +1,4 @@
-Base = require('lib/base')
+Class = require('lib/class')
 
-class Struct extends Base
+class Struct extends Class
 	-- TODO
