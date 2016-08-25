@@ -19,7 +19,7 @@ class Zone extends Entity
 			@onWithin(entity, collision)
 
 			if not @entities[entity]
-				@entities[entity] = entity\getPoint()
+				@entities[entity] = entity.point
 				return @onEnter(entity, collision)
 		else
 			if @entities[entity]

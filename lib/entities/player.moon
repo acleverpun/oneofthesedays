@@ -37,7 +37,6 @@ class Player extends Entity
 
 	getCenter: () =>
 		{ :width, :height } = @drawable
-		p width, height
 		(@point + (@point + Point(width, height))) / 2
 
 	getData: () =>

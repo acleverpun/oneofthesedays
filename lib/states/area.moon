@@ -7,6 +7,7 @@ entities = require('lib/entities')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
 Color = require('lib/display/color')
+Point = require('lib/geo/point')
 
 class AreaState extends State
 	new: (@mapName) =>
@@ -15,6 +16,7 @@ class AreaState extends State
 		@map = STI("assets/maps/#{@mapName}", { 'bump' })
 		@world = bump.newWorld(@map.tilewidth)
 		@map\bump_init(@world)
+		@scale = 2
 
 	enter: (previous, transition) =>
 		super(previous)
@@ -58,24 +60,22 @@ class AreaState extends State
 		entityLayer.engine\addEntity(@player)
 
 	addEntityToWorld: (entity, data) =>
-		@world\add(entity, data.x, data.y, data.width, data.height)
+		@world\add(entity, data.x, data.y, data.width * @scale, data.height * @scale)
 
 	update: (dt) =>
 		super(dt)
 		@map\update(dt)
+		@windowWidth = love.graphics.getWidth()
+		@windowHeight = love.graphics.getHeight()
+		tx = math.floor(@player.point.x - @windowWidth / @scale / 2)
+		ty = math.floor(@player.point.y - @windowHeight / @scale / 2)
+		@translation = Point(tx, ty)
 
 	draw: () =>
-		scale = 2
-		windowWidth = love.graphics.getWidth()
-		windowHeight = love.graphics.getHeight()
-
-		tx = math.floor(@player.point.x - windowWidth / scale / 2)
-		ty = math.floor(@player.point.y - windowHeight / scale / 2)
-
 		love.graphics.push()
-		love.graphics.scale(scale)
-		love.graphics.translate(-tx, -ty)
-		@map\setDrawRange(tx, ty, windowWidth, windowHeight)
+		love.graphics.scale(@scale)
+		love.graphics.translate(-@translation.x, -@translation.y)
+		@map\setDrawRange(@translation.x, @translation.y, @windowWidth, @windowHeight)
 		@map\draw()
 
 		if @DEBUG
@@ -90,3 +90,12 @@ class AreaState extends State
 	keypressed: (key) =>
 		super(key)
 		if key == 'escape' then @push(PauseState())
+
+	mousepressed: (x, y, button) =>
+		if @DEBUG and button == 2
+			eventPoint = Point(x, y)
+			-- TODO: Make work not just for player
+			point = eventPoint + @translation - Point(200, 150)
+
+			items, len = @world\queryPoint(point\toTuple())
+			if len > 0 then d items
