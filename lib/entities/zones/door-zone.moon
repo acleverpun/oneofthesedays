@@ -2,15 +2,15 @@ entities = require('lib/entities')
 Zone = require('lib/entities/zones/zone')
 
 class DoorZone extends Zone
-	onEnter: (entity) =>
+	onEnter: (entity, collision) =>
 		if entity.class == entities.Player
-			@enter(entity)
+			@enter(entity, collision)
 
-	enter: (entity) =>
+	enter: (entity, collision) =>
 		-- TODO: Move some of this logic to Transition
 		{ :map } = @data.properties
 		if not map then map = @state.previous.mapName
 
 		-- TODO: Wat?
-		offset = entity.point - @data
-		@state\switch(@state.__class(map), { :offset })
+		{ :offset, :direction } = collision
+		@state\switch(@state.__class(map), { :offset, :direction })

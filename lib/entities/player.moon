@@ -5,6 +5,7 @@ Drawable = require('lib/components/drawable')
 Movable = require('lib/components/movable')
 Controllable = require('lib/components/controllable')
 Color = require('lib/display/color')
+Direction = require('lib/enums/direction')
 
 class Player extends Entity
 	new: (...) =>
@@ -64,4 +65,6 @@ class Player extends Entity
 
 		for col in *cols
 			if col.type == 'cross' and _.isFunction(col.other.collision)
+				col.direction = Direction\fromNormal(col.normal)
+				col.offset = point - col.other.data
 				col.other\collision(@, col)

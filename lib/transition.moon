@@ -7,3 +7,4 @@ class Transition extends Base
 		@toDoor = data.toDoor
 		@toPoint = data.toPoint
 		@offset = data.offset
+		@direction = data.direction

@@ -8,6 +8,7 @@ DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
 Color = require('lib/display/color')
 Point = require('lib/geo/point')
+Direction = require('lib/enums/direction')
 
 class AreaState extends State
 	new: (@mapName) =>
@@ -50,7 +51,13 @@ class AreaState extends State
 		-- Handle door offsets
 		if transition.offset
 			if transition.offset.x then playerData.x += transition.offset.x
-			if transition.offset.y then playerData.y += transition.offset.y - playerData.height
+			if transition.offset.y then playerData.y += transition.offset.y
+		-- Handle direction
+		if transition.direction
+			if transition.direction == Direction.NORTH then playerData.y -= playerData.height
+			if transition.direction == Direction.SOUTH then playerData.y += playerData.height
+			if transition.direction == Direction.EAST then playerData.x -= playerData.width
+			if transition.direction == Direction.WEST then playerData.x += playerData.width
 
 		@addEntityToWorld(@player, playerData)
 
@@ -60,7 +67,7 @@ class AreaState extends State
 		entityLayer.engine\addEntity(@player)
 
 	addEntityToWorld: (entity, data) =>
-		@world\add(entity, data.x, data.y, data.width * @scale, data.height * @scale)
+		@world\add(entity, data.x, data.y, data.width, data.height)
 
 	update: (dt) =>
 		super(dt)
