@@ -5,7 +5,7 @@ Drawable = require('lib/components/drawable')
 Movable = require('lib/components/movable')
 Controllable = require('lib/components/controllable')
 Color = require('lib/display/color')
-Direction = require('lib/enums/direction')
+Direction = require('lib/geo/direction')
 
 class Player extends Entity
 	new: (...) =>

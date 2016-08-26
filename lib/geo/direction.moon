@@ -1,16 +1,7 @@
-Enum = require('lib/enums/enum')
+Enum = require('lib/utils/enum')
 Vector = require('lib/geo/vector')
 
 class Direction extends Enum
-	@NORTH: @('NORTH')
-	@SOUTH: @('SOUTH')
-	@WEST: @('WEST')
-	@EAST: @('EAST')
-	@NORTH_WEST: @('NORTH_WEST')
-	@NORTH_EAST: @('NORTH_EAST')
-	@SOUTH_WEST: @('SOUTH_WEST')
-	@SOUTH_EAST: @('SOUTH_EAST')
-
 	@fromNormal: (normal) =>
 		if normal.x == 0 and normal.y == -1 then return @NORTH
 		if normal.x == 0 and normal.y == 1 then return @SOUTH
@@ -41,3 +32,17 @@ class Direction extends Enum
 		if @ == @@SOUTH then return @@NORTH
 		if @ == @@WEST then return @@EAST
 		if @ == @@EAST then return @@WEST
+
+Direction\add({
+	'NORTH',
+	'SOUTH',
+	'WEST',
+	'EAST',
+	'NORTH_WEST',
+	'NORTH_EAST',
+	'SOUTH_WEST',
+	'SOUTH_EAST',
+	NONE: nil
+})
+
+return Direction

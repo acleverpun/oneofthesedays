@@ -8,7 +8,7 @@ DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
 Color = require('lib/display/color')
 Point = require('lib/geo/point')
-Direction = require('lib/enums/direction')
+Direction = require('lib/geo/direction')
 
 class AreaState extends State
 	new: (@mapName) =>

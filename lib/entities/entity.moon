@@ -1,7 +1,7 @@
 { Entity: ToysEntity } = require('vendor/lovetoys/lovetoys')
 ToysProxy = require('lib/utils/shims/lovetoys-proxy')
 Point = require('lib/geo/point')
-Direction = require('lib/enums/direction')
+Direction = require('lib/geo/direction')
 
 class Entity extends ToysProxy(ToysEntity)
 	new: (@state, @data) =>
