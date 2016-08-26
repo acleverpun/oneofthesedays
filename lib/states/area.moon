@@ -38,7 +38,12 @@ class AreaState extends State
 			@addEntityToWorld(entity, object)
 
 		assert @player
+
 		door = doors[1]
+		if transition.toDoor
+			door = _.find(doors, (door) -> _.includes({ door.name, door.id }, transition.toDoor))
+			if not door then door = doors[1]
+
 		if needsDoor
 			@player.point.x = door.x
 			@player.point.y = door.y
@@ -55,10 +60,10 @@ class AreaState extends State
 			if transition.offset.y then @player.point.y += transition.offset.y * doorScaleHeight
 		-- Handle direction
 		if transition.direction
-			if transition.direction == Direction.NORTH then @player.point.y += @player.data.height
-			if transition.direction == Direction.SOUTH then @player.point.y -= @player.data.height
-			if transition.direction == Direction.WEST then @player.point.x += @player.data.width
-			if transition.direction == Direction.EAST then @player.point.x -= @player.data.width
+			if transition.direction == Direction.NORTH then @player.point.y += door.height
+			if transition.direction == Direction.SOUTH then @player.point.y -= door.height
+			if transition.direction == Direction.WEST then @player.point.x += door.width
+			if transition.direction == Direction.EAST then @player.point.x -= door.width
 
 		@addEntityToWorld(@player, @player\getData())
 

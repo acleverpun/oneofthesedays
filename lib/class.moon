@@ -21,7 +21,7 @@ class Class
 		if type == @@name then return true
 
 		if _.isString(type)
-			return _.some(@@parents, (Parent) -> type == Parent.type or type == Parent.name)
+			return _.some(@@parents, (Parent) -> _.includes({ Parent.type, Parent.name }, type))
 		if _.isInstance(type)
 			return _.some(@@parents, (Parent) -> type.class == Parent)
 		if _.isClass(type)

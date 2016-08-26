@@ -15,7 +15,7 @@
  </layer>
  <objectgroup name="entities">
   <object id="1" name="player" type="Player" gid="1766" x="481" y="703" width="14" height="14"/>
-  <object id="2" name="building" type="zones/DoorZone" x="480" y="624" width="16" height="16">
+  <object id="2" type="zones/DoorZone" x="480" y="624" width="16" height="16">
    <properties>
     <property name="door" value="center"/>
     <property name="map" type="file" value="sample_indoor.lua"/>
@@ -33,7 +33,7 @@
    <property name="collidable" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt2k2O0zAUwPE2bdesGIGQho9TzHACJDYwIHEBQNNhxQkQUkF8Cs4Ae+AUM0jAmi2IBcMtsFVbuK/vOU6mEST8f5KVxkmTkV/t53gyGgEAAAAAAABAP12v/vZfMAxXK30rj9fVec+U+j3iVMy366LSt9FCaU+tLpq7YwfJ8efGuVeI0xorFrK9rf7gnRXH3rj9t1X+HO8h8VhT1z/iVusP31zd91Av+4RVh7xc/9D6iSXtE1/H63Uo0yYWuXlUeuxBwf1PEa8VVgzitm4OW5qT0/PI47a6vCHPlUpzcnoeedyWG6vks0RpLmnrnSvvXfnQ7W3+aSXPH965FrF4mfmOv54ct366cuzKr+a3GoySXK6NU+c30FfkuHXBzcsuunJpfPJr91XJvErub4f9NCavZ+X3ZE5l0+ZVsT/cn9rf227QpjvuOoeT1TpiotPmVVr+iLRxaicTNzRz0ufySMvdab4uyTdz14fuTerPGzJtrJKxSNtpz21vhM83w9aaR+WeM2TbX3P5567b3//P45HL3XHMKm2nW+H8VzW5/XZF25fKrau3lVtz+UHuMbXJGxY5/zqdfH46Wy8vGsyXh6zu/4Ca9Pd+6H7fR658DL/zNIc3mRNjSYuBXMeQbZ46mPwpXpu1wi7GyCGRbZq2+ZGIzTzUl8xTrWfArtcp+yiu5Wq517f5k+myzXdny3I5jPd+nnQnmSvxv43NkzGZT1b7iNYfzoSt71u839OtR9NlH/Dl8XS1P6RiHK33e7y6dSvGrnqfxqPR51C+GGvhzGH7hzXdzaEt+6c0Zrn3g8kftq0NXCNta+tdx7jPc2H3Fg1++/QNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAID3G4h4gQ4=
+   eJzt2k1u00AUwPHESdasqIqQCuUULSeoxAYKEhcA1JRVT4CQAqIFBGeAPXCKFglYswWxoL0FM8qMOnl582E3Ftj8f9LI8dixq3mZeeOpBwMAAAAAAAAA6KY71d/+C/rhVqVv5fFcnXWk1O8Sp2K2XWeVvvVmSntqdd7UHNsPjr+MnLtDnJbEYiHbO9YfrCvi2Duz/75Kn2M9JR5Lcv3Db7X+8MPU/XT1sk/E6pCW6h9aP4kJ+8T34XIdyjSJRWoeFR57UnD/S8RrQSwGfpubw5bm5PA88nhcLm/Ic6XSnByeRx6PS41V8lmiNJc09cGUj6Z8avc2/7SS5w/raoNYvE58x15Pjlu/TTk15az+rXqjJJdr49S1FfQVOW5dN/OyTVNuDC9+7a4qmVfJ/Q23H8bk7aT8nsyp4rR5le8PB+P49zZqtOmWuc7xaLGOmOi0eZWWPzxtnNpKxA31XPS53NNyd5ivS/LN1PShx6P8eX2mjVUyFmE77ZrtXff5ntvG5lGp5wzZ9rdN/nlk9vf+83ikcrcfs0rb6b47/00mtz+oaPtSqXX1plJrLr/IPVFN8kaMnH9dDj4fTpbLqxrz5T7L/R9QE/7ej83v+8SUz+53HubwOnNizGkxkOsYss1D+6PzYjVZK2xjjOwT2aZhm5+I2Exdfck8NfYM2PY6ZRf5tVwt99o2fzGet/n2ZF5uuvHezpMeBnMl/rexejIm09FiH9H6w7rb2r7F+z3tejae9wFbno8X+0PIxzH2fo+VW7di7Mr7MhwMvpryLbEOzhy2e1jTXR3asntKY5Z6P5j8Ebe2gmuEbR1719Hv81zYvlmN3z59AwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABg/QGN3YBB
   </data>
  </layer>
  <layer name="roofs" width="100" height="100">
