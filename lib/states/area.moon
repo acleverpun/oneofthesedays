@@ -19,12 +19,12 @@ class AreaState extends State
 		@map\bump_init(@world)
 		@scale = 1
 
-	enter: (previous, transition) =>
+	enter: (previous, @transition) =>
 		super(previous)
 
-		if transition.player
-			@player = transition.player\clone(@)
-		needsDoor = not not transition.player
+		if @transition.player
+			@player = @transition.player\clone(@)
+		needsDoor = not not @transition.player
 
 		doors = {}
 		for object in *@map.layers.entities.objects
@@ -40,8 +40,11 @@ class AreaState extends State
 		assert @player
 
 		door = doors[1]
-		if transition.toDoor
-			door = _.find(doors, (door) -> _.includes({ door.name, door.id }, transition.toDoor))
+		if needsDoor and not @transition.toDoor and @transition.fromState.transition
+			originalDoor = @transition.fromState.transition.fromDoor
+			if originalDoor then @transition.toDoor = originalDoor.data.id
+		if @transition.toDoor
+			door = _.find(doors, (door) -> _.includes({ door.name, door.id }, @transition.toDoor))
 			if not door then door = doors[1]
 
 		if needsDoor
@@ -49,21 +52,21 @@ class AreaState extends State
 			@player.point.y = door.y
 
 		-- Handle specific spawn points
-		if toPoint = transition.toPoint
+		if toPoint = @transition.toPoint
 			if toPoint.x then @player.point.x = toPoint.x
 			if toPoint.y then @player.point.y = toPoint.y
 		-- Handle door offsets
-		if transition.offset
-			doorScaleWidth = door.width / transition.fromDoor.data.width
-			doorScaleHeight = door.height / transition.fromDoor.data.height
-			if transition.offset.x then @player.point.x += transition.offset.x * doorScaleWidth
-			if transition.offset.y then @player.point.y += transition.offset.y * doorScaleHeight
+		if @transition.offset
+			doorScaleWidth = door.width / @transition.fromDoor.data.width
+			doorScaleHeight = door.height / @transition.fromDoor.data.height
+			if @transition.offset.x then @player.point.x += @transition.offset.x * doorScaleWidth
+			if @transition.offset.y then @player.point.y += @transition.offset.y * doorScaleHeight
 		-- Handle direction
-		if transition.direction
-			if transition.direction == Direction.NORTH then @player.point.y += door.height
-			if transition.direction == Direction.SOUTH then @player.point.y -= door.height
-			if transition.direction == Direction.WEST then @player.point.x += door.width
-			if transition.direction == Direction.EAST then @player.point.x -= door.width
+		if @transition.direction
+			if @transition.direction == Direction.NORTH then @player.point.y += door.height
+			if @transition.direction == Direction.SOUTH then @player.point.y -= door.height
+			if @transition.direction == Direction.WEST then @player.point.x += door.width
+			if @transition.direction == Direction.EAST then @player.point.x -= door.width
 
 		@addEntityToWorld(@player, @player\getData())
 
