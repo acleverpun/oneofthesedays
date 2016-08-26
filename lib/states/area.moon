@@ -38,28 +38,27 @@ class AreaState extends State
 			@addEntityToWorld(entity, object)
 
 		assert @player
-		playerData = @player\getData()
 		door = doors[1]
 		if needsDoor
-			playerData.x = door.x
-			playerData.y = door.y
+			@player.point.x = door.x
+			@player.point.y = door.y
 
 		-- Handle specific spawn points
 		if toPoint = transition.toPoint
-			if toPoint.x then playerData.x = toPoint.x
-			if toPoint.y then playerData.y = toPoint.y
+			if toPoint.x then @player.point.x = toPoint.x
+			if toPoint.y then @player.point.y = toPoint.y
 		-- Handle door offsets
 		-- if transition.offset
-		-- 	if transition.offset.x then playerData.x += transition.offset.x
-		-- 	if transition.offset.y then playerData.y += transition.offset.y
+		-- 	if transition.offset.x then @player.point.x += transition.offset.x
+		-- 	if transition.offset.y then @player.point.y += transition.offset.y
 		-- Handle direction
 		if transition.direction
-			if transition.direction == Direction.NORTH then playerData.y -= playerData.height
-			if transition.direction == Direction.SOUTH then playerData.y += playerData.height
-			if transition.direction == Direction.WEST then playerData.x += playerData.width
-			if transition.direction == Direction.EAST then playerData.x -= playerData.width
+			if transition.direction == Direction.NORTH then @player.point.y += @player.data.height
+			if transition.direction == Direction.SOUTH then @player.point.y -= @player.data.height
+			if transition.direction == Direction.WEST then @player.point.x += @player.data.width
+			if transition.direction == Direction.EAST then @player.point.x -= @player.data.width
 
-		@addEntityToWorld(@player, playerData)
+		@addEntityToWorld(@player, @player\getData())
 
 		entityLayer = MapLayer(@map, 'entities')
 		entityLayer.engine\addSystem(DrawSystem())
