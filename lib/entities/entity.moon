@@ -1,5 +1,7 @@
 { Entity: ToysEntity } = require('vendor/lovetoys/lovetoys')
 ToysProxy = require('lib/utils/shims/lovetoys-proxy')
+Point = require('lib/geo/point')
+Direction = require('lib/enums/direction')
 
 class Entity extends ToysProxy(ToysEntity)
 	new: (@state, @data) =>
@@ -29,3 +31,18 @@ class Entity extends ToysProxy(ToysEntity)
 			result[_.lowerFirst(key)] = value
 
 		return result
+
+	getPoint: (direction) =>
+		point = @point
+		if not point then point = Point(@data)
+		if not direction then return point
+
+		{ :x, :y } = point
+		{ :width, :height } = @data
+
+		if direction == Direction.NORTH then return Point(nil, y)
+		if direction == Direction.SOUTH then return Point(nil, y + height)
+		if direction == Direction.EAST then return Point(x + width, nil)
+		if direction == Direction.WEST then return Point(x, nil)
+
+		assert false

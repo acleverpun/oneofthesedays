@@ -56,8 +56,8 @@ class AreaState extends State
 		if transition.direction
 			if transition.direction == Direction.NORTH then playerData.y -= playerData.height
 			if transition.direction == Direction.SOUTH then playerData.y += playerData.height
-			if transition.direction == Direction.EAST then playerData.x -= playerData.width
 			if transition.direction == Direction.WEST then playerData.x += playerData.width
+			if transition.direction == Direction.EAST then playerData.x -= playerData.width
 
 		@addEntityToWorld(@player, playerData)
 
