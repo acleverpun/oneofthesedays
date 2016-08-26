@@ -13,4 +13,4 @@ class DoorZone extends Zone
 
 		-- TODO: Wat?
 		{ :offset, :direction } = collision
-		@state\switch(@state.__class(map), { :offset, :direction })
+		@state\switch(@state.__class(map), { :offset, :direction, fromDoor: @ })

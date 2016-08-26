@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" backgroundcolor="#000000" nextobjectid="3">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" backgroundcolor="#000000" nextobjectid="4">
  <tileset firstgid="1" name="roguelikeSheet_transparent" tilewidth="16" tileheight="16" spacing="1" tilecount="1767" columns="57">
   <image source="../spritesheets/roguelike/roguelikeSheet_transparent.png" width="968" height="526"/>
  </tileset>
@@ -14,19 +14,20 @@
   </data>
  </layer>
  <objectgroup name="entities">
-  <object id="2" type="zones/DoorZone" x="288" y="304" width="16" height="16"/>
+  <object id="2" name="center" type="zones/DoorZone" x="288" y="336" width="16" height="16"/>
+  <object id="3" name="left" type="zones/DoorZone" x="144" y="256" width="48" height="16"/>
  </objectgroup>
  <layer name="objects" width="32" height="32">
   <properties>
    <property name="collidable" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjILBCSwYGRjmAulTDBCaAYkmBB4zQuhIII4g0/5CqBnMjAgxdSYEewEOGgZkgVgOiskBTQTkb+Kgu7Go7SPTDcSAZUzYxQ8DcSYjdjliACH/EwOkgFiCCubgAvuRMLXBfAJ8EDgGxMeB2BIazl041GPTSwjcIMAHgQNIGJ9+bHpHwdAFuNITOemMHICcnhRxiI+CUTAKRsEowA4AI4wdsA==
+   eJxjYBgFo2AUjILBCSwYGRjmAulTDBCaAYkmBB4zQuhIII4g0/5CqBnMjAgxdSYEewEOGgZkgVgOiskBTQTkb+Kgu7Go7SPTDcSAZUzYxQ8DcSYjdjliACH/EwOkgFiCCubgAvuRMLXBfAJ8EDgGxMeB2BIazl041GPTSwjcIMAHgQNIGJ9+bHpHwdAFuNITOemMHIArPY2ms1EwCkbBKCAMAHdFHY8=
   </data>
  </layer>
  <layer name="details" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztzqEBACAMwLABZ3AjT3A5EsT8EImpbQTAv2bLy7V69UFuj+oDAABeBzazAUk=
+   eJztzrsVABAQAEGfMkQK1ITKhRL54c0km25KAPdq+Vy2UaIPzmaNPgB+16MHAB6zAOLrAWo=
   </data>
  </layer>
 </map>

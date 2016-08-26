@@ -49,8 +49,10 @@ class AreaState extends State
 			if toPoint.y then @player.point.y = toPoint.y
 		-- Handle door offsets
 		if transition.offset
-			if transition.offset.x then @player.point.x += transition.offset.x
-			if transition.offset.y then @player.point.y += transition.offset.y
+			doorScaleWidth = door.width / transition.fromDoor.data.width
+			doorScaleHeight = door.height / transition.fromDoor.data.height
+			if transition.offset.x then @player.point.x += transition.offset.x * doorScaleWidth
+			if transition.offset.y then @player.point.y += transition.offset.y * doorScaleHeight
 		-- Handle direction
 		if transition.direction
 			if transition.direction == Direction.NORTH then @player.point.y += @player.data.height
