@@ -1,4 +1,5 @@
 TupleStruct = require('lib/utils/structs/tuple-struct')
+entities = require('lib/entities')
 
 class Point extends TupleStruct
 	new: (x, y) =>
@@ -20,9 +21,7 @@ class Point extends TupleStruct
 	toTuple: () => @x, @y
 	toArray: () => { @x, @y }
 	toTable: () => { x: @x, y: @y }
-	toVector: () =>
-		Vector = require('lib/geo/vector')
-		Vector(@)
+	toVector: () => entities.Vector(@)
 
 	__tostring: () => "Point(#{@x}, #{@y})"
 

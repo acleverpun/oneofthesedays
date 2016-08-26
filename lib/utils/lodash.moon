@@ -51,4 +51,7 @@ _.isPlainTable = (value) ->
 		if type(key) == 'number' then return false
 	return true
 
+_.isInstance = (value) -> not not value.isInstance
+_.isClass = (value) -> not not value.isClass
+
 return _

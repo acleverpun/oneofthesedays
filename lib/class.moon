@@ -6,26 +6,25 @@ class Class
 
 	@__inherited: (child) =>
 		child.name = child.__name
+		child.type = _.lowerFirst(child.name)
 		child.parents = _.union(@@parents, { @@ })
 
 	new: () =>
 		@class = @@
-		@className = @@name
 		@type = _.lowerFirst(@@name)
 		@isInstance = true
 
 	is: (type) =>
 		if type == @ then return true
+		if type == @@ then return true
+		if type == @type then return true
+		if type == @@name then return true
 
 		if _.isString(type)
-			if _.lowerFirst(type) == type
-				return 'lower'
-			else
-				return 'upper'
-		if type.isClass
-			if type == @@ then return true
-			return _.some(@@parents, (Parent) -> return type == Parent)
-		if type.isInstance
-			-- if type == @ then return true
-			-- return _.some(@@parents, (Parent) -> return type == Parent)
-			return 'instance'
+			return _.some(@@parents, (Parent) -> type == Parent.type or type == Parent.name)
+		if _.isInstance(type)
+			return _.some(@@parents, (Parent) -> type.class == Parent)
+		if _.isClass(type)
+			return _.some(@@parents, (Parent) -> type == Parent)
+
+		return false
