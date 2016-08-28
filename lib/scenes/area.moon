@@ -1,8 +1,8 @@
 STI = require('vendor/sti/sti')
 bump = require('vendor/bump/bump')
-State = require('lib/states/state')
+Scene = require('lib/scenes/scene')
 MapLayer = require('lib/map-layer')
-PauseState = require('lib/states/pause')
+PauseScene = require('lib/scenes/pause')
 entities = require('lib/entities')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
@@ -10,7 +10,7 @@ Color = require('lib/display/color')
 Point = require('lib/geo/point')
 Direction = require('lib/geo/direction')
 
-class AreaState extends State
+class AreaScene extends Scene
 	new: (@mapName) =>
 		super()
 
@@ -40,8 +40,8 @@ class AreaState extends State
 		assert @player
 
 		door = doors[1]
-		if needsDoor and not @transition.toDoor and @transition.fromState.transition
-			originalDoor = @transition.fromState.transition.fromDoor
+		if needsDoor and not @transition.toDoor and @transition.fromScene.transition
+			originalDoor = @transition.fromScene.transition.fromDoor
 			if originalDoor then @transition.toDoor = originalDoor.data.id
 		if @transition.toDoor
 			door = _.find(doors, (door) -> _.includes({ door.name, door.id }, @transition.toDoor))
@@ -105,7 +105,7 @@ class AreaState extends State
 
 	keypressed: (key) =>
 		super(key)
-		if key == 'escape' then @push(PauseState())
+		if key == 'escape' then @push(PauseScene())
 
 	mousepressed: (x, y, button) =>
 		if @DEBUG and button == 2

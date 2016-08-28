@@ -45,8 +45,8 @@ class Player extends Entity
 		{ :width, :height } = @rectangle
 		return { :x, :y, :width, :height }
 
-	clone: (state) =>
-		return @@(state, @getData())
+	clone: (scene) =>
+		return @@(scene, @getData())
 
 	control: (dt) =>
 		{ :controllable, :movable, :point } = @getAll()
@@ -58,7 +58,7 @@ class Player extends Entity
 
 		point.x += speed * controls.horizontal() * dt
 		point.y += speed * controls.vertical() * dt
-		point.x, point.y, cols, num = @state.world\move(@, point.x, point.y, (other) =>
+		point.x, point.y, cols, num = @scene.world\move(@, point.x, point.y, (other) =>
 			if _.isFunction(other.collision) then return 'cross'
 			return 'slide'
 		)

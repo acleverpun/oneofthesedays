@@ -1,7 +1,7 @@
 suit = require('vendor/SUIT')
-State = require('lib/states/state')
+Scene = require('lib/scenes/scene')
 
-class GuiState extends State
+class GuiScene extends Scene
 	new: () =>
 		super()
 		@gui = suit.new()

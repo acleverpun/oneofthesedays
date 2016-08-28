@@ -1,9 +1,9 @@
 Audio = require('lib/utils/audio')
-GuiState = require('lib/states/gui')
-AreaState = require('lib/states/area')
+GuiScene = require('lib/scenes/gui')
+AreaScene = require('lib/scenes/area')
 Color = require('lib/display/color')
 
-class TitleState extends GuiState
+class TitleScene extends GuiScene
 	new: (...) =>
 		super(...)
 		@music = Audio('vendor/wave/music.wav', 'stream')
@@ -35,7 +35,7 @@ class TitleState extends GuiState
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
-		@switch(AreaState('sample_map.lua'))
+		@switch(AreaScene('sample_map.lua'))
 		@sound\play()
 
 	quitGame: () =>

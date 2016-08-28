@@ -9,8 +9,8 @@ class DoorZone extends Zone
 	enter: (entity, collision) =>
 		-- TODO: Move some of this logic to Transition
 		{ :map, :door } = @data.properties
-		if not map then map = @state.previous.mapName
+		if not map then map = @scene.previous.mapName
 
 		-- TODO: Wat?
 		{ :offset, :direction } = collision
-		@state\switch(@state.__class(map), { :offset, :direction, fromDoor: @, toDoor: door })
+		@scene\switch(@scene.__class(map), { :offset, :direction, fromDoor: @, toDoor: door })

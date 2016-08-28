@@ -1,15 +1,15 @@
 Class = require('lib/class')
-states = require('vendor/hump/gamestate')
+scenes = require('vendor/hump/gamestate')
 Engine = require('lib/engine')
 Transition = require('lib/transition')
 EventManager = require('lib/event-manager')
 DebugSystem = require('lib/systems/debug')
 
-class State extends Class
+class Scene extends Class
 	new: () =>
 		@engine = Engine()
 		@events = EventManager()
-		@states = states
+		@scenes = scenes
 
 		debugSystem = DebugSystem(@)
 		@engine\addSystem(debugSystem, 'update')
@@ -30,13 +30,13 @@ class State extends Class
 			@engine\toggleSystem(DebugSystem.name)
 			@DEBUG = not @DEBUG
 
-	switch: (state, data, ...) =>
-		transition = Transition(@, state, data)
-		@states.switch(state, transition, ...)
+	switch: (scene, data, ...) =>
+		transition = Transition(@, scene, data)
+		@scenes.switch(scene, transition, ...)
 
-	push: (state, data, ...) =>
-		transition = Transition(@, state, data)
-		@states.push(state, transition, ...)
+	push: (scene, data, ...) =>
+		transition = Transition(@, scene, data)
+		@scenes.push(scene, transition, ...)
 
 	pop: (...) =>
-		@states.pop(...)
+		@scenes.pop(...)

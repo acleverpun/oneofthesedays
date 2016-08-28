@@ -1,6 +1,6 @@
-GuiState = require('lib/states/gui')
+GuiScene = require('lib/scenes/gui')
 
-class PauseState extends GuiState
+class PauseScene extends GuiScene
 	update: (dt) =>
 		super(dt)
 
@@ -21,4 +21,4 @@ class PauseState extends GuiState
 		super(key)
 
 	unpause: () =>
-		@states.pop()
+		@scenes.pop()

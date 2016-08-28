@@ -2,7 +2,7 @@ System = require('lib/systems/system')
 Color = require('lib/display/color')
 
 class DebugSystem extends System
-	new: (@state) =>
+	new: (@scene) =>
 		super()
 		@x = 10
 
@@ -12,11 +12,11 @@ class DebugSystem extends System
 
 	draw: () =>
 		@debug('FPS', @fps)
-		@debug('state', @state.__class.__name)
+		@debug('scene', @scene.__class.__name)
 
-		if @state.mapName then @debug('map', @state.mapName)
+		if @scene.mapName then @debug('map', @scene.mapName)
 
-		if player = @state.player
+		if player = @scene.player
 			x = math.floor(player.point.x)
 			y = math.floor(player.point.y)
 			@debug('position', "#{x}, #{y}")

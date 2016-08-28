@@ -1,8 +1,8 @@
 Class = require('lib/class')
 
 class Transition extends Class
-	new: (@fromState, @toState, data = {}) =>
-		@player = data.player or @fromState.player
+	new: (@fromScene, @toScene, data = {}) =>
+		@player = data.player or @fromScene.player
 		@fromDoor = data.fromDoor
 		@toDoor = data.toDoor
 		@toPoint = data.toPoint
