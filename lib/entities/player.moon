@@ -1,7 +1,7 @@
 tactile = require('vendor/tactile/tactile')
 Entity = require('lib/entities/entity')
 Point = require('lib/geo/point')
-Drawable = require('lib/components/drawable')
+Rectangle = require('lib/display/rectangle')
 Movable = require('lib/components/movable')
 Controllable = require('lib/components/controllable')
 Color = require('lib/display/color')
@@ -16,7 +16,7 @@ class Player extends Entity
 
 		@addMultiple({
 			Point(@data.x, @data.y),
-			Drawable(@data.width, @data.height, Color(255, 100, 100)),
+			Rectangle(@data.width, @data.height, Color(255, 100, 100)),
 			Movable(speed, runSpeed),
 			Controllable({
 				vertical: with tactile.newControl()
@@ -37,12 +37,12 @@ class Player extends Entity
 		})
 
 	getCenter: () =>
-		{ :width, :height } = @drawable
+		{ :width, :height } = @rectangle
 		(@point + (@point + Point(width, height))) / 2
 
 	getData: () =>
 		{ :x, :y } = @point
-		{ :width, :height } = @drawable
+		{ :width, :height } = @rectangle
 		return { :x, :y, :width, :height }
 
 	clone: (state) =>

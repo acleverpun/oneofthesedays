@@ -11,7 +11,7 @@ class Direction extends Enum
 		if normal.x == 1 and normal.y == -1 then return @NORTH_EAST
 		if normal.x == -1 and normal.y == 1 then return @SOUTH_WEST
 		if normal.x == 1 and normal.y == 1 then return @SOUTH_EAST
-		assert(false)
+		assert false
 
 	new: (@value) =>
 
