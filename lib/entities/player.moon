@@ -1,10 +1,11 @@
 tactile = require('vendor/tactile/tactile')
 Entity = require('lib/entities/entity')
 Point = require('lib/geo/point')
+Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
+Sprite = require('lib/display/sprite')
 Movable = require('lib/components/movable')
 Controllable = require('lib/input/controllable')
-Color = require('lib/display/color')
 Direction = require('lib/geo/direction')
 
 class Player extends Entity
@@ -17,7 +18,7 @@ class Player extends Entity
 		@addMultiple({
 			Point(@data.x, @data.y),
 			Shape(@data.width, @data.height),
-			Color(255, 100, 100),
+			Sprite('ff4-characters.png', Vector(47, 5), Shape(16, 16)),
 			Movable(speed, runSpeed),
 			Controllable({
 				vertical: with tactile.newControl()

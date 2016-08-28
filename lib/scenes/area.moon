@@ -17,7 +17,7 @@ class AreaScene extends Scene
 		@map = STI("assets/maps/#{@mapName}", { 'bump' })
 		@world = bump.newWorld(@map.tilewidth)
 		@map\bump_init(@world)
-		@scale = 1
+		@scale = 4
 
 	enter: (previous, @transition) =>
 		super(previous)
