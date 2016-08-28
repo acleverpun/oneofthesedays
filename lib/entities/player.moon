@@ -1,9 +1,9 @@
 tactile = require('vendor/tactile/tactile')
 Entity = require('lib/entities/entity')
 Point = require('lib/geo/point')
-Rectangle = require('lib/display/rectangle')
+Shape = require('lib/geo/shape')
 Movable = require('lib/components/movable')
-Controllable = require('lib/components/controllable')
+Controllable = require('lib/input/controllable')
 Color = require('lib/display/color')
 Direction = require('lib/geo/direction')
 
@@ -16,7 +16,8 @@ class Player extends Entity
 
 		@addMultiple({
 			Point(@data.x, @data.y),
-			Rectangle(@data.width, @data.height, Color(255, 100, 100)),
+			Shape(@data.width, @data.height),
+			Color(255, 100, 100),
 			Movable(speed, runSpeed),
 			Controllable({
 				vertical: with tactile.newControl()
@@ -37,12 +38,12 @@ class Player extends Entity
 		})
 
 	getCenter: () =>
-		{ :width, :height } = @rectangle
+		{ :width, :height } = @shape
 		(@point + (@point + Point(width, height))) / 2
 
 	getData: () =>
 		{ :x, :y } = @point
-		{ :width, :height } = @rectangle
+		{ :width, :height } = @shape
 		return { :x, :y, :width, :height }
 
 	clone: (scene) =>
