@@ -11,10 +11,9 @@ class Entity extends ToysProxy(ToysEntity)
 		if not component
 			component = key
 			key = component.type
-
 		assert(not @[key])
 		@[key] = component
-		super(component)
+		super(component, key)
 
 	addMultiple: (components) =>
 		for key, component in pairs(components)

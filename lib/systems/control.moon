@@ -1,6 +1,7 @@
 System = require('lib/systems/system')
 
 class ControlSystem extends System
+
 	update: (dt) =>
 		for entity in *@getTargets()
 			{ :controllable } = entity\getAll()
@@ -10,4 +11,4 @@ class ControlSystem extends System
 
 			entity\control(dt)
 
-	requires: () => { 'Controllable' }
+	requires: () => { 'controllable' }

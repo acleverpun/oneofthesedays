@@ -26,6 +26,6 @@ class DrawSystem extends System
 			love.graphics.setColor(r, g, b, a)
 
 	requires: () => {
-		sprites: { 'Sprite', 'Shape', 'Point' },
-		polygons: { 'Shape', 'Point' },
+		sprites: { 'sprite', 'shape', 'point' },
+		polygons: { 'shape', 'point' },
 	}
