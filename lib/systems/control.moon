@@ -4,11 +4,11 @@ class ControlSystem extends System
 
 	update: (dt) =>
 		for entity in *@getTargets()
-			{ :controllable } = entity\getAll()
+			{ :controls } = entity\getAll()
 
-			for name, control in pairs(controllable.controls)
+			for name, control in pairs(controls.table)
 				control\update(dt)
 
 			entity\control(dt)
 
-	requires: () => { 'controllable' }
+	requires: () => { 'controls' }

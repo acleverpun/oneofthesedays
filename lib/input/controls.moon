@@ -1,4 +1,4 @@
 Class = require('lib/class')
 
-class Controllable extends Class
+class Controls extends Class
 	new: (@controls) => super()

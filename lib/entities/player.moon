@@ -5,7 +5,7 @@ Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 AnimatedSprite = require('lib/display/sprite')
 Movable = require('lib/components/movable')
-Controllable = require('lib/input/controllable')
+Controls = require('lib/input/controls')
 
 class Player extends Entity
 
@@ -20,7 +20,7 @@ class Player extends Entity
 			Shape(@data.width, @data.height),
 			AnimatedSprite('ff4-characters.png', Vector(47, 5), Shape(16, 16)),
 			Movable(speed, runSpeed),
-			Controllable({
+			Controls({
 				vertical: with tactile.newControl()
 					\addButtonPair(tactile.keys('up'), tactile.keys('down'))
 					\addButtonPair(tactile.keys('w'), tactile.keys('s'))
@@ -51,14 +51,13 @@ class Player extends Entity
 		return @@(scene, @getData())
 
 	control: (dt) =>
-		{ :controllable, :movable, :position } = @getAll()
+		{ :controls, :movable, :position } = @getAll()
 
-		controls = controllable.controls
 		speed = movable.speed
-		if controls.run\isDown() then speed = movable.runSpeed
+		if controls.table.run\isDown() then speed = movable.runSpeed
 
-		horizontal = controls.horizontal()
-		vertical = controls.vertical()
+		horizontal = controls.table.horizontal()
+		vertical = controls.table.vertical()
 		if horizontal != 0 or vertical != 0
 			movable.goal = position\clone()
 			movable.goal.x += speed * horizontal * dt
