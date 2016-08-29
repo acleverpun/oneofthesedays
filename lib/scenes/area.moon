@@ -6,6 +6,7 @@ PauseScene = require('lib/scenes/pause')
 entities = require('lib/entities')
 DrawSystem = require('lib/systems/draw')
 ControlSystem = require('lib/systems/control')
+MovementSystem = require('lib/systems/movement')
 Color = require('lib/display/color')
 Point = require('lib/geo/point')
 Direction = require('lib/geo/direction')
@@ -73,6 +74,7 @@ class AreaScene extends Scene
 		entityLayer = MapLayer(@map, 'entities')
 		entityLayer.engine\addSystem(DrawSystem())
 		entityLayer.engine\addSystem(ControlSystem())
+		entityLayer.engine\addSystem(MovementSystem())
 		entityLayer.engine\addEntity(@player)
 
 	addEntityToWorld: (entity, data) =>

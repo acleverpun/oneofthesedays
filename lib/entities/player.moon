@@ -6,9 +6,9 @@ Shape = require('lib/geo/shape')
 AnimatedSprite = require('lib/display/sprite')
 Movable = require('lib/components/movable')
 Controllable = require('lib/input/controllable')
-Direction = require('lib/geo/direction')
 
 class Player extends Entity
+
 	new: (...) =>
 		super(...)
 
@@ -55,18 +55,11 @@ class Player extends Entity
 
 		controls = controllable.controls
 		speed = movable.speed
-
 		if controls.run\isDown() then speed = movable.runSpeed
 
-		position.x += speed * controls.horizontal() * dt
-		position.y += speed * controls.vertical() * dt
-		position.x, position.y, cols, num = @scene.world\move(@, position.x, position.y, (other) =>
-			if _.isFunction(other.collision) then return 'cross'
-			return 'slide'
-		)
-
-		for col in *cols
-			if col.type == 'cross' and _.isFunction(col.other.collision)
-				col.direction = Direction\fromNormal(col.normal)
-				col.offset = position - col.other.data
-				col.other\collision(@, col)
+		horizontal = controls.horizontal()
+		vertical = controls.vertical()
+		if horizontal != 0 or vertical != 0
+			movable.goal = position\clone()
+			movable.goal.x += speed * horizontal * dt
+			movable.goal.y += speed * vertical * dt
