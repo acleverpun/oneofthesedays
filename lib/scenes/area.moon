@@ -48,25 +48,25 @@ class AreaScene extends Scene
 			if not door then door = doors[1]
 
 		if needsDoor
-			@player.point.x = door.x
-			@player.point.y = door.y
+			@player.position.x = door.x
+			@player.position.y = door.y
 
 		-- Handle specific spawn points
-		if toPoint = @transition.toPoint
-			if toPoint.x then @player.point.x = toPoint.x
-			if toPoint.y then @player.point.y = toPoint.y
+		if toPosition = @transition.toPosition
+			if toPosition.x then @player.position.x = toPosition.x
+			if toPosition.y then @player.position.y = toPosition.y
 		-- Handle door offsets
 		if @transition.offset
 			doorScaleWidth = door.width / @transition.fromDoor.data.width
 			doorScaleHeight = door.height / @transition.fromDoor.data.height
-			if @transition.offset.x then @player.point.x += @transition.offset.x * doorScaleWidth
-			if @transition.offset.y then @player.point.y += @transition.offset.y * doorScaleHeight
+			if @transition.offset.x then @player.position.x += @transition.offset.x * doorScaleWidth
+			if @transition.offset.y then @player.position.y += @transition.offset.y * doorScaleHeight
 		-- Handle direction
 		if @transition.direction
-			if @transition.direction == Direction.NORTH then @player.point.y += door.height
-			if @transition.direction == Direction.SOUTH then @player.point.y -= door.height
-			if @transition.direction == Direction.WEST then @player.point.x += door.width
-			if @transition.direction == Direction.EAST then @player.point.x -= door.width
+			if @transition.direction == Direction.NORTH then @player.position.y += door.height
+			if @transition.direction == Direction.SOUTH then @player.position.y -= door.height
+			if @transition.direction == Direction.WEST then @player.position.x += door.width
+			if @transition.direction == Direction.EAST then @player.position.x -= door.width
 
 		@addEntityToWorld(@player, @player\getData())
 
@@ -83,8 +83,8 @@ class AreaScene extends Scene
 		@map\update(dt)
 		@windowWidth = love.graphics.getWidth()
 		@windowHeight = love.graphics.getHeight()
-		tx = math.floor(@player.point.x - @windowWidth / @scale / 2)
-		ty = math.floor(@player.point.y - @windowHeight / @scale / 2)
+		tx = math.floor(@player.position.x - @windowWidth / @scale / 2)
+		ty = math.floor(@player.position.y - @windowHeight / @scale / 2)
 		@translation = Point(tx, ty)
 
 	draw: () =>
@@ -111,7 +111,7 @@ class AreaScene extends Scene
 		if @DEBUG and button == 2
 			eventPoint = Point(x, y)
 			-- TODO: Make work not just for player
-			point = eventPoint + @translation - Point(200, 150)
+			position = eventPoint + @translation - Point(200, 150)
 
-			items, len = @world\queryPoint(point\toTuple())
+			items, len = @world\queryPoint(position\toTuple())
 			if len > 0 then d items

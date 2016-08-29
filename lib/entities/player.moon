@@ -16,7 +16,7 @@ class Player extends Entity
 		runSpeed = speed * 8
 
 		@addMultiple({
-			Point(@data.x, @data.y),
+			position: Point(@data.x, @data.y),
 			Shape(@data.width, @data.height),
 			AnimatedSprite('ff4-characters.png', Vector(47, 5), Shape(16, 16)),
 			Movable(speed, runSpeed),
@@ -40,10 +40,10 @@ class Player extends Entity
 
 	getCenter: () =>
 		{ :width, :height } = @shape
-		(@point + (@point + Point(width, height))) / 2
+		(@position + (@position + Point(width, height))) / 2
 
 	getData: () =>
-		{ :x, :y } = @point
+		{ :x, :y } = @position
 		{ :width, :height } = @shape
 		return { :x, :y, :width, :height }
 
@@ -51,16 +51,16 @@ class Player extends Entity
 		return @@(scene, @getData())
 
 	control: (dt) =>
-		{ :controllable, :movable, :point } = @getAll()
+		{ :controllable, :movable, :position } = @getAll()
 
 		controls = controllable.controls
 		speed = movable.speed
 
 		if controls.run\isDown() then speed = movable.runSpeed
 
-		point.x += speed * controls.horizontal() * dt
-		point.y += speed * controls.vertical() * dt
-		point.x, point.y, cols, num = @scene.world\move(@, point.x, point.y, (other) =>
+		position.x += speed * controls.horizontal() * dt
+		position.y += speed * controls.vertical() * dt
+		position.x, position.y, cols, num = @scene.world\move(@, position.x, position.y, (other) =>
 			if _.isFunction(other.collision) then return 'cross'
 			return 'slide'
 		)
@@ -68,5 +68,5 @@ class Player extends Entity
 		for col in *cols
 			if col.type == 'cross' and _.isFunction(col.other.collision)
 				col.direction = Direction\fromNormal(col.normal)
-				col.offset = point - col.other.data
+				col.offset = position - col.other.data
 				col.other\collision(@, col)

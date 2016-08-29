@@ -5,6 +5,6 @@ class Transition extends Class
 		@player = data.player or @fromScene.player
 		@fromDoor = data.fromDoor
 		@toDoor = data.toDoor
-		@toPoint = data.toPoint
+		@toPosition = data.toPosition
 		@offset = data.offset
 		@direction = data.direction

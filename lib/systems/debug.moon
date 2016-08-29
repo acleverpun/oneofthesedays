@@ -17,8 +17,8 @@ class DebugSystem extends System
 		if @scene.mapName then @debug('map', @scene.mapName)
 
 		if player = @scene.player
-			x = math.floor(player.point.x)
-			y = math.floor(player.point.y)
+			x = math.floor(player.position.x)
+			y = math.floor(player.position.y)
 			@debug('position', "#{x}, #{y}")
 
 	debug: (key, value) =>

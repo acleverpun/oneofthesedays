@@ -37,11 +37,11 @@ class Entity extends ToysProxy(ToysEntity)
 		return result
 
 	getPoint: (direction) =>
-		point = @point
-		if not point then point = Point(@data)
-		if not direction then return point
+		position = @position
+		if not position then position = Point(@data)
+		if not direction then return position
 
-		{ :x, :y } = point
+		{ :x, :y } = position
 		{ :width, :height } = @data
 
 		if direction == Direction.NORTH then return Point(nil, y)

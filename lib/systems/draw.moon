@@ -11,21 +11,21 @@ class DrawSystem extends System
 			if drawn[entity] then continue
 			drawn[entity] = true
 
-			{ :sprite, :shape, :point } = entity\getAll()
-			love.graphics.draw(sprite.image, sprite.quad, point.x, point.y, sprite.rotation, sprite.scale.x, sprite.scale.y)
+			{ :sprite, :shape, :position } = entity\getAll()
+			love.graphics.draw(sprite.image, sprite.quad, position.x, position.y, sprite.rotation, sprite.scale.x, sprite.scale.y)
 
 		for entity in *targets.polygons
 			if drawn[entity] then continue
 			drawn[entity] = true
 
-			{ :shape, :point, :color } = entity\getAll()
+			{ :shape, :position, :color } = entity\getAll()
 			if not color then color = Color(255, 0, 0)
 			r, g, b, a = love.graphics.getColor()
 			love.graphics.setColor(color)
-			love.graphics.rectangle('fill', point.x, point.y, shape.width, shape.height)
+			love.graphics.rectangle('fill', position.x, position.y, shape.width, shape.height)
 			love.graphics.setColor(r, g, b, a)
 
 	requires: () => {
-		sprites: { 'sprite', 'shape', 'point' },
-		polygons: { 'shape', 'point' },
+		sprites: { 'sprite', 'shape', 'position' },
+		polygons: { 'shape', 'position' },
 	}
