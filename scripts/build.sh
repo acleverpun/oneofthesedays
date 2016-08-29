@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-scripts/clean.sh
-
 moonc -t dist .
 
 for map in assets/maps/*.tmx; do
