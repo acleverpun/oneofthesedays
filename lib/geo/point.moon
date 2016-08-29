@@ -18,6 +18,8 @@ class Point extends TupleStruct
 		@[1] = @x
 		@[2] = @y
 
+	clone: () => @@(@x, @y)
+
 	toTuple: () => @x, @y
 	toArray: () => { @x, @y }
 	toTable: () => { x: @x, y: @y }

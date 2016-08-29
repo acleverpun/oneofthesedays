@@ -15,6 +15,13 @@ class Entity extends ToysProxy(ToysEntity)
 		@[key] = component
 		super(component, key)
 
+	set: (key, component) =>
+		if not component
+			component = key
+			key = component.type
+		@[key] = component
+		super(component, key)
+
 	addMultiple: (components) =>
 		for key, component in pairs(components)
 			if _.isNumber(key)
@@ -25,10 +32,8 @@ class Entity extends ToysProxy(ToysEntity)
 	getAll: () =>
 		components = @getComponents()
 		result = {}
-
 		for key, value in pairs(components)
 			result[_.lowerFirst(key)] = value
-
 		return result
 
 	getPoint: (direction) =>

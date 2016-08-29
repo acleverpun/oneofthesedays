@@ -21,3 +21,5 @@ export p = (...) ->
 
 export d = (value, depth = 2) ->
 	print dump(value, depth)
+
+export q = love.event.quit
