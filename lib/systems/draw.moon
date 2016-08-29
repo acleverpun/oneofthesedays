@@ -3,6 +3,7 @@ System = require('lib/systems/system')
 Color = require('lib/display/color')
 
 class DrawSystem extends System
+
 	draw: () =>
 		targets = @getTargets()
 		drawn = {}
@@ -12,7 +13,10 @@ class DrawSystem extends System
 			drawn[entity] = true
 
 			{ :sprite, :shape, :position } = entity\getAll()
-			love.graphics.draw(sprite.image, sprite.quad, position.x, position.y, sprite.rotation, sprite.scale.x, sprite.scale.y)
+			spritePosition = position\clone()
+			spritePosition.x += (shape.width - sprite.shape.width) / 2
+			spritePosition.y += (shape.height - sprite.shape.height)
+			love.graphics.draw(sprite.image, sprite.quad, spritePosition.x, spritePosition.y, sprite.rotation, sprite.scale.x, sprite.scale.y)
 
 		for entity in *targets.polygons
 			if drawn[entity] then continue
