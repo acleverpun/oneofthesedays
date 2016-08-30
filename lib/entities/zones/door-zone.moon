@@ -1,16 +1,9 @@
-entities = require('lib/entities')
-Zone = require('lib/entities/zones/zone')
+BoundaryZone = require('lib/entities/zones/boundary-zone')
 
-class DoorZone extends Zone
-	onEnter: (entity, collision) =>
-		if entity.class == entities.Player
-			@enter(entity, collision)
+class DoorZone extends BoundaryZone
 
-	enter: (entity, collision) =>
-		-- TODO: Move some of this logic to Transition
-		{ :map, :door } = @data.properties
-		if not map then map = @scene.previous.mapName
-
-		-- TODO: Wat?
-		{ :offset, :direction } = collision
-		@scene\switch(@scene.__class(map), { :offset, :direction, fromDoor: @, toDoor: door })
+	getTransitionData: (collision) =>
+		transitionData = super(collision)
+		transitionData.fromDoor = @
+		transitionData.toDoor = @data.properties.door
+		return transitionData

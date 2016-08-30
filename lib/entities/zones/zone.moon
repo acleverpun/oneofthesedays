@@ -3,6 +3,7 @@ Entity = require('lib/entities/entity')
 Point = require('lib/geo/point')
 
 class Zone extends Entity
+
 	new: (...) =>
 		super(...)
 		@add(Point(@data.x, @data.y))
