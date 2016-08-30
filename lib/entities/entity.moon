@@ -4,6 +4,7 @@ Point = require('lib/geo/point')
 Direction = require('lib/geo/direction')
 
 class Entity extends ToysProxy(ToysEntity)
+
 	new: (@scene, @data) =>
 		super()
 

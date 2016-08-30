@@ -57,7 +57,7 @@ class AreaScene extends Scene
 			if toPosition.x then @player.position.x = toPosition.x
 			if toPosition.y then @player.position.y = toPosition.y
 		-- Handle door offsets
-		if @transition.offset
+		if @transition.offset and @transition.fromDoor
 			doorScaleWidth = door.width / @transition.fromDoor.data.width
 			doorScaleHeight = door.height / @transition.fromDoor.data.height
 			if @transition.offset.x then @player.position.x += @transition.offset.x * doorScaleWidth
