@@ -18,7 +18,7 @@ class AreaScene extends Scene
 		@map = STI("assets/maps/#{@mapName}", { 'bump' })
 		@world = bump.newWorld(@map.tilewidth)
 		@map\bump_init(@world)
-		@scale = 4
+		@scale = 2
 
 	enter: (previous, @transition) =>
 		super(previous)
@@ -74,7 +74,7 @@ class AreaScene extends Scene
 		entityLayer = MapLayer(@map, 'entities')
 		entityLayer.engine\addSystem(DrawSystem())
 		entityLayer.engine\addSystem(ControlSystem())
-		entityLayer.engine\addSystem(MovementSystem())
+		entityLayer.engine\addSystem(MovementSystem(@map))
 		entityLayer.engine\addEntity(@player)
 
 	addEntityToWorld: (entity, data) =>
