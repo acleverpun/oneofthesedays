@@ -5,8 +5,8 @@ class RenderSystem extends System
 
 	update: (dt) =>
 		for entity in *@getTargets().animated
-			{ :animatedSprite } = entity\getAll()
-			animatedSprite.animation\update(dt)
+			{ :animation } = entity\getAll()
+			animation.animation\update(dt)
 
 	draw: () =>
 		targets = @getTargets()
@@ -25,7 +25,6 @@ class RenderSystem extends System
 		for entity in *targets.polygons
 			if drawn[entity] then continue
 			drawn[entity] = true
-
 			{ :shape, :position, :color } = entity\getAll()
 			if not color then color = Color(255, 0, 0)
 			r, g, b, a = love.graphics.getColor()
@@ -34,9 +33,9 @@ class RenderSystem extends System
 			love.graphics.setColor(r, g, b, a)
 
 	drawSprite: (entity) =>
-		{ :sprite, :animatedSprite, :shape, :position } = entity\getAll()
+		{ :sprite, :animation, :shape, :position } = entity\getAll()
 		isAnimated = not sprite
-		if isAnimated then sprite = animatedSprite
+		if isAnimated then sprite = animation
 
 		spritePosition = position\clone()
 		spritePosition.x += (shape.width - sprite.shape.width) / 2
@@ -49,7 +48,7 @@ class RenderSystem extends System
 
 
 	requires: () => {
-		animated: { 'animatedSprite', 'shape', 'position' },
+		animated: { 'animation', 'shape', 'position' },
 		sprites: { 'sprite', 'shape', 'position' },
 		polygons: { 'shape', 'position' },
 	}
