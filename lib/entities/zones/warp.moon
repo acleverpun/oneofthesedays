@@ -1,7 +1,7 @@
 entities = require('lib/entities')
 Zone = require('lib/entities/zones/zone')
 
-class WarpZone extends Zone
+class Warp extends Zone
 
 	onEnter: (entity, collision) =>
 		if entity.class == entities.Player

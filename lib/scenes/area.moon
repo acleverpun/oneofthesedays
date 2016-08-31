@@ -32,8 +32,8 @@ class AreaScene extends Scene
 		doors = {}
 		for object in *@map.layers.entities.objects
 			if object.type == 'Player' and @player then continue
-			if object.type == 'zones/BoundaryZone' then _.push(boundaries, object)
-			if object.type == 'zones/DoorZone' then _.push(doors, object)
+			if object.type == 'zones/Boundary' then _.push(boundaries, object)
+			if object.type == 'zones/Door' then _.push(doors, object)
 
 			-- Set player if not passed in transition
 			entity = entities[object.type](@, object)
@@ -47,7 +47,7 @@ class AreaScene extends Scene
 		if fromWarp
 			warp = nil
 
-			if fromWarp\is('BoundaryZone')
+			if fromWarp\is('Boundary')
 				-- Determine which boundary to spawn at
 				for boundary in *boundaries
 					-- Map boundaries to directions
@@ -62,7 +62,7 @@ class AreaScene extends Scene
 						if not boundaries[Direction.EAST] or boundary.x > boundaries[Direction.EAST].x
 							boundaries[Direction.EAST] = boundary
 				warp = boundaries[@transition.direction]
-			elseif fromWarp\is('DoorZone')
+			elseif fromWarp\is('Door')
 				-- Determine which door to spawn at
 				warp = doors[1]
 				if playerExists and not @transition.toWarp and @transition.fromScene.transition

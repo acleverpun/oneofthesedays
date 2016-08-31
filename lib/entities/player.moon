@@ -13,7 +13,7 @@ class Player extends Entity
 		super(...)
 
 		speed = 100
-		runSpeed = speed * 8
+		runSpeed = speed * 4
 
 		@addMultiple({
 			position: Point(@data.x, @data.y),

@@ -15,35 +15,35 @@
  </layer>
  <objectgroup name="entities">
   <object id="1" name="player" type="Player" gid="1766" x="209" y="495" width="14" height="14"/>
-  <object id="2" type="zones/DoorZone" x="208" y="416" width="16" height="16">
+  <object id="2" type="zones/Door" x="208" y="416" width="16" height="16">
    <properties>
     <property name="door" value="center"/>
     <property name="map" type="file" value="sample_indoor.lua"/>
    </properties>
   </object>
-  <object id="5" type="zones/DoorZone" x="144" y="288" width="32" height="16">
+  <object id="5" type="zones/Door" x="144" y="288" width="32" height="16">
    <properties>
     <property name="door" value="left"/>
     <property name="map" type="file" value="sample_indoor.lua"/>
    </properties>
   </object>
   <object id="6" type="Entity" x="112" y="480" width="16" height="16"/>
-  <object id="7" type="zones/BoundaryZone" x="0" y="624" width="640" height="16">
+  <object id="7" type="zones/Boundary" x="0" y="624" width="640" height="16">
    <properties>
     <property name="map" type="file" value="sample_map.lua"/>
    </properties>
   </object>
-  <object id="8" type="zones/BoundaryZone" x="0" y="0" width="640" height="16">
+  <object id="8" type="zones/Boundary" x="0" y="0" width="640" height="16">
    <properties>
     <property name="map" type="file" value="sample_map.lua"/>
    </properties>
   </object>
-  <object id="9" type="zones/BoundaryZone" x="0" y="0" width="16" height="640">
+  <object id="9" type="zones/Boundary" x="0" y="0" width="16" height="640">
    <properties>
     <property name="map" type="file" value="sample_map.lua"/>
    </properties>
   </object>
-  <object id="10" type="zones/BoundaryZone" x="624" y="0" width="16" height="640">
+  <object id="10" type="zones/Boundary" x="624" y="0" width="16" height="640">
    <properties>
     <property name="map" type="file" value="sample_map.lua"/>
    </properties>
