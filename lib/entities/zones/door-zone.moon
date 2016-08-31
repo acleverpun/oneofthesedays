@@ -1,9 +1,8 @@
-BoundaryZone = require('lib/entities/zones/boundary-zone')
+WarpZone = require('lib/entities/zones/warp-zone')
 
-class DoorZone extends BoundaryZone
+class DoorZone extends WarpZone
 
 	getTransitionData: (collision) =>
 		transitionData = super(collision)
-		transitionData.fromDoor = @
-		transitionData.toDoor = @data.properties.door
+		transitionData.toWarp = @data.properties.door
 		return transitionData

@@ -6,6 +6,7 @@ EventManager = require('lib/event-manager')
 DebugSystem = require('lib/systems/debug')
 
 class Scene extends Class
+
 	new: () =>
 		@engine = Engine()
 		@events = EventManager()

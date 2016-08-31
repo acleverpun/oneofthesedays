@@ -2,6 +2,7 @@ Enum = require('lib/utils/enum')
 Vector = require('lib/geo/vector')
 
 class Direction extends Enum
+
 	@fromNormal: (normal) =>
 		if normal.x == 0 and normal.y == -1 then return @NORTH
 		if normal.x == 0 and normal.y == 1 then return @SOUTH

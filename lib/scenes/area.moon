@@ -25,13 +25,17 @@ class AreaScene extends Scene
 
 		if @transition.player
 			@player = @transition.player\clone(@)
-		needsDoor = not not @transition.player
+		playerExists = not not @transition.player
+		fromWarp = @transition.fromWarp
 
+		boundaries = {}
 		doors = {}
 		for object in *@map.layers.entities.objects
 			if object.type == 'Player' and @player then continue
+			if object.type == 'zones/BoundaryZone' then _.push(boundaries, object)
 			if object.type == 'zones/DoorZone' then _.push(doors, object)
 
+			-- Set player if not passed in transition
 			entity = entities[object.type](@, object)
 			if object.type == 'Player'
 				@player = entity
@@ -40,34 +44,54 @@ class AreaScene extends Scene
 
 		assert @player
 
-		door = doors[1]
-		if needsDoor and not @transition.toDoor and @transition.fromScene.transition
-			originalDoor = @transition.fromScene.transition.fromDoor
-			if originalDoor then @transition.toDoor = originalDoor.data.id
-		if @transition.toDoor
-			door = _.find(doors, (door) -> _.includes({ door.name, door.id }, @transition.toDoor))
-			if not door then door = doors[1]
+		if fromWarp
+			warp = nil
 
-		if needsDoor
-			@player.position.x = door.x
-			@player.position.y = door.y
+			if fromWarp\is('BoundaryZone')
+				-- Determine which boundary to spawn at
+				for boundary in *boundaries
+					-- Map boundaries to directions
+					if boundary.width > boundary.height
+						if not boundaries[Direction.NORTH] or boundary.y < boundaries[Direction.NORTH].y
+							boundaries[Direction.NORTH] = boundary
+						if not boundaries[Direction.SOUTH] or boundary.y > boundaries[Direction.SOUTH].y
+							boundaries[Direction.SOUTH] = boundary
+					else
+						if not boundaries[Direction.WEST] or boundary.x < boundaries[Direction.WEST].x
+							boundaries[Direction.WEST] = boundary
+						if not boundaries[Direction.EAST] or boundary.x > boundaries[Direction.EAST].x
+							boundaries[Direction.EAST] = boundary
+				warp = boundaries[@transition.direction]
+			elseif fromWarp\is('DoorZone')
+				-- Determine which door to spawn at
+				warp = doors[1]
+				if playerExists and not @transition.toWarp and @transition.fromScene.transition
+					originalDoor = @transition.fromScene.transition.fromWarp
+					if originalDoor then @transition.toWarp = originalDoor.data.id
+				if @transition.toWarp
+					warp = _.find(doors, (door) -> _.includes({ door.name, door.id }, @transition.toWarp))
+					if not warp then warp = doors[1]
 
-		-- Handle specific spawn points
-		if toPosition = @transition.toPosition
-			if toPosition.x then @player.position.x = toPosition.x
-			if toPosition.y then @player.position.y = toPosition.y
-		-- Handle door offsets
-		if @transition.offset and @transition.fromDoor
-			doorScaleWidth = door.width / @transition.fromDoor.data.width
-			doorScaleHeight = door.height / @transition.fromDoor.data.height
-			if @transition.offset.x then @player.position.x += @transition.offset.x * doorScaleWidth
-			if @transition.offset.y then @player.position.y += @transition.offset.y * doorScaleHeight
-		-- Handle direction
-		if @transition.direction
-			if @transition.direction == Direction.NORTH then @player.position.y += door.height
-			if @transition.direction == Direction.SOUTH then @player.position.y -= door.height
-			if @transition.direction == Direction.WEST then @player.position.x += door.width
-			if @transition.direction == Direction.EAST then @player.position.x -= door.width
+			if playerExists
+				@player.position.x = warp.x
+				@player.position.y = warp.y
+
+			-- Handle specific spawn points
+			if toPosition = @transition.toPosition
+				if toPosition.x then @player.position.x = toPosition.x
+				if toPosition.y then @player.position.y = toPosition.y
+			-- Handle door offsets
+			if @transition.offset and @transition.fromWarp
+				doorScaleWidth = warp.width / @transition.fromWarp.data.width
+				doorScaleHeight = warp.height / @transition.fromWarp.data.height
+				if @transition.offset.x then @player.position.x += @transition.offset.x * doorScaleWidth
+				if @transition.offset.y then @player.position.y += @transition.offset.y * doorScaleHeight
+			-- Handle direction
+			if @transition.direction
+				if @transition.direction == Direction.NORTH then @player.position.y += warp.height
+				if @transition.direction == Direction.SOUTH then @player.position.y -= warp.height
+				if @transition.direction == Direction.WEST then @player.position.x += warp.width
+				if @transition.direction == Direction.EAST then @player.position.x -= warp.width
 
 		@addEntityToWorld(@player, @player\getData())
 
