@@ -1,10 +1,10 @@
 Class = require('lib/class')
 
 class AnimationList extends Class
+
 	current: 'default'
 
 	new: (@entity, animations, options = {}) =>
-		super()
 		if options.current then @current = options.current
 
 		for name, animation in pairs(animations)

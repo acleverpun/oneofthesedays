@@ -1,9 +1,8 @@
 TupleStruct = require('lib/utils/structs/tuple-struct')
 
 class Color extends TupleStruct
-	new: (r, g = 0, b = 0, a = 255) =>
-		super()
 
+	new: (r, g = 0, b = 0, a = 255) =>
 		value = r
 		if not _.isNumber(value) then r = 0
 

@@ -1,4 +1,10 @@
+classify = () =>
+	@class = @@
+	@type = _.lowerFirst(@@name)
+	@isInstance = true
+
 class Class
+
 	@name: 'Class'
 	@type: 'class'
 	@parents: { @ }
@@ -9,10 +15,13 @@ class Class
 		child.type = _.lowerFirst(child.name)
 		child.parents = _.union(@@parents, { @@ })
 
-	new: () =>
-		@class = @@
-		@type = _.lowerFirst(@@name)
-		@isInstance = true
+		-- Call setup code in constructor, so children do not need to call `super`
+		constructor = child.__init
+		child.__init = (...) =>
+			classify(@)
+			constructor(@, ...)
+
+	new: () => classify(@)
 
 	is: (type) =>
 		if type == @ then return true

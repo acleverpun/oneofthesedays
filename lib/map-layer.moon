@@ -2,13 +2,16 @@ Class = require('lib/class')
 Engine = require('lib/engine')
 
 class MapLayer extends Class
+
 	new: (@map, @name, index) =>
 		exists = false
 
 		-- Support using an existing layer
 		for l, layer in ipairs @map.layers
-			if layer.name == @name
+			if _.isString(@name) and layer.name == @name
 				exists = true
+				index = l
+			if _.isString(index) and layer.name == index
 				index = l
 
 		-- Default to adding to the top

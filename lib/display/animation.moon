@@ -10,7 +10,6 @@ class Animation extends Class
 	}
 
 	new: (frameData, @options = {}) =>
-		super()
 		@options.frameData = frameData
 
 	init: (options) =>

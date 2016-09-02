@@ -2,6 +2,7 @@ Class = require('lib/class')
 wave = require('vendor/wave/wave')
 
 class Audio extends Class
+
 	new: (@path, @type = 'stream') =>
 		@sound = wave\newSource(@path, @type)
 

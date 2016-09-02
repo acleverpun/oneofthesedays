@@ -2,9 +2,8 @@ Class = require('lib/class')
 
 (ProxyClass) ->
 	ToysProxy = class extends Class
-		new: (...) =>
-			super()
-			@proxy = ProxyClass(...)
+
+		new: (...) => @proxy = ProxyClass(...)
 
 	for key, value in pairs ProxyClass.__instanceDict
 		if _.isFunction(value)

@@ -4,6 +4,7 @@ AreaScene = require('lib/scenes/area')
 Color = require('lib/display/color')
 
 class TitleScene extends GuiScene
+
 	new: (...) =>
 		super(...)
 		@music = Audio('vendor/wave/music.wav', 'stream')

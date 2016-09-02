@@ -1,4 +1,5 @@
 class Loader
+
 	new: (handler) =>
 		cache = {}
 

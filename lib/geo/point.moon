@@ -3,8 +3,6 @@ TupleStruct = require('lib/utils/structs/tuple-struct')
 class Point extends TupleStruct
 
 	new: (x, y) =>
-		super()
-
 		if _.isArray(x)
 			@x = x[1]
 			@y = x[2]

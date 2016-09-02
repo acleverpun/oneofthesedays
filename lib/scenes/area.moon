@@ -12,6 +12,7 @@ Point = require('lib/geo/point')
 Direction = require('lib/geo/direction')
 
 class AreaScene extends Scene
+
 	new: (@mapName) =>
 		super()
 
@@ -100,7 +101,7 @@ class AreaScene extends Scene
 
 		@addEntityToWorld(@player, @player\getData())
 
-		entityLayer = MapLayer(@map, '__entities')
+		entityLayer = MapLayer(@map, '__entities', 'entities')
 		renderSystem = RenderSystem()
 		entityLayer.engine\addSystem(renderSystem, 'update')
 		entityLayer.engine\addSystem(renderSystem, 'draw')

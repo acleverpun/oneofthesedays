@@ -4,11 +4,11 @@ Point = require('lib/geo/point')
 
 class Zone extends Entity
 
+	entities: {}
+
 	new: (...) =>
 		super(...)
 		@add(Point(@data.x, @data.y))
-
-		@entities = {}
 
 	isEntityWithin: (entity) =>
 		bump.rect.containsPoint(@data.x, @data.y, @data.width, @data.height, entity\getCenter()\toTuple())

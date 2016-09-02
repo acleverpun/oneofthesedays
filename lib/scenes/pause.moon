@@ -1,6 +1,7 @@
 GuiScene = require('lib/scenes/gui')
 
 class PauseScene extends GuiScene
+
 	update: (dt) =>
 		super(dt)
 

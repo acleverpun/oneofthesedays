@@ -2,6 +2,7 @@ System = require('lib/systems/system')
 Color = require('lib/display/color')
 
 class DebugSystem extends System
+
 	new: (@scene) =>
 		super()
 		@x = 10

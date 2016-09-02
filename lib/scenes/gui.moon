@@ -2,6 +2,7 @@ suit = require('vendor/SUIT')
 Scene = require('lib/scenes/scene')
 
 class GuiScene extends Scene
+
 	new: () =>
 		super()
 		@gui = suit.new()
