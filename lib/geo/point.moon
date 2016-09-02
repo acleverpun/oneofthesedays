@@ -2,6 +2,7 @@ TupleStruct = require('lib/utils/structs/tuple-struct')
 entities = require('lib/entities')
 
 class Point extends TupleStruct
+
 	new: (x, y) =>
 		super()
 
