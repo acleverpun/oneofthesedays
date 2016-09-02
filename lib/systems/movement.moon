@@ -5,7 +5,6 @@ Vector = require('lib/geo/vector')
 class MovementSystem extends System
 
 	new: (map) =>
-		super()
 		@mapWidth = map.width * map.tilewidth
 		@mapHeight = map.height * map.tileheight
 

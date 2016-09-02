@@ -1,7 +1,6 @@
-classify = () =>
+init = () =>
 	@class = @@
 	@type = _.lowerFirst(@@name)
-	@isInstance = true
 
 class Class
 
@@ -9,6 +8,8 @@ class Class
 	@type: 'class'
 	@parents: { @ }
 	@isClass: true
+
+	isInstance: true
 
 	@__inherited: (child) =>
 		child.name = child.__name
@@ -18,10 +19,10 @@ class Class
 		-- Call setup code in constructor, so children do not need to call `super`
 		constructor = child.__init
 		child.__init = (...) =>
-			classify(@)
+			init(@)
 			constructor(@, ...)
 
-	new: () => classify(@)
+	-- new: () => init(@)
 
 	is: (type) =>
 		if type == @ then return true

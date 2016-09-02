@@ -3,9 +3,9 @@ Color = require('lib/display/color')
 
 class DebugSystem extends System
 
+	x: 10
+
 	new: (@scene) =>
-		super()
-		@x = 10
 
 	update: () =>
 		@y = 10

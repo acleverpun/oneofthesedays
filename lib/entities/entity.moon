@@ -6,7 +6,6 @@ Direction = require('lib/geo/direction')
 class Entity extends ToysProxy(ToysEntity)
 
 	new: (@scene, @data) =>
-		super()
 
 	add: (key, component) =>
 		if not component
