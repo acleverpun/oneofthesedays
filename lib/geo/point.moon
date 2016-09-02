@@ -21,7 +21,9 @@ class Point extends TupleStruct
 	toTuple: () => @x, @y
 	toArray: () => { @x, @y }
 	toTable: () => { x: @x, y: @y }
-	-- toVector: () => Vector(@)
+	toVector: () =>
+		Vector = require('lib/geo/vector')
+		Vector(@)
 
 	__tostring: () => "Point(#{@x}, #{@y})"
 

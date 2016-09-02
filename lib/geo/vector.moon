@@ -4,6 +4,10 @@ class Vector extends Point
 
 	new: (x, y, @origin) => super(x, y)
 
+	getDirection: () =>
+		Direction = require('lib/geo/direction')
+		Direction\fromVector(@)
+
 	toPoint: () => Point(@)
 
 	__tostring: () => "Vector(#{@x}, #{@y})"

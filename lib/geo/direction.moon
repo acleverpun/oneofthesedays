@@ -18,8 +18,9 @@ class Direction extends Enum
 	toVector: () => return @value
 
 	__tostring: () => @key
-
 	__eq: (other) => @key == other.key and @value == other.value
+	__add: (other) => @@fromVector(@value + other.value)
+	__sub: (other) => @@fromVector(@value - other.value)
 	__unm: () => return @@fromVector(-@value)
 
 Direction\add({
@@ -27,11 +28,11 @@ Direction\add({
 	SOUTH: Vector(0, 1),
 	WEST: Vector(-1, 0),
 	EAST: Vector(1, 0),
-	NORTH_WEST: Vector(-1, 1),
-	NORTH_EAST: Vector(1, 1),
-	SOUTH_WEST: Vector(-1, -1),
-	SOUTH_EAST: Vector(1, -1),
-	NONE: Vector(nil, nil)
+	NORTH_WEST: Vector(-1, -1),
+	NORTH_EAST: Vector(1, -1),
+	SOUTH_WEST: Vector(-1, 1),
+	SOUTH_EAST: Vector(1, 1),
+	NONE: Vector(0, 0)
 })
 
 return Direction
