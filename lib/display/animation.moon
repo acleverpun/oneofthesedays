@@ -4,8 +4,18 @@ Vector = require('lib/geo/vector')
 
 class Animation extends Class
 
-	new: (imagePath, offset, @shape, @scale = Vector(1, 1), @rotation = 0) =>
+	@options: {
+		scale: Vector(1, 1),
+		rotation: 0
+	}
+
+	new: (frameData, @options = {}) =>
 		super()
-		@image = love.graphics.newImage("assets/sprites/#{imagePath}")
-		g = anim8.newGrid(16, 16, @image\getWidth(), @image\getHeight(), offset.x, offset.y, 2)
-		@animation = anim8.newAnimation(g('1-2', 1), 0.2)
+		@options.frameData = frameData
+
+	init: (options) =>
+		@options = _.defaults(@options, options, @@options)
+		@shape = @options.shape
+		@image = love.graphics.newImage("assets/sprites/#{@options.image}")
+		g = anim8.newGrid(@shape.width, @shape.height, @image\getWidth(), @image\getHeight(), @options.offset.x, @options.offset.y, @options.border)
+		@animation = anim8.newAnimation(g(unpack(@options.frameData)), @options.duration)

@@ -4,6 +4,7 @@ Point = require('lib/geo/point')
 Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
+AnimationList = require('lib/display/animation-list')
 Movable = require('lib/components/movable')
 Controls = require('lib/input/controls')
 
@@ -18,7 +19,16 @@ class Player extends Entity
 		@addMultiple({
 			position: Point(@data.x, @data.y),
 			Shape(@data.width, @data.height),
-			Animation('ff4-characters.png', Vector(45, 3), Shape(16, 16)),
+			AnimationList(@, {
+				default: Animation({ 1, 1 }, { duration: 2 }),
+				down: Animation({ '1-2', 1 }),
+			}, {
+				image: 'ff4-characters.png',
+				shape: Shape(16, 16),
+				offset: Vector(45, 3),
+				border: 2,
+				duration: 0.2,
+			}),
 			Movable(speed, runSpeed),
 			Controls({
 				vertical: with tactile.newControl()

@@ -42,7 +42,7 @@ class RenderSystem extends System
 		spritePosition.y += (shape.height - sprite.shape.height)
 
 		if isAnimated
-			sprite.animation\draw(sprite.image, spritePosition.x, spritePosition.y, sprite.rotation, sprite.scale.x, sprite.scale.y)
+			sprite.animation\draw(sprite.image, spritePosition.x, spritePosition.y, sprite.options.rotation, sprite.options.scale.x, sprite.options.scale.y)
 		else
 			love.graphics.draw(sprite.image, sprite.quad, spritePosition.x, spritePosition.y, sprite.rotation, sprite.scale.x, sprite.scale.y)
 
