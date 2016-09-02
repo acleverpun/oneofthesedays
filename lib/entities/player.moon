@@ -16,19 +16,6 @@ class Player extends Entity
 		runSpeed = speed * 4
 
 		@addMultiple({
-			AnimationList(@, {
-				default: Animation({ 1, 1 }, { duration: 2 }),
-				NORTH: Animation({ '5-6', 1 }),
-				SOUTH: Animation({ '1-2', 1 }),
-				WEST: Animation({ '3-4', 1 }),
-				EAST: Animation({ '7-8', 1 }, { offset: Vector(45, 4) }),
-			}, {
-				image: 'ff4-characters.png',
-				shape: Shape(16, 16),
-				offset: Vector(46, 4),
-				border: 1,
-				duration: 0.2,
-			}),
 			Movable(speed, runSpeed),
 			Controls({
 				vertical: with tactile.newControl()
@@ -45,5 +32,18 @@ class Player extends Entity
 					\addButton(tactile.keys('space'))
 				use: with tactile.newControl()
 					\addButton(tactile.keys('return'))
+			}),
+			AnimationList(@, {
+				default: Animation({ 1, 1 }, { duration: 2 }),
+				NORTH: Animation({ '5-6', 1 }),
+				SOUTH: Animation({ '1-2', 1 }),
+				WEST: Animation({ '3-4', 1 }),
+				EAST: Animation({ '7-8', 1 }, { offset: Vector(45, 4) }),
+			}, {
+				image: 'ff4-characters.png',
+				shape: Shape(16, 16),
+				offset: Vector(46, 4),
+				border: 1,
+				duration: 0.2,
 			}),
 		})

@@ -17,4 +17,4 @@ class Animation extends Class
 		@shape = @options.shape
 		@image = love.graphics.newImage("assets/sprites/#{@options.image}")
 		g = anim8.newGrid(@shape.width, @shape.height, @image\getWidth(), @image\getHeight(), @options.offset.x, @options.offset.y, @options.border)
-		@animation = anim8.newAnimation(g(unpack(@options.frameData)), @options.duration)
+		@value = anim8.newAnimation(g(unpack(@options.frameData)), @options.duration)

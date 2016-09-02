@@ -5,7 +5,7 @@ class PlayerControlSystem extends System
 
 	update: (dt) =>
 		for entity in *@getTargets()
-			{ :controls, :movable, :position } = entity\getComponents()
+			{ :controls, :movable, :position, :animation } = entity\getComponents()
 
 			speed = movable.speed
 			if controls.run\isDown() then speed = movable.runSpeed
@@ -16,6 +16,9 @@ class PlayerControlSystem extends System
 				movable.goal = position\clone()
 				movable.goal.x += speed * horizontal * dt
 				movable.goal.y += speed * vertical * dt
+				animation.value\resume()
+			else
+				animation.value\pause()
 
 			if controls.use\pressed() and movable.collisions
 				for col in *movable.collisions
@@ -24,4 +27,4 @@ class PlayerControlSystem extends System
 						if entity.direction == useDirection
 							col.other\onUse(entity, col)
 
-	requires: () => { 'isPlayer', 'controls', 'movable', 'position' }
+	requires: () => { 'isPlayer', 'controls', 'movable', 'position', 'animation' }

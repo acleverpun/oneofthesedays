@@ -8,7 +8,7 @@ class RenderSystem extends System
 			{ :animation, :animationList } = entity\getComponents()
 			direction = entity.direction.key
 			if animationList[direction] then animationList\set(direction)
-			animation.animation\update(dt)
+			animation.value\update(dt)
 
 	draw: () =>
 		targets = @getTargets()
@@ -44,7 +44,7 @@ class RenderSystem extends System
 		spritePosition.y += (shape.height - sprite.shape.height)
 
 		if isAnimated
-			sprite.animation\draw(sprite.image, spritePosition.x, spritePosition.y, sprite.options.rotation, sprite.options.scale.x, sprite.options.scale.y)
+			animation.value\draw(sprite.image, spritePosition.x, spritePosition.y, sprite.options.rotation, sprite.options.scale.x, sprite.options.scale.y)
 		else
 			love.graphics.draw(sprite.image, sprite.quad, spritePosition.x, spritePosition.y, sprite.rotation, sprite.scale.x, sprite.scale.y)
 
