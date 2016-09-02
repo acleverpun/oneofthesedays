@@ -20,6 +20,7 @@ class DebugSystem extends System
 			x = math.floor(player.position.x)
 			y = math.floor(player.position.y)
 			@debug('position', "#{x}, #{y}")
+			@debug('direction', "#{player.direction.key}")
 
 	debug: (key, value) =>
 		love.graphics.print({ Color(255, 0, 100), key .. ': ', Color(255, 255, 100), value }, @x, @y)

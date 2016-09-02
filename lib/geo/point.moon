@@ -1,5 +1,4 @@
 TupleStruct = require('lib/utils/structs/tuple-struct')
-entities = require('lib/entities')
 
 class Point extends TupleStruct
 
@@ -24,7 +23,7 @@ class Point extends TupleStruct
 	toTuple: () => @x, @y
 	toArray: () => { @x, @y }
 	toTable: () => { x: @x, y: @y }
-	toVector: () => entities.Vector(@)
+	-- toVector: () => Vector(@)
 
 	__tostring: () => "Point(#{@x}, #{@y})"
 
@@ -36,11 +35,7 @@ class Point extends TupleStruct
 	__sub: (other) => @@(@x - other.x, @y - other.y)
 	__mul: (other) =>
 		if _.isNumber(other) then return @@(@x * other, @y * other)
-		-- dot product
-		@x * other.x + @y * other.y
 	__div: (other) =>
 		if _.isNumber(other) then return @@(@x / other, @y / other)
-		-- cross product
-		-- TODO
 
 	__unm: () => @@(-@x, -@y)

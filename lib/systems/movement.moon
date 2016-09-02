@@ -1,5 +1,6 @@
 System = require('lib/systems/system')
 Direction = require('lib/geo/direction')
+Vector = require('lib/geo/vector')
 
 class MovementSystem extends System
 
@@ -7,6 +8,9 @@ class MovementSystem extends System
 		super()
 		@mapWidth = map.width * map.tilewidth
 		@mapHeight = map.height * map.tileheight
+
+		@proxy.onAddEntity = (@, entity) ->
+			entity.direction = Direction.NONE
 
 	update: (dt) =>
 		for entity in *@getTargets()
@@ -21,6 +25,8 @@ class MovementSystem extends System
 			goal.x = math.min(goal.x, @mapWidth - shape.width)
 			goal.y = math.min(goal.y, @mapHeight - shape.height)
 
+			entity.direction = Direction\fromVector(Vector(goal - position))
+
 			position.x, position.y, cols, num = entity.scene.world\move(entity, goal.x, goal.y, (other) =>
 				if _.isFunction(other.collision) then return 'cross'
 				return 'slide'
@@ -28,7 +34,7 @@ class MovementSystem extends System
 
 			for col in *cols
 				if col.type == 'cross' and _.isFunction(col.other.collision)
-					col.direction = Direction\fromNormal(col.normal)
+					col.direction = Direction\fromVector(col.normal)
 					col.offset = position - col.other.data
 					col.other\collision(entity, col)
 
