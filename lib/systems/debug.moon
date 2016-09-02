@@ -26,3 +26,8 @@ class DebugSystem extends System
 	debug: (key, value) =>
 		love.graphics.print({ Color(255, 0, 100), key .. ': ', Color(255, 255, 100), value }, @x, @y)
 		@y += 20
+
+	onToggle: (isActive) =>
+		if not @scene.map then return
+		if entityLayer = @scene.map.layers.entities
+			entityLayer.visible = isActive
