@@ -5,7 +5,9 @@ class RenderSystem extends System
 
 	update: (dt) =>
 		for entity in *@getTargets().animated
-			{ :animation } = entity\getAll()
+			{ :animation, :animationList } = entity\getAll()
+			direction = entity.direction.key
+			if animationList[direction] then animationList\set(direction)
 			animation.animation\update(dt)
 
 	draw: () =>
@@ -48,7 +50,7 @@ class RenderSystem extends System
 
 
 	requires: () => {
-		animated: { 'animation', 'shape', 'position' },
+		animated: { 'animation', 'animationList', 'shape', 'position' },
 		sprites: { 'sprite', 'shape', 'position' },
 		polygons: { 'shape', 'position' },
 	}

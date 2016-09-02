@@ -55,7 +55,7 @@ _.defaults = (target, ...) ->
 	sources = { ... }
 	for source in *sources
 		for key, value in pairs(source)
-			if (type(value) == 'table') and (type(target[key] or false) == 'table')
+			if (type(value) == 'table') and (type(target[key] or false) == 'table') and not target.isInstance and not target.isClass
 				_.defaults(target[key], source[key])
 			elseif not target[key]
 				target[key] = value
