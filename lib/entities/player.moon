@@ -65,7 +65,7 @@ class Player extends Entity
 		return @@(scene, @getData())
 
 	control: (dt) =>
-		{ :controls, :movable, :position } = @getAll()
+		{ :controls, :movable, :position } = @getComponents()
 
 		speed = movable.speed
 		if controls.run\isDown() then speed = movable.runSpeed

@@ -13,7 +13,7 @@ class Direction extends Enum
 			normY = if vector.y == 0 then 1 else math.abs(vector.y)
 			return @fromVector(Vector(vector.x / normX, vector.y / normY), true)
 
-		assert false
+		return @@NONE
 
 	toVector: () => return @value
 

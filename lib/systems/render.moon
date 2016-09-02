@@ -5,7 +5,7 @@ class RenderSystem extends System
 
 	update: (dt) =>
 		for entity in *@getTargets().animated
-			{ :animation, :animationList } = entity\getAll()
+			{ :animation, :animationList } = entity\getComponents()
 			direction = entity.direction.key
 			if animationList[direction] then animationList\set(direction)
 			animation.animation\update(dt)
@@ -27,7 +27,7 @@ class RenderSystem extends System
 		for entity in *targets.polygons
 			if drawn[entity] then continue
 			drawn[entity] = true
-			{ :shape, :position, :color } = entity\getAll()
+			{ :shape, :position, :color } = entity\getComponents()
 			if not color then color = Color(255, 0, 0)
 			r, g, b, a = love.graphics.getColor()
 			love.graphics.setColor(color)
@@ -35,7 +35,7 @@ class RenderSystem extends System
 			love.graphics.setColor(r, g, b, a)
 
 	drawSprite: (entity) =>
-		{ :sprite, :animation, :shape, :position } = entity\getAll()
+		{ :sprite, :animation, :shape, :position } = entity\getComponents()
 		isAnimated = not sprite
 		if isAnimated then sprite = animation
 

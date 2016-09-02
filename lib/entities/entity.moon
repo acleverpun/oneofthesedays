@@ -30,13 +30,6 @@ class Entity extends ToysProxy(ToysEntity)
 			else
 				@add(key, component)
 
-	getAll: () =>
-		components = @getComponents()
-		result = {}
-		for key, value in pairs(components)
-			result[_.lowerFirst(key)] = value
-		return result
-
 	getPoint: (direction) =>
 		position = @position
 		if not position then position = Point(@data)

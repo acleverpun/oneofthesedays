@@ -14,7 +14,7 @@ class MovementSystem extends System
 
 	update: (dt) =>
 		for entity in *@getTargets()
-			{ :movable, :position, :shape } = entity\getAll()
+			{ :movable, :position, :shape } = entity\getComponents()
 
 			if not movable.goal then continue
 			goal = movable.goal
