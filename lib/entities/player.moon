@@ -1,13 +1,11 @@
 tactile = require('vendor/tactile/tactile')
 Entity = require('lib/entities/entity')
-Point = require('lib/geo/point')
 Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
 Movable = require('lib/components/movable')
 Controls = require('lib/input/controls')
-Direction = require('lib/geo/direction')
 
 class Player extends Entity
 
@@ -18,8 +16,6 @@ class Player extends Entity
 		runSpeed = speed * 4
 
 		@addMultiple({
-			position: Point(@data.x, @data.y),
-			Shape(@data.width, @data.height),
 			AnimationList(@, {
 				default: Animation({ 1, 1 }, { duration: 2 }),
 				NORTH: Animation({ '5-6', 1 }),
@@ -51,35 +47,3 @@ class Player extends Entity
 					\addButton(tactile.keys('return'))
 			}),
 		})
-
-	getCenter: () =>
-		{ :width, :height } = @shape
-		(@position + (@position + Point(width, height))) / 2
-
-	getData: () =>
-		{ :x, :y } = @position
-		{ :width, :height } = @shape
-		return { :x, :y, :width, :height }
-
-	clone: (scene) =>
-		return @@(scene, @getData())
-
-	control: (dt) =>
-		{ :controls, :movable, :position } = @getComponents()
-
-		speed = movable.speed
-		if controls.run\isDown() then speed = movable.runSpeed
-
-		horizontal = controls.horizontal()
-		vertical = controls.vertical()
-		if horizontal != 0 or vertical != 0
-			movable.goal = position\clone()
-			movable.goal.x += speed * horizontal * dt
-			movable.goal.y += speed * vertical * dt
-
-		if controls.use\pressed() and movable.collisions
-			for col in *movable.collisions
-				if col.type == 'slide' and _.isFunction(col.other.onUse)
-					useDirection = -Direction\fromVector(col.normal)
-					if @direction == useDirection
-						col.other\onUse(@, col)

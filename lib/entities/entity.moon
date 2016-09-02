@@ -1,11 +1,16 @@
 { Entity: ToysEntity } = require('vendor/lovetoys/lovetoys')
 ToysProxy = require('lib/utils/shims/lovetoys-proxy')
+Shape = require('lib/geo/shape')
 Point = require('lib/geo/point')
 Direction = require('lib/geo/direction')
 
 class Entity extends ToysProxy(ToysEntity)
 
 	new: (@scene, @data) =>
+		-- Add components
+		@add("is#{@@name}", true) -- identity
+		@add('position', Point(@data.x, @data.y))
+		@add(Shape(@data.width, @data.height))
 
 	add: (key, component) =>
 		if not component
@@ -43,3 +48,14 @@ class Entity extends ToysProxy(ToysEntity)
 		if direction == Direction.WEST then return Point(x, nil)
 
 		assert false
+
+	getCenter: () =>
+		{ :width, :height } = @shape
+		(@position + (@position + Point(width, height))) / 2
+
+	getData: () =>
+		{ :x, :y } = @position
+		{ :width, :height } = @shape
+		return { :x, :y, :width, :height }
+
+	clone: (scene) => return @@(scene, @getData())

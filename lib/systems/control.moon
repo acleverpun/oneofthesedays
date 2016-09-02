@@ -9,6 +9,4 @@ class ControlSystem extends System
 			for name, control in pairs(controls.list)
 				control\update(dt)
 
-			entity\control(dt)
-
 	requires: () => { 'controls' }
