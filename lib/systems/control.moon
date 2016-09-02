@@ -6,7 +6,7 @@ class ControlSystem extends System
 		for entity in *@getTargets()
 			{ :controls } = entity\getAll()
 
-			for name, control in pairs(controls.table)
+			for name, control in pairs(controls.list)
 				control\update(dt)
 
 			entity\control(dt)

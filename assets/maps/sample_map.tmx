@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" nextobjectid="11">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" nextobjectid="13">
  <tileset firstgid="1" name="Roguelike" tilewidth="16" tileheight="16" spacing="1" tilecount="1767" columns="57">
   <image source="../sprites/roguelikeSheet_transparent.png" width="968" height="526"/>
  </tileset>
@@ -13,7 +13,17 @@
    eJztl40JwjAQRpNG0OoijqGtc4h7qGNodQ0XETuRkSYYj8QGL3/CPfigSdvr41IaylharjzxAy3UFWNzlUX1ea4Ev0Y6tSobD7+LkPNGYqH71hpZgR76+IV21F5r4GbrYQ6/xuGlc5Dp+ZBzBr+9cpgBr6nM8Yf3L9Y7qD11oFtuPx/IDwf54SA/HP/mt5MunfIp0a+XLtuC+/fiIQZPMz50/L2v3yx7VSi/EmrFqBmqlrkOd+PYJyn8Yv1zkF+aumPXwfP1hLGlcCe3XyhcdeF8jv51X74FcB6OT2Bs+w/BglmTsXtD9C+mXwjIDwf54SA/HOSHg/z8eAJ6U4bR
   </data>
  </layer>
+ <objectgroup name="misc">
+  <object id="12" type="Sign" gid="20" x="112" y="496" width="16" height="16">
+   <properties>
+    <property name="value" value="Hi, Mom!"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="entities">
+  <properties>
+   <property name="hidden" type="bool" value="true"/>
+  </properties>
   <object id="1" name="player" type="Player" gid="1766" x="209" y="495" width="14" height="14"/>
   <object id="2" type="zones/Door" x="208" y="416" width="16" height="16">
    <properties>
@@ -27,7 +37,6 @@
     <property name="map" type="file" value="sample_indoor.lua"/>
    </properties>
   </object>
-  <object id="6" type="Entity" x="112" y="480" width="16" height="16"/>
   <object id="7" type="zones/Boundary" x="0" y="624" width="640" height="16">
    <properties>
     <property name="map" type="file" value="sample_map.lua"/>
@@ -54,7 +63,7 @@
    <property name="collidable" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmM1KAzEQx+3u9uxJUYT68RTVJxC8aBV8ARW3nnwCEar4iT6D3tWnaAX17FXxoL6FE5pgOp1JJtlWKuwPhnSz+fjvZCab7djY4FhLBjiYxUpCl/i+r05xRtQ3CuhW87QSujS0iPGpOkMO95rW/XOm7bJAN6cNz8/5SzGN7t3A9W3ibqM4FOjz+c+UlL/eoO5d12OfcXWhuPxH+ZHD9tlrpb8ulhhtrjy17x0I5h/36Oc0mdK3Z0hiHLeT9lH44g63xUhiHLeT9lG41hbvZdJYjOUO7B7swaqT7H+KmQhtl44+ajy8zp9gX2DfVp0kN6h1nR2AL/E6z0Hez4MtVHrn9uUtvq4l/Rqvq3JdvpzFc+O8Nf7az/h+tYA56jBOO43TSOUtFX8Gal3rjucoStH3hoHKBTv+JfGag4/3kJ+ptcXa7H4NKNf1742U16Zw7XNYyyrE7w5c7yJ9rlwwa0z1o9jU7a88ubKVyMfEuM5RsbjekR8BsRsTdxw4vyes36fVfrtgfO47J1PY/mjD83fAHrUf7JwI2YM4KE34vYM12DTTX1OEvPsNoTGF57A1dJDWXNfjfYGC25Ml62bOKlQsKw0nWVfDYrVrSzpeVB5uW7kYcraLBWvM014fUv6a0qXyfZHvyRiOsq6PlB1nvf6yMc/FfU8qJOf5UJ7gvPMM9lLh24TsGaNKyLlqlMb+K0LOdNx1SPxNypuKtHD/RZjrYbz7fbQCfDPs78OSkpKS/8QPFYSAQQ==
+   eJztmM1KAzEQx9vd7dmToAj14ymqTyB40Sr4AipuPfkEIlTxE30GvatP0Qrq2aviQX0LJzTBdDqTTLJt6WF/MKSbzcd/JzPZbCuV4bGRDHEwi7WELvF9X53igqhvFtCt5mkndGloE+NTdYYc7rWs+5dM21WBbk4bnp/zl2IW3buD6/vE3UZxLNDn858pKX99QN2nrsc+4+pCcfmP8iOH7bP36mBdLDHaXHlq3zsSzD/l0c9pMqVvz5DEOG4n7aPwxR1ui5HEOG4n7aNwrS3ey6SxGMsD2CPYk1Un2f8UcxHarh191Hh4nb/BfsB+rTpJblDrOj8EX+J1XoC8XwRbqvbP7ctbfF1PBjXe1uS6fDmL58Z5a/x1mPH96gFzNGCcThqnkcpbKv4M1Lo2HM9RlKLvDQOVC3b8S+I1Bx8fID9Ta4u12f2aUG7q31spr03h2uewlnWI3z243kf6XLlg1pjqR7Gt2994cmUnkY+JcZ2jYnG9I78CYjcm7jhwfk9bv89rg3bF+Nx3Tqaw/dGB5++CPWs/2DkRsgdxUJrwewdrsGml/6YIefcbQmMKz2Fr6CKtua7H+wIFtydL1s2cVahYVhrOsp6G5VrPVnS8qDzctXIx5GwXC9aYp/0+pPw1o0vl+yLfkzGcZD0fKTvN+v1lY56L+55USM7zobzAeecV7K3KtwnZMyaVkHPVJI09LkLOdNz1qL9xXFq4/yLM9Sje/T7aAb4Zt+9KSkpKJpk/jl2AKw==
   </data>
  </layer>
  <layer name="roofs" width="40" height="40">

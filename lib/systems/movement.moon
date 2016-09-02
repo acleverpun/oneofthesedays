@@ -27,12 +27,12 @@ class MovementSystem extends System
 
 			entity.direction = Direction\fromVector(Vector(goal - position))
 
-			position.x, position.y, cols, num = entity.scene.world\move(entity, goal.x, goal.y, (other) =>
+			position.x, position.y, movable.collisions, num = entity.scene.world\move(entity, goal.x, goal.y, (other) =>
 				if _.isFunction(other.collision) then return 'cross'
 				return 'slide'
 			)
 
-			for col in *cols
+			for col in *movable.collisions
 				if col.type == 'cross' and _.isFunction(col.other.collision)
 					col.direction = Direction\fromVector(col.normal)
 					col.offset = position - col.other.data

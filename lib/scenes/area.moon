@@ -20,6 +20,10 @@ class AreaScene extends Scene
 		@map\bump_init(@world)
 		@scale = 2
 
+		-- Hide hidden layers without being hidden in the editor
+		for layer in *@map.layers
+			if layer.properties.hidden then layer.visible = false
+
 	enter: (previous, @transition) =>
 		super(previous)
 
@@ -30,7 +34,8 @@ class AreaScene extends Scene
 
 		boundaries = {}
 		doors = {}
-		for object in *@map.layers.entities.objects
+		for object in *@map.objects
+			if not object then continue
 			if object.type == 'Player' and @player then continue
 			if object.type == 'zones/Boundary' then _.push(boundaries, object)
 			if object.type == 'zones/Door' then _.push(doors, object)
@@ -95,7 +100,7 @@ class AreaScene extends Scene
 
 		@addEntityToWorld(@player, @player\getData())
 
-		entityLayer = MapLayer(@map, 'entities')
+		entityLayer = MapLayer(@map, '__entities')
 		renderSystem = RenderSystem()
 		entityLayer.engine\addSystem(renderSystem, 'update')
 		entityLayer.engine\addSystem(renderSystem, 'draw')

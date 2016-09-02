@@ -14,6 +14,9 @@
   </data>
  </layer>
  <objectgroup name="entities">
+  <properties>
+   <property name="hidden" type="bool" value="true"/>
+  </properties>
   <object id="2" name="center" type="zones/Door" x="288" y="336" width="16" height="16"/>
   <object id="3" name="left" type="zones/Door" x="144" y="272" width="48" height="16"/>
  </objectgroup>

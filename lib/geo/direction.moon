@@ -17,9 +17,10 @@ class Direction extends Enum
 
 	toVector: () => return @value
 
-	__tostring: () => @value
+	__tostring: () => @key
 
-	__unm: () => return @@[-@value]
+	__eq: (other) => @key == other.key and @value == other.value
+	__unm: () => return @@fromVector(-@value)
 
 Direction\add({
 	NORTH: Vector(0, -1),
