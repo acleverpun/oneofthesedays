@@ -3,6 +3,9 @@ ToysProxy = require('lib/utils/shims/lovetoys-proxy')
 
 class System extends ToysProxy(ToysSystem)
 
+	new: () =>
+		if _.isFunction(@onAddEntity) then @proxy.onAddEntity = @onAddEntity
+
 	toggleActive: (...) =>
 		isActive = super(...)
 		if isActive and _.isFunction(@onEnable) then @onEnable()
