@@ -1,8 +1,8 @@
 Class = require('lib/class')
 
 (ProxyClass) ->
-	init = (...) =>
-		@proxy = ProxyClass(...)
+	init = () =>
+		@proxy = ProxyClass()
 
 	ToysProxy = class extends Class
 
@@ -12,7 +12,7 @@ Class = require('lib/class')
 			-- Call setup code in constructor, so children do not need to call `super`
 			constructor = child.__init
 			child.__init = (...) =>
-				init(@, ...)
+				init(@)
 				constructor(@, ...)
 
 		-- new: (...) => init(@, ...)

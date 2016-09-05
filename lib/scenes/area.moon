@@ -47,7 +47,7 @@ class AreaScene extends Scene
 			if object.type == 'Player'
 				@player = entity
 				continue
-			@addEntityToWorld(entity, object)
+			@addEntityToWorld(entity)
 
 		assert @player
 
@@ -100,7 +100,7 @@ class AreaScene extends Scene
 				if @transition.direction == Direction.WEST then @player.position.x += warp.width
 				if @transition.direction == Direction.EAST then @player.position.x -= warp.width
 
-		@addEntityToWorld(@player, @player\getData())
+		@addEntityToWorld(@player)
 
 		entityLayer = MapLayer(@map, '__entities', 'entities')
 		renderSystem = RenderSystem()
@@ -111,7 +111,8 @@ class AreaScene extends Scene
 		entityLayer.engine\addSystem(MovementSystem(@map))
 		entityLayer.engine\addEntity(@player)
 
-	addEntityToWorld: (entity, data) =>
+	addEntityToWorld: (entity) =>
+		data = entity\getData()
 		@world\add(entity, data.x, data.y, data.width, data.height)
 
 	update: (dt) =>
