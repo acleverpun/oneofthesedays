@@ -49,7 +49,7 @@ class AreaScene extends Scene
 				continue
 			@addEntityToWorld(entity)
 
-		assert @player
+		unless @player then error 'No player found.'
 
 		if fromWarp
 			warp = nil

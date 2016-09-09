@@ -16,6 +16,6 @@ class AnimationList extends Class
 
 	set: (animation) =>
 		if _.isString(animation) then animation = @[animation]
-		assert animation
+		unless animation then error 'No animation specified.'
 		@current = animation.name
 		@entity\set('animation', animation)

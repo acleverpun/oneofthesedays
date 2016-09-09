@@ -16,7 +16,7 @@ class Entity extends ToysProxy(ToysEntity)
 		if not component
 			component = key
 			key = component.type
-		assert(not @[key])
+		if @[key] then error 'Entity already has component.'
 		@[key] = component
 		super(component, key)
 
@@ -47,7 +47,7 @@ class Entity extends ToysProxy(ToysEntity)
 		if direction == Direction.EAST then return Point(x + width, nil)
 		if direction == Direction.WEST then return Point(x, nil)
 
-		assert false
+		error 'Point could not be determined.'
 
 	getCenter: () =>
 		{ :width, :height } = @shape
