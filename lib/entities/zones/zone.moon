@@ -1,8 +1,8 @@
 bump = require('vendor/bump/bump')
-Entity = require('lib/entities/entity')
+MyEntity = require('lib/entities/my-entity')
 Point = require('lib/geo/point')
 
-class Zone extends Entity
+class Zone extends MyEntity
 
 	entities: {}
 

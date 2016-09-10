@@ -1,5 +1,5 @@
 tactile = require('vendor/tactile/tactile')
-Entity = require('lib/entities/entity')
+MyEntity = require('lib/entities/my-entity')
 Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
@@ -7,7 +7,7 @@ AnimationList = require('lib/display/animation-list')
 Movable = require('lib/components/movable')
 Controls = require('lib/input/controls')
 
-class Player extends Entity
+class Player extends MyEntity
 
 	new: (...) =>
 		super(...)

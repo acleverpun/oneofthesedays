@@ -1,61 +1,50 @@
-{ Entity: ToysEntity } = require('vendor/lovetoys/lovetoys')
-ToysProxy = require('lib/utils/shims/lovetoys-proxy')
-Shape = require('lib/geo/shape')
-Point = require('lib/geo/point')
-Direction = require('lib/geo/direction')
+Class = require('lib/class')
 
-class Entity extends ToysProxy(ToysEntity)
+class Entity extends Class
 
-	new: (@scene, @data) =>
-		-- Add components
-		@add("is#{@@name}", true) -- identity
-		@add('position', Point(@data.x, @data.y))
-		@add(Shape(@data.width, @data.height))
+	events: nil
 
-	add: (key, component) =>
-		if not component
-			component = key
-			key = component.type
-		if @[key] then error 'Entity already has component.'
-		@[key] = component
-		super(component, key)
+	new: (components) =>
+		@components = {}
+		@addMultiple(components)
 
 	set: (key, component) =>
-		if not component
+		unless component
 			component = key
 			key = component.type
-		@[key] = component
-		super(component, key)
 
-	addMultiple: (components) =>
+		isNew = not @components[key]
+		@components[key] = component
+		-- TODO: Make getter, rather than duplicate
+		@[key] = component
+
+		if isNew and @events then @events\fireEvent('component.added', @, key)
+
+	add: (key, component) =>
+		unless component
+			component = key
+			key = component.type
+
+		if @has(key) then error "Entity already has component '#{key}'."
+		if @[key] then error "Entity already has property '#{key}'."
+
+		@set(key, component)
+
+	addMultiple: (components = {}) =>
 		for key, component in pairs(components)
 			if _.isNumber(key)
 				@add(component)
 			else
 				@add(key, component)
 
-	getPoint: (direction) =>
-		position = @position
-		if not position then position = Point(@data)
-		if not direction then return position
+	remove: (key) =>
+		if @has(key)
+			@componets[key] = nil
+			@[key] = nil
+			if @events then @events\fireEvent('component.removed', @, key)
+		else
+			error "Tried removed nonexistent component '#{key}' from entity."
 
-		{ :x, :y } = position
-		{ :width, :height } = @data
-
-		if direction == Direction.NORTH then return Point(nil, y)
-		if direction == Direction.SOUTH then return Point(nil, y + height)
-		if direction == Direction.EAST then return Point(x + width, nil)
-		if direction == Direction.WEST then return Point(x, nil)
-
-		error 'Point could not be determined.'
-
-	getCenter: () =>
-		{ :width, :height } = @shape
-		(@position + (@position + Point(width, height))) / 2
-
-	getData: () =>
-		{ :x, :y } = @position
-		{ :width, :height } = @shape
-		return { :x, :y, :width, :height }
-
-	clone: (scene) => return @@(scene, @getData())
+	has: (key) => not not @components[key]
+	get: (key) => @components[key]
+	getAll: () => @components

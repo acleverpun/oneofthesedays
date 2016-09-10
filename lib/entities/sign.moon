@@ -1,6 +1,6 @@
-Entity = require('lib/entities/entity')
+MyEntity = require('lib/entities/my-entity')
 
-class Sign extends Entity
+class Sign extends MyEntity
 
 	new: (...) =>
 		super(...)

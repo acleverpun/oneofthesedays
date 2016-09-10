@@ -1,9 +1,9 @@
-Entity = require('lib/entities/entity')
+MyEntity = require('lib/entities/my-entity')
 Sprite = require('lib/display/sprite')
 Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 
-class Npc extends Entity
+class Npc extends MyEntity
 
 	new: (...) =>
 		super(...)
