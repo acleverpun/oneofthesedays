@@ -18,7 +18,7 @@ class Entity extends Class
 		-- TODO: Make getter, rather than duplicate
 		@[key] = component
 
-		if isNew and @events then @events\fireEvent('component.added', @, key)
+		if isNew and @events then @events\fireEvent('entity.component.added', @, key)
 
 	add: (key, component) =>
 		unless component
@@ -38,12 +38,11 @@ class Entity extends Class
 				@add(key, component)
 
 	remove: (key) =>
-		if @has(key)
-			@componets[key] = nil
-			@[key] = nil
-			if @events then @events\fireEvent('component.removed', @, key)
-		else
-			error "Tried removed nonexistent component '#{key}' from entity."
+		if not @has(key) then error "Tried removing nonexistent component '#{key}' from entity."
+
+		@componets[key] = nil
+		@[key] = nil
+		if @events then @events\fireEvent('entity.component.removed', @, key)
 
 	has: (key) => not not @components[key]
 	get: (key) => @components[key]

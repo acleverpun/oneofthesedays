@@ -1,6 +1,7 @@
 init = () =>
 	@class = @@
 	@type = _.lowerFirst(@@name)
+	@["is#{@@name}"] = true
 
 class Class
 
