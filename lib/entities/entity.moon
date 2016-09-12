@@ -13,7 +13,7 @@ class Entity extends Class
 			component = key
 			key = component.type
 
-		isNew = not @components[key]
+		isNew = not @has(key)
 		@components[key] = component
 		-- TODO: Make getter, rather than duplicate
 		@[key] = component

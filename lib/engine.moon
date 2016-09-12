@@ -24,13 +24,16 @@ class Engine extends Class
 		@entities[entity.id] = entity
 
 		for key, component in pairs(entity.components)
-			if not @entityLists[key] then @entityLists[name] = {}
+			if not @entityLists[key] then @entityLists[key] = {}
 			@entityLists[key][entity.id] = entity
 
 			if @singleRequirements[key]
 				for _, system in pairs(@singleRequirements[key])
-					if @checkRequirements(entity, system)
+					if system\validate(entity) then system\add(entity)
 
 	removeEntity: (entity) =>
 
 	addSystem: (entity) =>
+
+	onComponentAdded: () =>
+	onComponentRemoved: () =>

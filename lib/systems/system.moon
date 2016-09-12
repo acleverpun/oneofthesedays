@@ -10,26 +10,16 @@ class System extends Class
 
 	requires: () => {}
 
-	add: (entity, category) =>
+	add: (entity) =>
 		if not entity.id then error 'Added entity has no id.'
 
-		if category
-			if not @targets[category] then @targets[category] = {}
-			@targets[category][entity.id] = entity
-		else
-			@targets[entity.id] = entity
-
+		@targets[entity.id] = entity
 		if @events then @events\fireEvent('system.entity.added', @, entity)
 
 	remove: (entity) =>
 		if not entity.id then error 'Added entity has no id.'
 
-		for key, target in pairs(@targets)
-			if target.isInstance
-				@targets[entity.id] = nil
-				break
-			target[entity.id] = nil
-
+		@targets[entity.id] = nil
 		if @events then @events\fireEvent('system.entity.removed', @, entity)
 
 	toggleActive: (...) =>
