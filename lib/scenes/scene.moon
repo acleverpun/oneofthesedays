@@ -1,6 +1,6 @@
 Class = require('lib/class')
 scenes = require('vendor/hump/gamestate')
-Engine = require('lib/engine')
+Secs = require('lib/secs')
 Transition = require('lib/transition')
 EventManager = require('lib/event-manager')
 DebugSystem = require('lib/systems/debug')
@@ -8,27 +8,27 @@ DebugSystem = require('lib/systems/debug')
 class Scene extends Class
 
 	new: () =>
-		@engine = Engine()
+		@secs = Secs()
 		@events = EventManager()
 		@scenes = scenes
 
 		debugSystem = DebugSystem(@)
-		@engine\addSystem(debugSystem, 'update')
-		@engine\addSystem(debugSystem, 'draw')
-		@engine\stopSystem(DebugSystem.name)
+		@secs\addSystem(debugSystem, 'update')
+		@secs\addSystem(debugSystem, 'draw')
+		@secs\stopSystem(DebugSystem.name)
 
 	enter: (@previous) =>
 
 	update: (dt) =>
-		@engine\update(dt)
+		@secs\update(dt)
 
 	draw: () =>
-		@engine\draw()
+		@secs\draw()
 
 	keypressed: (key) =>
 		if key == 'q' then love.event.quit()
 		if key == '`'
-			@engine\toggleSystem(DebugSystem.name)
+			@secs\toggleSystem(DebugSystem.name)
 			@DEBUG = not @DEBUG
 
 	switch: (scene, data, ...) =>

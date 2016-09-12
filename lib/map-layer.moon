@@ -1,5 +1,5 @@
 Class = require('lib/class')
-Engine = require('lib/engine')
+Secs = require('lib/secs')
 
 class MapLayer extends Class
 
@@ -34,10 +34,10 @@ class MapLayer extends Class
 		@map.layers[index] = @
 		@map.layers[@name] = @
 
-		@engine = Engine()
+		@secs = Secs()
 
 	update: (dt) =>
-		@engine\update(dt)
+		@secs\update(dt)
 
 	draw: () =>
-		@engine\draw()
+		@secs\draw()

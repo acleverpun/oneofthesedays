@@ -1,7 +1,7 @@
 Class = require('lib/class')
 EventManager = require('lib/event-manager')
 
-class Engine extends Class
+class Secs extends Class
 
 	new: () =>
 		@entities = {}

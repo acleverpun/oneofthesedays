@@ -104,12 +104,12 @@ class AreaScene extends Scene
 
 		entityLayer = MapLayer(@map, '__entities', 'entities')
 		renderSystem = RenderSystem()
-		entityLayer.engine\addSystem(renderSystem, 'update')
-		entityLayer.engine\addSystem(renderSystem, 'draw')
-		entityLayer.engine\addSystem(ControlSystem())
-		entityLayer.engine\addSystem(PlayerControlSystem())
-		entityLayer.engine\addSystem(MovementSystem(@map))
-		entityLayer.engine\addEntity(@player)
+		entityLayer.secs\addSystem(renderSystem, 'update')
+		entityLayer.secs\addSystem(renderSystem, 'draw')
+		entityLayer.secs\addSystem(ControlSystem())
+		entityLayer.secs\addSystem(PlayerControlSystem())
+		entityLayer.secs\addSystem(MovementSystem(@map))
+		entityLayer.secs\addEntity(@player)
 
 	addEntityToWorld: (entity) =>
 		data = entity\getData()
