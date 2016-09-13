@@ -8,6 +8,8 @@ class Entity extends Class
 		@components = {}
 		@addMultiple(components)
 
+	init: () =>
+
 	set: (key, component) =>
 		unless component
 			component = key
@@ -18,7 +20,7 @@ class Entity extends Class
 		-- TODO: Make getter, rather than duplicate
 		@[key] = component
 
-		if isNew and @events then @events\fireEvent('entity.component.added', @, key)
+		if isNew and @events then @events\emit('entity.component.added', @, key)
 
 	add: (key, component) =>
 		unless component
@@ -42,7 +44,7 @@ class Entity extends Class
 
 		@componets[key] = nil
 		@[key] = nil
-		if @events then @events\fireEvent('entity.component.removed', @, key)
+		if @events then @events\emit('entity.component.removed', @, key)
 
 	has: (key) => not not @components[key]
 	get: (key) => @components[key]

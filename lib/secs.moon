@@ -1,31 +1,39 @@
 Class = require('lib/class')
-EventManager = require('lib/event-manager')
+EventEmitter = require('lib/event-emitter')
 
 class Secs extends Class
 
 	new: () =>
 		@entities = {}
-		@events = EventManager()
+		@events = EventEmitter()
 		@systems = {}
 
-		@events\addListener('entity.component.added', @, @onComponentAdded)
-		@events\addListener('entity.component.removed', @, @onComponentRemoved)
+		if @onComponentAdd then @events\on('entity.component.added', @onComponentAdd)
+		if @onComponentRemove then @events\on('entity.component.removed', @onComponentRemove)
 
 	addSystem: (system) =>
+		system.active = true
 		system.events = @events
 		@systems[system.type] = system
 
 		for id, entity in pairs(@entities)
 			hasAllReqs = true
 			for req in *system.requirements
-				if not entity.has(req)
+				if not entity\has(req)
 					hasAllReqs = false
 					break
 			if hasAllReqs then system\add(entity)
 
+		system\init()
+
 	removeSystem: (system) =>
 		system.events = nil
 		@systems[system.type] = nil
+
+	getSystem: (system) => return @systems[system] or @systems[system.type]
+	startSystem: (system) => @getSystem(system).active = true
+	stopSystem: (system) => @getSystem(system).active = false
+	toggleSystem: (system) => @getSystem(system).active = not @getSystem(system).active
 
 	addEntity: (entity) =>
 		entity.events = @events
@@ -35,10 +43,12 @@ class Secs extends Class
 		for name, system in pairs(@systems)
 			hasAllReqs = true
 			for req in *system.requirements
-				if not entity.has(req)
+				if not entity\has(req)
 					hasAllReqs = false
 					break
 			if hasAllReqs then system\add(entity)
+
+		entity\init()
 
 	removeEntity: (entity) =>
 		@entities[entity.id].events = nil
@@ -51,6 +61,3 @@ class Secs extends Class
 	draw: () =>
 		for name, system in pairs(@systems)
 			if system.draw then system\draw()
-
-	onComponentAdded: () =>
-	onComponentRemoved: () =>

@@ -4,8 +4,8 @@ Direction = require('lib/geo/direction')
 class PlayerControlSystem extends System
 
 	update: (dt) =>
-		for entity in *@getTargets()
-			{ :controls, :movable, :position, :animation } = entity\getComponents()
+		for entity in *@entities
+			{ :controls, :movable, :position, :animation } = entity\getAll()
 
 			speed = movable.speed
 			if controls.run\isDown() then speed = movable.runSpeed

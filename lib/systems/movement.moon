@@ -4,16 +4,16 @@ Vector = require('lib/geo/vector')
 
 class MovementSystem extends System
 
+	requirements: { 'movable', 'position', 'shape' }
+
 	new: (map) =>
+		super()
 		@mapWidth = map.width * map.tilewidth
 		@mapHeight = map.height * map.tileheight
 
-		@proxy.onAddEntity = (@, entity) ->
-			entity.direction = Direction.NONE
-
 	update: (dt) =>
-		for entity in *@getTargets()
-			{ :movable, :position, :shape } = entity\getComponents()
+		for entity in *@entities
+			{ :movable, :position, :shape } = entity\getAll()
 
 			if not movable.goal then continue
 			goal = movable.goal
@@ -37,4 +37,5 @@ class MovementSystem extends System
 					col.offset = position - col.other.data
 					col.other\collision(entity, col)
 
-	requires: () => { 'movable', 'position', 'shape' }
+	onAdd: (entity) =>
+		entity.direction = Direction.NONE

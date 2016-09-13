@@ -7,7 +7,6 @@ class MyEntity extends Entity
 
 	new: (@scene, @data) =>
 		super({
-			["is#{@@name}"]: true,
 			position: Point(@data.x, @data.y),
 			Shape(@data.width, @data.height)
 		})

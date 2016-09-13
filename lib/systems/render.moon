@@ -4,38 +4,38 @@ Color = require('lib/display/color')
 class RenderSystem extends System
 
 	update: (dt) =>
-		for entity in *@getTargets().animated
-			{ :animation, :animationList } = entity\getComponents()
-			direction = entity.direction.key
-			if animationList[direction] then animationList\set(direction)
-			animation.value\update(dt)
+		-- for entity in *@entities.animated
+		-- 	{ :animation, :animationList } = entity\getAll()
+		-- 	direction = entity.direction.key
+		-- 	if animationList[direction] then animationList\set(direction)
+		-- 	animation.value\update(dt)
 
 	draw: () =>
-		targets = @getTargets()
-		drawn = {}
-
-		for entity in *targets.animated
-			if drawn[entity] then continue
-			drawn[entity] = true
-			@drawSprite(entity)
-
-		for entity in *targets.sprites
-			if drawn[entity] then continue
-			drawn[entity] = true
-			@drawSprite(entity)
-
-		for entity in *targets.polygons
-			if drawn[entity] then continue
-			drawn[entity] = true
-			{ :shape, :position, :color } = entity\getComponents()
-			if not color then color = Color(255, 0, 0)
-			r, g, b, a = love.graphics.getColor()
-			love.graphics.setColor(color)
-			love.graphics.rectangle('fill', position.x, position.y, shape.width, shape.height)
-			love.graphics.setColor(r, g, b, a)
+		-- targets = @entities
+		-- drawn = {}
+    --
+		-- for entity in *targets.animated
+		-- 	if drawn[entity] then continue
+		-- 	drawn[entity] = true
+		-- 	@drawSprite(entity)
+    --
+		-- for entity in *targets.sprites
+		-- 	if drawn[entity] then continue
+		-- 	drawn[entity] = true
+		-- 	@drawSprite(entity)
+    --
+		-- for entity in *targets.polygons
+		-- 	if drawn[entity] then continue
+		-- 	drawn[entity] = true
+		-- 	{ :shape, :position, :color } = entity\getAll()
+		-- 	if not color then color = Color(255, 0, 0)
+		-- 	r, g, b, a = love.graphics.getColor()
+		-- 	love.graphics.setColor(color)
+		-- 	love.graphics.rectangle('fill', position.x, position.y, shape.width, shape.height)
+		-- 	love.graphics.setColor(r, g, b, a)
 
 	drawSprite: (entity) =>
-		{ :sprite, :animation, :shape, :position } = entity\getComponents()
+		{ :sprite, :animation, :shape, :position } = entity\getAll()
 		isAnimated = not sprite
 		if isAnimated then sprite = animation
 
