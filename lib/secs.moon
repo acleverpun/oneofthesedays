@@ -5,35 +5,52 @@ class Secs extends Class
 
 	new: () =>
 		@entities = {}
-		@singleRequirements = {}
-		@allRequirements = {}
-		@entityLists = {}
 		@events = EventManager()
-
-		@systemRegistry = {}
 		@systems = {}
-		@systems.update = {}
-		@systems.draw = {}
 
 		@events\addListener('entity.component.added', @, @onComponentAdded)
 		@events\addListener('entity.component.removed', @, @onComponentRemoved)
+
+	addSystem: (system) =>
+		system.events = @events
+		@systems[system.type] = system
+
+		for id, entity in pairs(@entities)
+			hasAllReqs = true
+			for req in *system.requirements
+				if not entity.has(req)
+					hasAllReqs = false
+					break
+			if hasAllReqs then system\add(entity)
+
+	removeSystem: (system) =>
+		system.events = nil
+		@systems[system.type] = nil
 
 	addEntity: (entity) =>
 		entity.events = @events
 		entity.id = #@entities + 1
 		@entities[entity.id] = entity
 
-		for key, component in pairs(entity.components)
-			if not @entityLists[key] then @entityLists[key] = {}
-			@entityLists[key][entity.id] = entity
-
-			if @singleRequirements[key]
-				for _, system in pairs(@singleRequirements[key])
-					if system\validate(entity) then system\add(entity)
+		for name, system in pairs(@systems)
+			hasAllReqs = true
+			for req in *system.requirements
+				if not entity.has(req)
+					hasAllReqs = false
+					break
+			if hasAllReqs then system\add(entity)
 
 	removeEntity: (entity) =>
+		@entities[entity.id].events = nil
+		@entities[entity.id] = nil
 
-	addSystem: (entity) =>
+	update: (dt) =>
+		for name, system in pairs(@systems)
+			if system.update then system\update(dt)
+
+	draw: () =>
+		for name, system in pairs(@systems)
+			if system.draw then system\draw()
 
 	onComponentAdded: () =>
 	onComponentRemoved: () =>

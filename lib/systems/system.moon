@@ -3,23 +3,22 @@ Class = require('lib/class')
 class System extends Class
 
 	events: nil
+	requirements: {}
 
 	new: () =>
-		@targets = {}
+		@entities = {}
 		@active = true
-
-	requires: () => {}
 
 	add: (entity) =>
 		if not entity.id then error 'Added entity has no id.'
 
-		@targets[entity.id] = entity
+		@entities[entity.id] = entity
 		if @events then @events\fireEvent('system.entity.added', @, entity)
 
 	remove: (entity) =>
 		if not entity.id then error 'Added entity has no id.'
 
-		@targets[entity.id] = nil
+		@entities[entity.id] = nil
 		if @events then @events\fireEvent('system.entity.removed', @, entity)
 
 	toggleActive: (...) =>
