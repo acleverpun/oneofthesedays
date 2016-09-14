@@ -1,5 +1,5 @@
 Class = require('lib/class')
-Secs = require('lib/secs')
+Secs = require('lib/secs/secs')
 
 class MapLayer extends Class
 

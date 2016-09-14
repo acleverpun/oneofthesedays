@@ -1,4 +1,4 @@
-System = require('lib/systems/system')
+System = require('lib/secs/system')
 
 class ControlSystem extends System
 

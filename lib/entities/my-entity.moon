@@ -1,4 +1,4 @@
-Entity = require('lib/entities/entity')
+Entity = require('lib/secs/entity')
 Shape = require('lib/geo/shape')
 Point = require('lib/geo/point')
 Direction = require('lib/geo/direction')

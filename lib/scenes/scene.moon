@@ -1,6 +1,6 @@
 Class = require('lib/class')
 scenes = require('vendor/hump/gamestate')
-Secs = require('lib/secs')
+Secs = require('lib/secs/secs')
 Transition = require('lib/transition')
 EventEmitter = require('lib/utils/event-emitter')
 DebugSystem = require('lib/systems/debug')
