@@ -31,9 +31,11 @@ class Secs extends Class
 		@systems[system.type] = nil
 
 	getSystem: (system) => return @systems[system] or @systems[system.type]
-	startSystem: (system) => @getSystem(system).active = true
-	stopSystem: (system) => @getSystem(system).active = false
-	toggleSystem: (system) => @getSystem(system).active = not @getSystem(system).active
+	startSystem: (system) => @toggleSystem(system, true)
+	stopSystem: (system) => @toggleSystem(system, false)
+	toggleSystem: (system, active) =>
+		system = @getSystem(system)
+		system.active = if type(active) == 'nil' then not system.active else active
 
 	addEntity: (entity) =>
 		entity.events = @events
@@ -54,10 +56,15 @@ class Secs extends Class
 		@entities[entity.id].events = nil
 		@entities[entity.id] = nil
 
+		for name, system in pairs(@systems)
+			if system\has(entity) then system\remove(entity)
+
 	update: (dt) =>
 		for name, system in pairs(@systems)
-			if system.update then system\update(dt)
+			if not system.update or not system.active then continue
+			system\update(dt)
 
 	draw: () =>
 		for name, system in pairs(@systems)
-			if system.draw then system\draw()
+			if not system.draw or not system.active then continue
+			system\draw()

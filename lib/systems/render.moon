@@ -13,17 +13,17 @@ class RenderSystem extends System
 	draw: () =>
 		-- targets = @entities
 		-- drawn = {}
-    --
+
 		-- for entity in *targets.animated
 		-- 	if drawn[entity] then continue
 		-- 	drawn[entity] = true
 		-- 	@drawSprite(entity)
-    --
+
 		-- for entity in *targets.sprites
 		-- 	if drawn[entity] then continue
 		-- 	drawn[entity] = true
 		-- 	@drawSprite(entity)
-    --
+
 		-- for entity in *targets.polygons
 		-- 	if drawn[entity] then continue
 		-- 	drawn[entity] = true

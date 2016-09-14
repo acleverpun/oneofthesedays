@@ -46,6 +46,6 @@ class Entity extends Class
 		@[key] = nil
 		if @events then @events\emit('entity.component.removed', @, key)
 
-	has: (key) => not not @components[key]
 	get: (key) => @components[key]
 	getAll: () => @components
+	has: (key) => not not @get(key)

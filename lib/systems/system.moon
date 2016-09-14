@@ -6,10 +6,8 @@ class System extends Class
 	events: nil
 	requirements: {}
 
-	new: () =>
-		@entities = {}
-
 	init: () =>
+		@entities = {}
 		if @onAdd then @events\on('system.entity.add', @onAdd)
 		if @onRemove then @events\on('system.entity.remove', @onRemove)
 
@@ -24,6 +22,9 @@ class System extends Class
 
 		@entities[entity.id] = nil
 		if @events then @events\emit('system.entity.remove', @, entity)
+
+	get: (entity) => @entities[entity] or @entities[entity.id]
+	has: (entity) => not not @get(entity)
 
 	toggleActive: (...) =>
 		isActive = super(...)

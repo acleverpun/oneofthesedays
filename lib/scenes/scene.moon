@@ -26,7 +26,7 @@ class Scene extends Class
 	keypressed: (key) =>
 		if key == 'q' then love.event.quit()
 		if key == '`'
-			@secs\toggleSystem(DebugSystem.name)
+			@secs\toggleSystem(DebugSystem)
 			@DEBUG = not @DEBUG
 
 	switch: (scene, data, ...) =>
