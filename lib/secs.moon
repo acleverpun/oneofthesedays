@@ -1,5 +1,5 @@
 Class = require('lib/class')
-EventEmitter = require('lib/event-emitter')
+EventEmitter = require('lib/utils/event-emitter')
 
 class Secs extends Class
 

@@ -2,7 +2,7 @@ Class = require('lib/class')
 scenes = require('vendor/hump/gamestate')
 Secs = require('lib/secs')
 Transition = require('lib/transition')
-EventEmitter = require('lib/event-emitter')
+EventEmitter = require('lib/utils/event-emitter')
 DebugSystem = require('lib/systems/debug')
 
 class Scene extends Class
