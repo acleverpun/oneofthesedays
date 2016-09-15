@@ -8,8 +8,8 @@ class System extends Class
 
 	init: () =>
 		@entities = {}
-		if @onAdd then @events\on('system.entity.add', @onAdd)
-		if @onRemove then @events\on('system.entity.remove', @onRemove)
+		if @onAdd then @events\on('system.entity.add', @onAdd, @)
+		if @onRemove then @events\on('system.entity.remove', @onRemove, @)
 
 	add: (entity) =>
 		if not entity.id then error 'Added entity has no id.'

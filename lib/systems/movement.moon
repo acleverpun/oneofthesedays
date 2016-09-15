@@ -13,7 +13,7 @@ class MovementSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :movable, :position, :shape } = entity\getAll()
+			{ :movable, :position, :shape } = entity\get()
 
 			if not movable.goal then continue
 			goal = movable.goal

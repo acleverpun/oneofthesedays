@@ -4,7 +4,7 @@ class ControlSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :controls } = entity\getAll()
+			{ :controls } = entity\get()
 
 			for name, control in pairs(controls.list)
 				control\update(dt)

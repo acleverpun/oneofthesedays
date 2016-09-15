@@ -5,7 +5,7 @@ class PlayerControlSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :controls, :movable, :position, :animation } = entity\getAll()
+			{ :controls, :movable, :position, :animation } = entity\get()
 
 			speed = movable.speed
 			if controls.run\isDown() then speed = movable.runSpeed

@@ -10,7 +10,7 @@ dump = (value, depth, hideMeta = false) ->
 	output ..= inspect(value, options)
 	return output
 
-export p = (...) ->
+export log = (...) ->
 	args = { ... }
 	depth = if #args == 1 then 2 else 1
 	output = ''
@@ -19,5 +19,5 @@ export p = (...) ->
 		output ..= dump(value, depth, true)
 	print output
 
-export d = (value, depth = 2) ->
+export debug = (value, depth = 2) ->
 	print dump(value, depth)

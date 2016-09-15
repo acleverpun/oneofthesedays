@@ -8,8 +8,8 @@ class Secs extends Class
 		@events = EventEmitter()
 		@systems = {}
 
-		if @onComponentAdd then @events\on('entity.component.added', @onComponentAdd)
-		if @onComponentRemove then @events\on('entity.component.removed', @onComponentRemove)
+		if @onComponentAdd then @events\on('entity.component.add', @onComponentAdd, @)
+		if @onComponentRemove then @events\on('entity.component.remove', @onComponentRemove, @)
 
 	addSystem: (system) =>
 		system.active = true
@@ -68,3 +68,7 @@ class Secs extends Class
 		for name, system in pairs(@systems)
 			if not system.draw or not system.active then continue
 			system\draw()
+
+	-- TODO: sync entities/systems as components change
+	onComponentAdd: (entity, key) =>
+	onComponentRemove: (entity, key) =>
