@@ -23,7 +23,7 @@ class System extends Class
 		@entities[entity.id] = nil
 		if @events then @events\emit('system.entity.remove', @, entity)
 
-	get: (entity) => @entities[entity] or @entities[entity.id]
+	get: (entity) => if entity then @entities[entity] or @entities[entity.id] else @entities
 	has: (entity) => not not @get(entity)
 
 	toggleActive: (...) =>
