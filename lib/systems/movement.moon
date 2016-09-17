@@ -4,7 +4,7 @@ Vector = require('lib/geo/vector')
 
 class MovementSystem extends System
 
-	requirements: { 'movable', 'position', 'shape' }
+	@criteria: System.Criteria({ 'movable', 'position', 'shape' })
 
 	new: (map) =>
 		super()

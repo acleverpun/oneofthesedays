@@ -3,6 +3,8 @@ Direction = require('lib/geo/direction')
 
 class PlayerControlSystem extends System
 
+	@criteria: System.Criteria({ 'isPlayer', 'controls', 'movable', 'position', 'animation' })
+
 	update: (dt) =>
 		for entity in *@entities
 			{ :controls, :movable, :position, :animation } = entity\get()
@@ -26,5 +28,3 @@ class PlayerControlSystem extends System
 						useDirection = -Direction\fromVector(col.normal)
 						if entity.direction == useDirection
 							col.other\onUse(entity, col)
-
-	requires: () => { 'isPlayer', 'controls', 'movable', 'position', 'animation' }
