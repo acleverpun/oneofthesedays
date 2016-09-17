@@ -3,21 +3,24 @@ Color = require('lib/display/color')
 
 class RenderSystem extends System
 
+	@criteria: System.Criteria({ 'shape', 'position' }, { 'animation', 'animationList', 'sprite' })
+
 	update: (dt) =>
 		-- for entity in *@entities.animated
-		-- 	{ :animation, :animationList } = entity\get()
-		-- 	direction = entity.direction.key
-		-- 	if animationList[direction] then animationList\set(direction)
-		-- 	animation.value\update(dt)
+		for entity in *@entities
+			{ :animation, :animationList } = entity\get()
+			direction = entity.direction.key
+			if animationList[direction] then animationList\set(direction)
+			animation.value\update(dt)
 
 	draw: () =>
-		-- targets = @entities
 		-- drawn = {}
 
-		-- for entity in *targets.animated
-		-- 	if drawn[entity] then continue
-		-- 	drawn[entity] = true
-		-- 	@drawSprite(entity)
+		-- for entity in *@entities.animated
+		for entity in *@entities
+			-- if drawn[entity] then continue
+			-- drawn[entity] = true
+			@drawSprite(entity)
 
 		-- for entity in *targets.sprites
 		-- 	if drawn[entity] then continue
@@ -49,8 +52,8 @@ class RenderSystem extends System
 			love.graphics.draw(sprite.image, sprite.quad, spritePosition.x, spritePosition.y, sprite.rotation, sprite.scale.x, sprite.scale.y)
 
 
-	requires: () => {
-		animated: { 'animation', 'animationList', 'shape', 'position' },
-		sprites: { 'sprite', 'shape', 'position' },
-		polygons: { 'shape', 'position' },
-	}
+	-- requires: () => {
+	-- 	animated: { 'animation', 'animationList', 'shape', 'position' },
+	-- 	sprites: { 'sprite', 'shape', 'position' },
+	-- 	polygons: { 'shape', 'position' },
+	-- }

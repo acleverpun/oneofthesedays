@@ -20,7 +20,7 @@ class System extends Class
 			if not entity.id then error 'Added entity has no id.'
 			if @entities[entity.id] then error 'Entity already present.'
 			@entities[entity.id] = entity
-			if @events then @events\emit('system.entity.add', @, entity)
+			if @events then @events\emit('system.entity.add', entity)
 
 	remove: (...) =>
 		entities = { ... }
@@ -28,7 +28,7 @@ class System extends Class
 			if not entity.id then error 'Added entity has no id.'
 			if not @entities[entity.id] then error 'Entity not present.'
 			@entities[entity.id] = nil
-			if @events then @events\emit('system.entity.remove', @, entity)
+			if @events then @events\emit('system.entity.remove', entity)
 
 	get: (entity) => if entity then @entities[entity] or @entities[entity.id] else @entities
 	has: (entity) => not not @get(entity)
