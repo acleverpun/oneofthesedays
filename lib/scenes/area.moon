@@ -149,4 +149,4 @@ class AreaScene extends Scene
 			position = eventPoint + @translation - Point(200, 150)
 
 			items, len = @world\queryPoint(position\toTuple())
-			if len > 0 then d items
+			if len > 0 then debug items

@@ -32,9 +32,7 @@ class System extends Class
 
 	get: (entity) => if entity then @entities[entity] or @entities[entity.id] else @entities
 	has: (entity) => not not @get(entity)
-
-	matches: (...) => @@criteria\matches(...)
-	involves: (...) => @@criteria\involves(...)
+	getCriteria: () => @@criteria
 
 	sync: (...) =>
 		entities = { ... }

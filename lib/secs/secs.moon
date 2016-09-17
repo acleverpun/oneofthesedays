@@ -14,7 +14,7 @@ class Secs extends Class
 	addSystem: (system) =>
 		system.active = true
 		system.events = @events
-		@systems[system.type] = system
+		@systems[system\getCriteria()] = system
 
 		for id, entity in pairs(@entities)
 			if system\matches(entity) then system\add(entity)
@@ -23,9 +23,9 @@ class Secs extends Class
 
 	removeSystem: (system) =>
 		system.events = nil
-		@systems[system.type] = nil
+		@systems[system\getCriteria()] = nil
 
-	getSystem: (system) => return @systems[system] or @systems[system.type]
+	getSystem: (system) => return @systems[system] or @systems[system\getCriteria()]
 	startSystem: (system) => @toggleSystem(system, true)
 	stopSystem: (system) => @toggleSystem(system, false)
 	toggleSystem: (system, active) =>
@@ -38,8 +38,8 @@ class Secs extends Class
 		entity.id = #@entities + 1
 		@entities[entity.id] = entity
 
-		for name, system in pairs(@systems)
-			if system\matches(entity) then system\add(entity)
+		for criteria, system in pairs(@systems)
+			if criteria\matches(entity) then system\add(entity)
 
 		entity\init()
 
@@ -47,20 +47,20 @@ class Secs extends Class
 		@entities[entity.id].events = nil
 		@entities[entity.id] = nil
 
-		for name, system in pairs(@systems)
+		for criteria, system in pairs(@systems)
 			if system\has(entity) then system\remove(entity)
 
 	-- Sync entities/systems as components change
 	updateComponent: (entity, component) =>
-		for name, system in pairs(@systems)
-			if system\involves(component) then system\sync(entity)
+		for criteria, system in pairs(@systems)
+			if criteria\involves(component) then system\sync(entity)
 
 	update: (dt) =>
-		for name, system in pairs(@systems)
+		for criteria, system in pairs(@systems)
 			if not system.update or not system.active then continue
 			system\update(dt)
 
 	draw: () =>
-		for name, system in pairs(@systems)
+		for criteria, system in pairs(@systems)
 			if not system.draw or not system.active then continue
 			system\draw()

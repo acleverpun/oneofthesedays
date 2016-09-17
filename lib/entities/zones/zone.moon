@@ -27,9 +27,9 @@ class Zone extends MyEntity
 				@entities[entity] = nil
 				return @onExit(entity, collision)
 
-	onTouch: (entity, collision) => -- p 'zone.touch'
-	onEnter: (entity, collision) => p 'zone.enter'
-	onWithin: (entity, collision) => -- p 'zone.within'
-	onLand: (entity, collision) => p 'zone.land'
-	onExit: (entity, collision) => p 'zone.exit'
-	onCross: (entity, collision) => p 'zone.cross'
+	onTouch: (entity, collision) => -- print 'zone.touch'
+	onEnter: (entity, collision) => print 'zone.enter'
+	onWithin: (entity, collision) => -- print 'zone.within'
+	onLand: (entity, collision) => print 'zone.land'
+	onExit: (entity, collision) => print 'zone.exit'
+	onCross: (entity, collision) => print 'zone.cross'
