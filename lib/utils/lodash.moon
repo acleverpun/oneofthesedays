@@ -92,21 +92,4 @@ _.kebabCase = (value) ->
 	value = string.gsub(value, '([a-z])([A-Z])', '%1-%2')
 	return _.lowerCase(value)
 
--- UTIL
-
----
- -- Returns true if the given value is considered a terminal value for traversal operations.
- -- Terminal values are as follows:
- -- - Any scalars (anything isScalar() returns true for)
- -- - Any non-plain objects, other than arrays
- --
- -- @method isTerminal
- -- @param {Mixed} value
- -- @return {Boolean}
- --
-_.isTerminal = (value) ->
-	if not value then return true
-	if value == nil then return true
-	return type(value) != 'table'
-
 return _

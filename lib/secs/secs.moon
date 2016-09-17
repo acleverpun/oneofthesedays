@@ -4,12 +4,12 @@ EventEmitter = require('lib/utils/event-emitter')
 class Secs extends Class
 
 	new: () =>
-		@entities = {}
 		@events = EventEmitter()
+		@entities = {}
 		@systems = {}
 
-		if @onComponentAdd then @events\on('entity.component.add', @onComponentAdd, @)
-		if @onComponentRemove then @events\on('entity.component.remove', @onComponentRemove, @)
+		if @onComponentAdd then @events\on('entity.component.add', @updateComponent, @)
+		if @onComponentRemove then @events\on('entity.component.remove', @updateComponent, @)
 
 	addSystem: (system) =>
 		system.active = true
@@ -17,12 +17,7 @@ class Secs extends Class
 		@systems[system.type] = system
 
 		for id, entity in pairs(@entities)
-			hasAllReqs = true
-			for req in *system.requirements
-				if not entity\has(req)
-					hasAllReqs = false
-					break
-			if hasAllReqs then system\add(entity)
+			if system\matches(entity) then system\add(entity)
 
 		system\init()
 
@@ -39,16 +34,12 @@ class Secs extends Class
 
 	addEntity: (entity) =>
 		entity.events = @events
+		-- TODO: address
 		entity.id = #@entities + 1
 		@entities[entity.id] = entity
 
 		for name, system in pairs(@systems)
-			hasAllReqs = true
-			for req in *system.requirements
-				if not entity\has(req)
-					hasAllReqs = false
-					break
-			if hasAllReqs then system\add(entity)
+			if system\matches(entity) then system\add(entity)
 
 		entity\init()
 
@@ -59,6 +50,11 @@ class Secs extends Class
 		for name, system in pairs(@systems)
 			if system\has(entity) then system\remove(entity)
 
+	-- Sync entities/systems as components change
+	updateComponent: (entity, component) =>
+		for name, system in pairs(@systems)
+			if system\involves(component) then system\sync(entity)
+
 	update: (dt) =>
 		for name, system in pairs(@systems)
 			if not system.update or not system.active then continue
@@ -68,7 +64,3 @@ class Secs extends Class
 		for name, system in pairs(@systems)
 			if not system.draw or not system.active then continue
 			system\draw()
-
-	-- TODO: sync entities/systems as components change
-	onComponentAdd: (entity, key) =>
-	onComponentRemove: (entity, key) =>
