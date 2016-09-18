@@ -1,7 +1,7 @@
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 wave = require('vendor/wave/wave')
 
-class Audio extends Class
+class Audio extends Caste
 
 	new: (@path, @type = 'stream') =>
 		@sound = wave\newSource(@path, @type)

@@ -1,6 +1,6 @@
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 
-class AnimationList extends Class
+class AnimationList extends Caste
 
 	current: 'default'
 

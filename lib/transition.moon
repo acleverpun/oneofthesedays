@@ -1,6 +1,6 @@
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 
-class Transition extends Class
+class Transition extends Caste
 
 	new: (@fromScene, @toScene, data = {}) =>
 		@player = data.player or @fromScene.player

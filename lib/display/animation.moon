@@ -1,8 +1,8 @@
 anim8 = require('vendor/anim8/anim8')
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 Vector = require('lib/geo/vector')
 
-class Animation extends Class
+class Animation extends Caste
 
 	@options: {
 		scale: Vector(1, 1),

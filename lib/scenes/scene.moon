@@ -1,11 +1,11 @@
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 scenes = require('vendor/hump/gamestate')
-Secs = require('lib/secs/secs')
+Secs = require('vendor/secs/lib/secs')
+EventEmitter = require('vendor/secs/lib/event-emitter')
 Transition = require('lib/transition')
-EventEmitter = require('lib/utils/event-emitter')
 DebugSystem = require('lib/systems/debug')
 
-class Scene extends Class
+class Scene extends Caste
 
 	new: () =>
 		@secs = Secs()

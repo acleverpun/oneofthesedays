@@ -1,4 +1,4 @@
-System = require('lib/secs/system')
+System = require('vendor/secs/lib/system')
 Direction = require('lib/geo/direction')
 Vector = require('lib/geo/vector')
 

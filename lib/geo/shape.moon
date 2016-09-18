@@ -1,5 +1,5 @@
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 
-class Shape extends Class
+class Shape extends Caste
 
 	new: (@width, @height) =>

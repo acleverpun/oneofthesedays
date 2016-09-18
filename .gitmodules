@@ -4,10 +4,6 @@
 [submodule "vendor/SUIT"]
 	path = vendor/SUIT
 	url = https://github.com/vrld/SUIT.git
-[submodule "vendor/lovetoys"]
-	path = vendor/lovetoys
-	url = https://github.com/rosshadden/lovetoys.git
-	branch = dev
 [submodule "vendor/tactile"]
 	path = vendor/tactile
 	url = https://github.com/tesselode/tactile.git
@@ -29,3 +25,9 @@
 [submodule "vendor/anim8"]
 	path = vendor/anim8
 	url = https://github.com/kikito/anim8.git
+[submodule "vendor/caste"]
+	path = vendor/caste
+	url = https://github.com/acleverpun/caste.git
+[submodule "vendor/secs"]
+	path = vendor/secs
+	url = https://github.com/acleverpun/secs.git

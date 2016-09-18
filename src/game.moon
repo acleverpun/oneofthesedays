@@ -1,7 +1,5 @@
 require('src/debug')
 export _ = require('lib/utils/lodash')
-lovetoys = require('vendor/lovetoys/lovetoys')
-lovetoys.initialize()
 
 scenes = require('vendor/hump/gamestate')
 TitleScene = require('lib/scenes/title')

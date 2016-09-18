@@ -1,5 +1,5 @@
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 
-class Struct extends Class
+class Struct extends Caste
 
 	-- TODO

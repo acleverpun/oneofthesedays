@@ -1,7 +1,7 @@
-Class = require('lib/class')
-Secs = require('lib/secs/secs')
+Caste = require('vendor/caste/lib/caste')
+Secs = require('vendor/secs/lib/secs')
 
-class MapLayer extends Class
+class MapLayer extends Caste
 
 	new: (@map, @name, index) =>
 		exists = false

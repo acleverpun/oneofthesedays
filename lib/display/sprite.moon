@@ -1,7 +1,7 @@
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 Vector = require('lib/geo/vector')
 
-class Sprite extends Class
+class Sprite extends Caste
 
 	new: (imagePath, offset, @shape, @scale = Vector(1, 1), @rotation = 0) =>
 		@image = love.graphics.newImage("assets/sprites/#{imagePath}")

@@ -1,4 +1,4 @@
-System = require('lib/secs/system')
+System = require('vendor/secs/lib/system')
 Color = require('lib/display/color')
 
 class DebugSystem extends System

@@ -1,5 +1,5 @@
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 
-class Movable extends Class
+class Movable extends Caste
 
 	new: (@speed, @runSpeed) =>

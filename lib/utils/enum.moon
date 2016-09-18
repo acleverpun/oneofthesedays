@@ -1,6 +1,6 @@
-Class = require('lib/class')
+Caste = require('vendor/caste/lib/caste')
 
-class Enum extends Class
+class Enum extends Caste
 
 	@add: (values) =>
 		unless _.isTable(values) then error 'Expected table.'
