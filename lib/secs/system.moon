@@ -44,6 +44,6 @@ class System extends Class
 
 	toggleActive: (...) =>
 		isActive = super(...)
-		if isActive and _.isFunction(@onEnable) then @onEnable()
-		elseif not isActive and _.isFunction(@onDisable) then @onDisable()
-		if _.isFunction(@onToggle) then @onToggle(isActive)
+		if isActive and type(@onEnable) == 'function' then @onEnable()
+		elseif not isActive and type(@onDisable) == 'function' then @onDisable()
+		if type(@onToggle) == 'function' then @onToggle(isActive)

@@ -34,7 +34,7 @@ class Entity extends Class
 
 	addMultiple: (components = {}) =>
 		for key, component in pairs(components)
-			if _.isNumber(key)
+			if type(key) == 'number'
 				@add(component)
 			else
 				@add(key, component)
