@@ -7,7 +7,7 @@ class PlayerControlSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :controls, :movable, :position, :animation } = entity\get()
+			{ :controls, :movable, :position, :animation, :collisions } = entity\get()
 
 			speed = movable.speed
 			if controls.run\isDown() then speed = movable.runSpeed
@@ -15,15 +15,16 @@ class PlayerControlSystem extends System
 			horizontal = controls.horizontal()
 			vertical = controls.vertical()
 			if horizontal != 0 or vertical != 0
-				movable.goal = position\clone()
-				movable.goal.x += speed * horizontal * dt
-				movable.goal.y += speed * vertical * dt
+				goal = position\clone()
+				goal.x += speed * horizontal * dt
+				goal.y += speed * vertical * dt
+				entity\set('goal', goal)
 				animation.value\resume()
 			else
 				animation.value\pause()
 
-			if controls.use\pressed() and movable.collisions
-				for col in *movable.collisions
+			if collisions and controls.use\pressed()
+				for col in *collisions
 					if col.type == 'slide' and _.isFunction(col.other.onUse)
 						useDirection = -Direction\fromVector(col.normal)
 						if entity.direction == useDirection

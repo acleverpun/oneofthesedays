@@ -4,7 +4,7 @@ Vector = require('lib/geo/vector')
 
 class MovementSystem extends System
 
-	@criteria: System.Criteria({ 'movable', 'position', 'shape' })
+	@criteria: System.Criteria({ 'goal', 'position', 'shape' })
 
 	new: (map) =>
 		super()
@@ -13,29 +13,25 @@ class MovementSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :movable, :position, :shape } = entity\get()
-
-			if not movable.goal then continue
-			goal = movable.goal
-			movable.goal = nil
+			{ :goal, :position, :shape } = entity\get()
 
 			goal.x = math.max(goal.x, 0)
 			goal.y = math.max(goal.y, 0)
 			goal.x = math.min(goal.x, @mapWidth - shape.width)
 			goal.y = math.min(goal.y, @mapHeight - shape.height)
 
-			entity.direction = Direction\fromVector(Vector(goal - position))
+			entity\set('direction', Direction\fromVector(Vector(goal - position)))
 
-			position.x, position.y, movable.collisions, num = entity.scene.world\move(entity, goal.x, goal.y, (other) =>
+			position.x, position.y, collisions, num = entity.scene.world\move(entity, goal.x, goal.y, (other) =>
 				if _.isFunction(other.collision) then return 'cross'
 				return 'slide'
 			)
 
-			for col in *movable.collisions
+			entity\set('collisions', collisions)
+			entity\remove('goal')
+
+			for col in *collisions
 				if col.type == 'cross' and _.isFunction(col.other.collision)
 					col.direction = Direction\fromVector(col.normal)
 					col.offset = position - col.other.data
 					col.other\collision(entity, col)
-
-	onAdd: (entity) =>
-		entity.direction = Direction.NONE
