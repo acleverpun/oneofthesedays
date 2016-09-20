@@ -26,6 +26,12 @@ class AreaScene extends Scene
 		for layer in *@map.layers
 			if layer.properties.hidden then layer.visible = false
 
+		@entityLayer = MapLayer(@map, '__entities', 'entities')
+		@entityLayer.secs\addSystem(RenderSystem())
+		@entityLayer.secs\addSystem(ControlSystem())
+		@entityLayer.secs\addSystem(PlayerControlSystem())
+		@entityLayer.secs\addSystem(MovementSystem(@map))
+
 	enter: (previous, @transition) =>
 		super(previous)
 
@@ -102,16 +108,10 @@ class AreaScene extends Scene
 
 		@addEntityToWorld(@player)
 
-		entityLayer = MapLayer(@map, '__entities', 'entities')
-		entityLayer.secs\addSystem(RenderSystem())
-		entityLayer.secs\addSystem(ControlSystem())
-		entityLayer.secs\addSystem(PlayerControlSystem())
-		entityLayer.secs\addSystem(MovementSystem(@map))
-		entityLayer.secs\addEntity(@player)
-
 	addEntityToWorld: (entity) =>
 		data = entity\getData()
 		@world\add(entity, data.x, data.y, data.width, data.height)
+		@entityLayer.secs\addEntity(entity)
 
 	update: (dt) =>
 		super(dt)
