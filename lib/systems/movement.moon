@@ -7,7 +7,6 @@ class MovementSystem extends System
 	@criteria: System.Criteria({ 'goal', 'position', 'shape' })
 
 	new: (map) =>
-		super()
 		@mapWidth = map.width * map.tilewidth
 		@mapHeight = map.height * map.tileheight
 

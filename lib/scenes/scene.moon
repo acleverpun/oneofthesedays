@@ -13,7 +13,6 @@ class Scene extends Caste
 		@scenes = scenes
 
 		@secs\addSystem(DebugSystem(@))
-		@secs\stopSystem(DebugSystem)
 
 	enter: (@previous) =>
 

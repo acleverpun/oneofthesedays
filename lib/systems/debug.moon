@@ -3,6 +3,7 @@ Color = require('lib/display/color')
 
 class DebugSystem extends System
 
+	active: false
 	x: 10
 
 	new: (@scene) =>
