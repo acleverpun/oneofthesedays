@@ -1,6 +1,6 @@
 inspect = require('vendor/inspect/inspect')
 
-dump = (value, depth, hideMeta = false) ->
+traverse = (value, depth, hideMeta = false) ->
 	output = ''
 	if _.isTable(value) and value.__class then output ..= "#{value.__class.__name}:"
 
@@ -16,8 +16,8 @@ export log = (...) ->
 	output = ''
 	for value in *args
 		if #output > 0 then output ..= '\t'
-		output ..= dump(value, depth, true)
+		output ..= traverse(value, depth, true)
 	print output
 
-export debug = (value, depth = 2) ->
-	print dump(value, depth)
+export dump = (value, depth = 2) ->
+	print traverse(value, depth)
