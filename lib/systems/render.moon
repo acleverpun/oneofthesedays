@@ -5,37 +5,30 @@ class RenderSystem extends System
 
 	@criteria: System.Criteria({ 'shape', 'position' }, { 'animation', 'animationList', 'sprite' })
 
+	new: () =>
+		@animatedEntities = {}
+
 	update: (dt) =>
-		-- for entity in *@entities.animated
-		for entity in *@entities
+		for entity in *@animatedEntities
 			{ :animation, :animationList, :direction } = entity\get()
 			directionKey = if direction then direction.key else 'NONE'
 			if animationList[directionKey] then animationList\set(directionKey)
 			animation.value\update(dt)
 
 	draw: () =>
-		-- drawn = {}
-
-		-- for entity in *@entities.animated
 		for entity in *@entities
-			-- if drawn[entity] then continue
-			-- drawn[entity] = true
-			@drawSprite(entity)
+			if entity\has('sprite') or entity\has('animation', 'animationList')
+				@drawSprite(entity)
+			else
+				@drawPolygon(entity)
 
-		-- for entity in *targets.sprites
-		-- 	if drawn[entity] then continue
-		-- 	drawn[entity] = true
-		-- 	@drawSprite(entity)
-
-		-- for entity in *targets.polygons
-		-- 	if drawn[entity] then continue
-		-- 	drawn[entity] = true
-		-- 	{ :shape, :position, :color } = entity\get()
-		-- 	if not color then color = Color(255, 0, 0)
-		-- 	r, g, b, a = love.graphics.getColor()
-		-- 	love.graphics.setColor(color)
-		-- 	love.graphics.rectangle('fill', position.x, position.y, shape.width, shape.height)
-		-- 	love.graphics.setColor(r, g, b, a)
+	drawPolygon: (entity) =>
+		{ :shape, :position, :color } = entity\get()
+		if not color then color = Color(255, 0, 0)
+		r, g, b, a = love.graphics.getColor()
+		love.graphics.setColor(color)
+		love.graphics.rectangle('fill', position.x, position.y, shape.width, shape.height)
+		love.graphics.setColor(r, g, b, a)
 
 	drawSprite: (entity) =>
 		{ :sprite, :animation, :shape, :position } = entity\get()
@@ -51,9 +44,11 @@ class RenderSystem extends System
 		else
 			love.graphics.draw(sprite.image, sprite.quad, spritePosition.x, spritePosition.y, sprite.rotation, sprite.scale.x, sprite.scale.y)
 
+	onAdd: (entity) =>
+		if entity\has('animation', 'animationList')
+			table.insert(@animatedEntities, entity)
 
-	-- requires: () => {
-	-- 	animated: { 'animation', 'animationList', 'shape', 'position' },
-	-- 	sprites: { 'sprite', 'shape', 'position' },
-	-- 	polygons: { 'shape', 'position' },
-	-- }
+	onRemove: (entity) =>
+		if entity\has('animation', 'animationList')
+			for e = 1, #@animatedEntities
+				if @animatedEntities[e] == entity then table.remove(@animatedEntities, e)
