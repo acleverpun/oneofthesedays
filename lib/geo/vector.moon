@@ -11,7 +11,7 @@ class Vector extends Caste
 
 		if _.isTable(x)
 			if x.x or x.y
-				-- @param {Table{/[xy]/ => Number}}
+				-- @param {Table{/(x|y)/ => Number}}
 				@x = x.x
 				@y = x.y
 			elseif x[1] or x[2]

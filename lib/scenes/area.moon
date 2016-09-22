@@ -9,7 +9,7 @@ ControlSystem = require('lib/systems/control')
 PlayerControlSystem = require('lib/systems/player-control')
 MovementSystem = require('lib/systems/movement')
 Color = require('lib/display/color')
-Point = require('lib/geo/point')
+Vector = require('lib/geo/vector')
 Direction = require('lib/geo/direction')
 
 class AreaScene extends Scene
@@ -120,7 +120,7 @@ class AreaScene extends Scene
 		@windowHeight = love.graphics.getHeight()
 		tx = math.floor(@player.position.x - @windowWidth / @scale / 2)
 		ty = math.floor(@player.position.y - @windowHeight / @scale / 2)
-		@translation = Point(tx, ty)
+		@translation = Vector(tx, ty)
 
 	draw: () =>
 		love.graphics.push()
@@ -144,9 +144,9 @@ class AreaScene extends Scene
 
 	mousepressed: (x, y, button) =>
 		if @DEBUG and button == 2
-			eventPoint = Point(x, y)
+			eventPosition = Vector(x, y)
 			-- TODO: Make work not just for player
-			position = eventPoint + @translation - Point(200, 150)
+			position = eventPosition + @translation - Vector(200, 150)
 
 			items, len = @world\queryPoint(position\toTuple())
 			if len > 0 then debug items

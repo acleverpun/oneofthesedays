@@ -1,17 +1,12 @@
 bump = require('vendor/bump/bump')
 MyEntity = require('lib/entities/my-entity')
-Point = require('lib/geo/point')
 
 class Zone extends MyEntity
 
 	entities: {}
 
-	new: (...) =>
-		super(...)
-		@add(Point(@data.x, @data.y))
-
 	isEntityWithin: (entity) =>
-		bump.rect.containsPoint(@data.x, @data.y, @data.width, @data.height, entity\getCenter()\toTuple())
+		bump.rect.containsPoint(@position.x, @position.y, @shape.width, @shape.height, entity\getCenter()\toTuple())
 
 	collision: (entity, collision) =>
 		-- TODO: Why is all this collision handling here? Where should it be?
