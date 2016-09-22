@@ -27,7 +27,7 @@ class Vector extends Caste
 	getLength: () => math.sqrt(@x^2 + @y^2)
 
 	normalize: (length) =>
-		normalized = @normalize(@, length)
+		normalized = @@normalize(@, length)
 		@x = normalized.x
 		@y = normalized.y
 

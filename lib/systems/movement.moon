@@ -19,7 +19,7 @@ class MovementSystem extends System
 			goal.x = math.min(goal.x, @mapWidth - shape.width)
 			goal.y = math.min(goal.y, @mapHeight - shape.height)
 
-			entity\set('direction', Direction\fromVector(Vector(goal - position)))
+			entity\set('direction', Direction(goal - position))
 
 			position.x, position.y, collisions, num = entity.scene.world\move(entity, goal.x, goal.y, (other) =>
 				if _.isFunction(other.collision) then return 'cross'
