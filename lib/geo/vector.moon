@@ -1,4 +1,6 @@
-class Vector
+Caste = require('vendor/caste/lib/caste')
+
+class Vector extends Caste
 
 	new: (x, y) =>
 		-- @param {Vector}
@@ -24,13 +26,17 @@ class Vector
 
 	getLength: () => math.sqrt(@x^2 + @y^2)
 
+	normalize: (length) =>
+		normalized = @normalize(@, length)
+		@x = normalized.x
+		@y = normalized.y
+
 	clone: () => @@(@x, @y)
 
+	__tostring: () => "Vector(#{@x}, #{@y})##{@getLength()}"
 	toTuple: () => @x, @y, @getLength()
 	toArray: () => { @x, @y }
 	toTable: () => { x: @x, y: @y, length: @getLength() }
-
-	__tostring: () => "Vector(#{@x}, #{@y})##{@getLength()}"
 
 	__eq: (other) => @x == other.x and @y == other.y
 	__le: (other) => @x <= other.x and @y <= other.y
