@@ -26,6 +26,6 @@ class PlayerControlSystem extends System
 			if collisions and controls.use\pressed()
 				for col in *collisions
 					if col.type == 'slide' and _.isFunction(col.other.onUse)
-						useDirection = -Direction\fromVector(col.normal)
+						useDirection = -Direction(col.normal)
 						if entity.direction == useDirection
 							col.other\onUse(entity, col)

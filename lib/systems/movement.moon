@@ -1,6 +1,5 @@
 System = require('vendor/secs/lib/system')
 Direction = require('lib/geo/direction')
-Vector = require('lib/geo/vector')
 
 class MovementSystem extends System
 
@@ -19,6 +18,7 @@ class MovementSystem extends System
 			goal.x = math.min(goal.x, @mapWidth - shape.width)
 			goal.y = math.min(goal.y, @mapHeight - shape.height)
 
+			-- TODO: don't create a direction every frame
 			entity\set('direction', Direction(goal - position))
 
 			position.x, position.y, collisions, num = entity.scene.world\move(entity, goal.x, goal.y, (other) =>
@@ -31,6 +31,6 @@ class MovementSystem extends System
 
 			for col in *collisions
 				if col.type == 'cross' and _.isFunction(col.other.collision)
-					col.direction = Direction\fromVector(col.normal)
+					col.direction = Direction(col.normal)
 					col.offset = position - col.other.data
 					col.other\collision(entity, col)

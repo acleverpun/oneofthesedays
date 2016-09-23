@@ -33,7 +33,7 @@ class Vector extends Caste
 
 	clone: () => @@(@x, @y)
 
-	__tostring: () => "Vector(#{@x}, #{@y})##{@getLength()}"
+	__tostring: () => "#{@@name}(#{@x}, #{@y})##{@getLength()}"
 	toTuple: () => @x, @y, @getLength()
 	toArray: () => { @x, @y }
 	toTable: () => { x: @x, y: @y, length: @getLength() }

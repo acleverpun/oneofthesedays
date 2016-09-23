@@ -10,7 +10,7 @@ class Enum extends Caste
 		if not _.isTable(values) then error 'Expected table.'
 
 		for key, value in pairs(values)
-			if _.isNumber(key) then key = value
+			value.key = key
 			@[key] = value
 			@[value] = value
 			_.push(@keys, key)
