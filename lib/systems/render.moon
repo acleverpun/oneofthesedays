@@ -1,5 +1,6 @@
 System = require('vendor/secs/lib/system')
 Color = require('lib/display/color')
+Direction = require('lib/geo/direction')
 
 class RenderSystem extends System
 
@@ -10,8 +11,8 @@ class RenderSystem extends System
 
 	update: (dt) =>
 		for entity in *@animatedEntities
-			{ :animation, :animationList, :direction } = entity\get()
-			heading = if direction then direction\getHeading() else 'NONE'
+			{ :animation, :animationList, :velocity } = entity\get()
+			heading = Direction\getHeading(velocity)
 			if animationList[heading] then animationList\set(heading)
 			animation.value\update(dt)
 

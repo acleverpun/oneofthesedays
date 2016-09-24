@@ -3,7 +3,7 @@ Direction = require('lib/geo/direction')
 
 class MovementSystem extends System
 
-	@criteria: System.Criteria({ 'goal', 'position', 'shape' })
+	@criteria: System.Criteria({ 'velocity', 'position', 'shape' })
 
 	new: (map) =>
 		@mapWidth = map.width * map.tilewidth
@@ -11,15 +11,12 @@ class MovementSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :goal, :position, :shape } = entity\get()
+			{ :velocity, :position, :shape } = entity\get()
 
-			goal.x = math.max(goal.x, 0)
-			goal.y = math.max(goal.y, 0)
-			goal.x = math.min(goal.x, @mapWidth - shape.width)
-			goal.y = math.min(goal.y, @mapHeight - shape.height)
-
-			-- TODO: don't create a direction every frame
-			entity\set('direction', Direction(goal - position))
+			-- TODO: don't create a vector every frame, but call `position\add`
+			goal = velocity + position
+			goal.x = math.min(math.max(goal.x, 0), @mapWidth - shape.width)
+			goal.y = math.min(math.max(goal.y, 0), @mapHeight - shape.height)
 
 			position.x, position.y, collisions, num = entity.scene.world\move(entity, goal.x, goal.y, (other) =>
 				if _.isFunction(other.collision) then return 'cross'
@@ -27,7 +24,7 @@ class MovementSystem extends System
 			)
 
 			entity\set('collisions', collisions)
-			entity\remove('goal')
+			entity\remove('velocity')
 
 			for col in *collisions
 				if col.type == 'cross' and _.isFunction(col.other.collision)

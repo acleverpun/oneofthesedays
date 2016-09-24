@@ -1,5 +1,6 @@
 System = require('vendor/secs/lib/system')
 Color = require('lib/display/color')
+Direction = require('lib/geo/direction')
 
 class DebugSystem extends System
 
@@ -22,7 +23,7 @@ class DebugSystem extends System
 			x = math.floor(player.position.x)
 			y = math.floor(player.position.y)
 			@debug('position', "#{x}, #{y}")
-			if player.direction then @debug('direction', "#{player.direction\getHeading()}")
+			if player.velocity then @debug('direction', "#{Direction\getHeading(player.velocity)}")
 			@debug('animation', "#{player.animationList.current}")
 
 	debug: (key, value) =>

@@ -1,4 +1,5 @@
 System = require('vendor/secs/lib/system')
+Vector = require('lib/geo/vector')
 Direction = require('lib/geo/direction')
 
 class PlayerControlSystem extends System
@@ -15,10 +16,8 @@ class PlayerControlSystem extends System
 			horizontal = controls.horizontal()
 			vertical = controls.vertical()
 			if horizontal != 0 or vertical != 0
-				goal = position\clone()
-				goal.x += speed * horizontal * dt
-				goal.y += speed * vertical * dt
-				entity\set('goal', goal)
+				velocity = Vector(speed * horizontal * dt, speed * vertical * dt)
+				entity\set('velocity', velocity)
 				animation.value\resume()
 			else
 				animation.value\pause()
