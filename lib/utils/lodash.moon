@@ -23,6 +23,12 @@ _.isPlainTable = (value) ->
 _.isInstance = (value) -> not not value.isInstance
 _.isClass = (value) -> not not value.isClass
 
+-- MATH
+
+_.round = (value, precision) ->
+	factor = 10^(precision or 0)
+	return math.floor(value * factor + 0.5) / factor
+
 -- OBJECT
 
 ---

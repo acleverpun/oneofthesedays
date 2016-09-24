@@ -11,6 +11,15 @@ class Direction extends Vector
 		super(x, y)
 		-- @normalize()
 
+	getHeading: (allowIntermediate = false) =>
+		if @x == 0 and @y == 0 then return @@NONE
+		angle = math.atan2(@y, @x)
+		octants = if allowIntermediate then 8 else 4
+		octant = _.round(octants * angle / (2 * math.pi) + octants) % octants
+		if octants == 4 then octant *= 2
+		octant += 1
+		return @@headings[octant]
+
 	toVector: () => Vector(@x, @y)
 
 moon.mixin(Direction, Enum, {
@@ -24,5 +33,7 @@ moon.mixin(Direction, Enum, {
 	SOUTH_EAST: Direction(1, 1),
 	NONE: Direction(0, 0)
 })
+
+Direction.headings = { 'EAST', 'SOUTH_EAST', 'SOUTH', 'SOUTH_WEST', 'WEST', 'NORTH_WEST', 'NORTH', 'NORTH_EAST' }
 
 return Direction

@@ -11,8 +11,8 @@ class RenderSystem extends System
 	update: (dt) =>
 		for entity in *@animatedEntities
 			{ :animation, :animationList, :direction } = entity\get()
-			bearing = if direction then direction\getBearing() else 'NONE'
-			if animationList[bearing] then animationList\set(bearing)
+			heading = if direction then direction\getHeading() else 'NONE'
+			if animationList[heading] then animationList\set(heading)
 			animation.value\update(dt)
 
 	draw: () =>
