@@ -13,7 +13,7 @@ class MyEntity extends Entity
 		})
 
 	-- TODO: move to Vector class? Or somewhere? wtf even is it
-	-- TODO: rename.exe
+	-- TODO: rename.exe, maybe getEdge?
 	getPoint: (direction) =>
 		if not direction then return @position
 
