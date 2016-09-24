@@ -24,7 +24,6 @@ class MovementSystem extends System
 			)
 
 			entity\set('collisions', collisions)
-			entity\remove('velocity')
 
 			for col in *collisions
 				if col.type == 'cross' and _.isFunction(col.other.collision)
