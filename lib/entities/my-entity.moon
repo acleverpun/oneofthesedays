@@ -12,20 +12,25 @@ class MyEntity extends Entity
 			Shape(@data)
 		})
 
-	-- TODO: move to Vector class? Or somewhere? wtf even is it
-	-- TODO: rename.exe, maybe getEdge?
+	---
+	-- Returns a point found on the entity
+	--
+	-- @method getPoint
+	-- @param {StdDirection} [direction] - Use the point at the specified direction.
+	-- @return {Point}
+	--
 	getPoint: (direction) =>
 		if not direction then return @position
 
 		{ :x, :y } = @position
 		{ :width, :height } = @data
 
-		if direction == Direction.NORTH then return Vector(nil, y)
-		if direction == Direction.SOUTH then return Vector(nil, y + height)
-		if direction == Direction.EAST then return Vector(x + width, nil)
-		if direction == Direction.WEST then return Vector(x, nil)
+		if direction.x == 0 then x = x + width / 2
+		elseif direction.x == 1 then x = x + width
+		if direction.y == 0 then y = y + height / 2
+		elseif direction.y == 1 then y = y + height
 
-		assert false
+		return Vector(x, y)
 
 	getCenter: () =>
 		{ :width, :height } = @shape

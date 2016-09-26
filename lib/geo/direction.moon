@@ -13,6 +13,15 @@ class Direction extends Vector
 
 	toVector: () => Vector(@x, @y)
 
+	---
+	-- Gets the closest heading for a vector
+	--
+	-- @method getHeading
+	-- @static
+	-- @param {Vector} vector
+	-- @param {Boolean} [allowIntermediate=false] - Whether to return intermediate headings
+	-- @return {StdDirection}
+	--
 	@getHeading: (vector, allowIntermediate = false) =>
 		if not vector or vector.x == 0 and vector.y == 0 then return @NONE
 		angle = math.atan2(vector.y, vector.x)
@@ -21,6 +30,19 @@ class Direction extends Vector
 		if octants == 4 then octant *= 2
 		octant += 1
 		return @headings[octant]
+
+	---
+	-- Aligns a vector to the closest standard heading
+	--
+	-- @method align
+	-- @static
+	-- @param {Vector} vector
+	-- @param {Boolean} [allowIntermediate=false] - Whether to return intermediate headings
+	-- @return {Vector} - A new vector with the same magnitude, but aligned to a standard direction
+	--
+	@align: (vector, allowIntermediate = false) =>
+		heading = @getHeading(vector, allowIntermediate)
+		return Vector(heading, vector\getLength())
 
 moon.mixin(Direction, Enum, {
 	NORTH: Direction(0, -1),
