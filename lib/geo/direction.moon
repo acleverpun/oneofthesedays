@@ -37,6 +37,19 @@ class Direction extends Vector
 		heading = @getHeading(vector, allowIntermediate)
 		return Vector(heading, vector\getLength())
 
+	---
+	-- Returns whether a vector is a standard direction
+	--
+	-- @method isStandard
+	-- @static
+	-- @param {Vector} vector
+	-- @return {Boolean}
+	--
+	@isStandard: (vector) =>
+		absX = math.abs(vector.x)
+		absY = math.abs(vector.y)
+		return (absX == 1 or absX == 0) and (absY == 1 or absY == 0)
+
 	new: (x, y) =>
 		-- @param {String}
 		if _.isString(x)
