@@ -4,14 +4,7 @@ Vector = require('lib/geo/vector')
 
 class Direction extends Vector
 
-	new: (x, y) =>
-		-- @param {Vector}
-		if _.isTable(x) then y = 1
-
-		super(x, y)
-		-- @normalize()
-
-	toVector: () => Vector(@x, @y)
+	@headings: { 'EAST', 'SOUTH_EAST', 'SOUTH', 'SOUTH_WEST', 'WEST', 'NORTH_WEST', 'NORTH', 'NORTH_EAST' }
 
 	---
 	-- Gets the closest heading for a vector
@@ -23,7 +16,7 @@ class Direction extends Vector
 	-- @return {StdDirection}
 	--
 	@getHeading: (vector, allowIntermediate = false) =>
-		if not vector or vector.x == 0 and vector.y == 0 then return @NONE
+		if not vector or vector.x == 0 and vector.y == 0 then return 'NONE'
 		angle = math.atan2(vector.y, vector.x)
 		octants = if allowIntermediate then 8 else 4
 		octant = _.round(octants * angle / (2 * math.pi) + octants) % octants
@@ -44,6 +37,21 @@ class Direction extends Vector
 		heading = @getHeading(vector, allowIntermediate)
 		return Vector(heading, vector\getLength())
 
+	new: (x, y) =>
+		-- @param {String}
+		if _.isString(x)
+			direction = @@[x]
+			x = direction.x
+			y = direction.y
+
+		-- @param {Vector}
+		if _.isTable(x) then y = 1
+
+		super(x, y)
+		-- @normalize()
+
+	toVector: () => Vector(@x, @y)
+
 moon.mixin(Direction, Enum, {
 	NORTH: Direction(0, -1),
 	SOUTH: Direction(0, 1),
@@ -55,7 +63,5 @@ moon.mixin(Direction, Enum, {
 	SOUTH_EAST: Direction(1, 1),
 	NONE: Direction(0, 0)
 })
-
-Direction.headings = { 'EAST', 'SOUTH_EAST', 'SOUTH', 'SOUTH_WEST', 'WEST', 'NORTH_WEST', 'NORTH', 'NORTH_EAST' }
 
 return Direction

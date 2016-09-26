@@ -6,5 +6,5 @@ class Sign extends MyEntity
 		super(...)
 		@text = @data.properties.text
 
-	onUse: (entity, col) =>
+	onUse: (entity) =>
 		print "Sign: #{@text}"

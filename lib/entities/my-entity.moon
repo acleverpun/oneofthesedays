@@ -21,6 +21,7 @@ class MyEntity extends Entity
 	--
 	getPoint: (direction) =>
 		if not direction then return @position
+		if _.isString(direction) then direction = Direction[direction]
 
 		{ :x, :y } = @position
 		{ :width, :height } = @data

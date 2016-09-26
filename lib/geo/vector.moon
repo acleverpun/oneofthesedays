@@ -2,6 +2,12 @@ Caste = require('vendor/caste/lib/caste')
 
 class Vector extends Caste
 
+	-- Return vector of specified length
+	@normalize: (vector, length = 1) =>
+		normalized = vector / vector\getLength()
+		if length != 1 then normalized *= length
+		return normalized
+
 	new: (x, y) =>
 		-- @param {Vector}
 		-- @param {Number}
@@ -34,7 +40,7 @@ class Vector extends Caste
 	clone: () => @@(@x, @y)
 
 	__tostring: () => "#{@@name}(#{@x}, #{@y})##{@getLength()}"
-	toTuple: () => @x, @y, @getLength()
+	toTuple: () => @x, @y
 	toArray: () => { @x, @y }
 	toTable: () => { x: @x, y: @y, length: @getLength() }
 
@@ -53,9 +59,3 @@ class Vector extends Caste
 		if _.isNumber(other) then return @@(@x / other, @y / other)
 		-- cross product
 		-- TODO
-
-	-- Return vector of specified length
-	@normalize: (vector, length = 1) =>
-		normalized = vector / vector\getLength()
-		if length != 1 then normalized *= length
-		return normalized

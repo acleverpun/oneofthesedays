@@ -5,7 +5,7 @@ class MovementSystem extends System
 
 	@criteria: System.Criteria({ 'velocity', 'position', 'shape' })
 
-	new: (map) =>
+	new: (@world, map) =>
 		@mapWidth = map.width * map.tilewidth
 		@mapHeight = map.height * map.tileheight
 
@@ -13,18 +13,27 @@ class MovementSystem extends System
 		for entity in *@entities
 			{ :velocity, :position, :shape } = entity\get()
 
-			-- TODO: don't create a vector every frame, but call `position\add`
-			goal = velocity + position
-			goal.x = math.min(math.max(goal.x, 0), @mapWidth - shape.width)
-			goal.y = math.min(math.max(goal.y, 0), @mapHeight - shape.height)
+			-- Set heading
+			heading = Direction\getHeading(velocity)
+			if heading != 'NONE' then entity\set('heading', heading)
 
-			position.x, position.y, collisions, num = entity.scene.world\move(entity, goal.x, goal.y, (other) =>
+			-- Determine course
+			-- TODO: don't create a vector every frame, but call `position\add`
+			course = position + velocity
+			course.x = math.min(math.max(course.x, 0), @mapWidth - shape.width)
+			course.y = math.min(math.max(course.y, 0), @mapHeight - shape.height)
+
+			-- Attempt to move entity
+			position.x, position.y, collisions, num = @world\move(entity, course.x, course.y, (other) =>
 				if _.isFunction(other.collision) then return 'cross'
 				return 'slide'
 			)
 
+			-- Set collisions encountered
 			entity\set('collisions', collisions)
 
+			-- Handle collisions
+			-- TODO: breakout.exe
 			for col in *collisions
 				if col.type == 'cross' and _.isFunction(col.other.collision)
 					col.direction = Direction(col.normal)

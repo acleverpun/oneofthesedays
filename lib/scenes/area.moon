@@ -29,8 +29,8 @@ class AreaScene extends Scene
 		@entityLayer = MapLayer(@map, '__entities', 'entities')
 		@entityLayer.secs\addSystem(RenderSystem())
 		@entityLayer.secs\addSystem(ControlSystem())
-		@entityLayer.secs\addSystem(PlayerControlSystem())
-		@entityLayer.secs\addSystem(MovementSystem(@map))
+		@entityLayer.secs\addSystem(PlayerControlSystem(@world))
+		@entityLayer.secs\addSystem(MovementSystem(@world, @map))
 
 	enter: (previous, @transition) =>
 		super(previous)
@@ -149,4 +149,4 @@ class AreaScene extends Scene
 			position = eventPosition + @translation - Vector(200, 150)
 
 			items, len = @world\queryPoint(position\toTuple())
-			if len > 0 then debug items
+			if len > 0 then dump items

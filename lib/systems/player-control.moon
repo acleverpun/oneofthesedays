@@ -6,9 +6,11 @@ class PlayerControlSystem extends System
 
 	@criteria: System.Criteria({ 'isPlayer', 'controls', 'movable', 'position', 'animation' })
 
+	new: (@world) =>
+
 	update: (dt) =>
 		for entity in *@entities
-			{ :controls, :velocity, :movable, :position, :animation, :collisions } = entity\get()
+			{ :controls, :velocity, :movable, :position, :animation, :collisions, :heading } = entity\get()
 
 			speed = movable.speed
 			if controls.run\isDown() then speed = movable.runSpeed
@@ -25,8 +27,10 @@ class PlayerControlSystem extends System
 					velocity.y = 0
 				animation.value\pause()
 
-			if collisions and controls.use\pressed()
-				for col in *collisions
-					if col.type == 'slide' and _.isFunction(col.other.onUse)
-						if -Direction(col.normal) == Direction(entity.velocity)
-							col.other\onUse(entity, col)
+			if heading and controls.use\pressed()
+				direction = Direction[heading]
+				point = entity\getPoint(direction) + direction
+				items = @world\queryPoint(point.x, point.y)
+				for item in *items
+					if _.isFunction(item.onUse)
+						item\onUse(entity)
