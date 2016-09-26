@@ -4,21 +4,21 @@ Direction = require('lib/geo/direction')
 
 class PlayerControlSystem extends System
 
-	@criteria: System.Criteria({ 'isPlayer', 'controls', 'movable', 'position', 'animation' })
+	@criteria: System.Criteria({ 'isPlayer', 'controls', 'position', 'animation', 'speed' })
 
 	new: (@world) =>
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :controls, :velocity, :movable, :position, :animation, :collisions, :heading } = entity\get()
+			{ :controls, :velocity, :position, :animation, :collisions, :speed, :heading } = entity\get()
 
-			speed = movable.speed
-			if controls.run\isDown() then speed = movable.runSpeed
+			maxSpeed = speed.value
+			if controls.run\isDown() then maxSpeed = speed.run
 
 			horizontal = controls.horizontal()
 			vertical = controls.vertical()
 			if horizontal != 0 or vertical != 0
-				newVelocity = Vector(speed * horizontal * dt, speed * vertical * dt)
+				newVelocity = Vector(maxSpeed * horizontal * dt, maxSpeed * vertical * dt)
 				entity\set('velocity', newVelocity)
 				animation.value\resume()
 			else
