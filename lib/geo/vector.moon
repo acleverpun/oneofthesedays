@@ -2,12 +2,22 @@ Caste = require('vendor/caste/lib/caste')
 
 class Vector extends Caste
 
-	-- Return vector of specified length
-	@normalize: (vector, length = 1) =>
-		if not _.isFunction(vector.getLength) then vector = Vector(vector)
-		normalized = vector / vector\getLength()
-		if length != 1 then normalized *= length
-		return normalized
+	-- Return normalized vector
+	@normalize: (vector) =>
+		return vector / vector\getLength()
+
+	-- Return vector scaled to a specified length
+	@scale: (vector, length = 1) =>
+		vector = @normalize(vector)
+		if length != 1 then vector *= length
+		return vector
+
+	-- Return vector of max length
+	@truncate: (vector, length = 1) =>
+		if vector\getLength() <= length then return vector
+		vector = @normalize(vector)
+		if length != 1 then vector *= length
+		return truncated
 
 	new: (x, y) =>
 		-- @param {Vector}
@@ -33,8 +43,8 @@ class Vector extends Caste
 
 	getLength: () => math.sqrt(@x^2 + @y^2)
 
-	normalize: (length) =>
-		normalized = @@normalize(@, length)
+	normalize: () =>
+		normalized = @@normalize(@)
 		@x = normalized.x
 		@y = normalized.y
 
