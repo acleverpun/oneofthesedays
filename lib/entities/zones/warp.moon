@@ -9,7 +9,7 @@ class Warp extends Zone
 
 	enter: (entity, collision) =>
 		-- TODO: Move some of this logic to Transition
-		{ :map } = @data.properties
+		{ :map } = @tile.properties
 		if not map then map = @scene.previous.mapName
 
 		-- TODO: Wat?

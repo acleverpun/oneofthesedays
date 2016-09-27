@@ -4,5 +4,5 @@ class Door extends Warp
 
 	getTransitionData: (collision) =>
 		transitionData = super(collision)
-		transitionData.toWarp = @data.properties.door
+		transitionData.toWarp = @tile.properties.door
 		return transitionData

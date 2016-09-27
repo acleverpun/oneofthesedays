@@ -37,5 +37,5 @@ class MovementSystem extends System
 			for col in *collisions
 				if col.type == 'cross' and _.isFunction(col.other.collision)
 					col.direction = Direction(col.normal)
-					col.offset = position - col.other.data
+					col.offset = position - col.other.position
 					col.other\collision(entity, col)

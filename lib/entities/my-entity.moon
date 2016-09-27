@@ -2,14 +2,16 @@ Entity = require('vendor/secs/lib/entity')
 Shape = require('lib/geo/shape')
 Vector = require('lib/geo/vector')
 Direction = require('lib/geo/direction')
+Tile = require('lib/geo/tile')
 
 class MyEntity extends Entity
 
-	new: (@scene, @data) =>
+	new: (@scene, data) =>
 		super({
 			["is#{@@name}"]: true,
-			position: Vector(@data),
-			Shape(@data)
+			position: Vector(data),
+			Shape(data),
+			Tile(data)
 		})
 
 	---
@@ -24,7 +26,7 @@ class MyEntity extends Entity
 		if _.isString(direction) then direction = Direction[direction]
 
 		{ :x, :y } = @position
-		{ :width, :height } = @data
+		{ :width, :height } = @shape
 
 		if direction.x == 0 then x = x + width / 2
 		elseif direction.x == 1 then x = x + width

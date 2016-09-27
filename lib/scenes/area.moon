@@ -80,7 +80,7 @@ class AreaScene extends Scene
 				warp = doors[1]
 				if playerExists and not @transition.toWarp and @transition.fromScene.transition
 					originalDoor = @transition.fromScene.transition.fromWarp
-					if originalDoor then @transition.toWarp = originalDoor.data.id
+					if originalDoor then @transition.toWarp = originalDoor.tile.id
 				if @transition.toWarp
 					warp = _.find(doors, (door) -> _.includes({ door.name, door.id }, @transition.toWarp))
 					if not warp then warp = doors[1]
@@ -95,8 +95,8 @@ class AreaScene extends Scene
 				if toPosition.y then @player.position.y = toPosition.y
 			-- Handle door offsets
 			if @transition.offset and @transition.fromWarp
-				doorScaleWidth = warp.width / @transition.fromWarp.data.width
-				doorScaleHeight = warp.height / @transition.fromWarp.data.height
+				doorScaleWidth = warp.width / @transition.fromWarp.shape.width
+				doorScaleHeight = warp.height / @transition.fromWarp.shape.height
 				if @transition.offset.x then @player.position.x += @transition.offset.x * doorScaleWidth
 				if @transition.offset.y then @player.position.y += @transition.offset.y * doorScaleHeight
 			-- Handle direction
@@ -109,8 +109,8 @@ class AreaScene extends Scene
 		@addEntityToWorld(@player)
 
 	addEntityToWorld: (entity) =>
-		data = entity\getData()
-		@world\add(entity, data.x, data.y, data.width, data.height)
+		{ :position, :shape } = entity\get()
+		@world\add(entity, position.x, position.y, shape.width, shape.height)
 		@entityLayer.secs\addEntity(entity)
 
 	update: (dt) =>
