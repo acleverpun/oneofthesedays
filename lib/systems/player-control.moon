@@ -10,7 +10,7 @@ class PlayerControlSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :controls, :velocity, :position, :animation, :collisions, :speed, :heading } = entity\get()
+			{ :controls, :velocity, :position, :animation, :speed, :heading } = entity\get()
 
 			maxSpeed = speed.value
 			if controls.run\isDown() then maxSpeed = speed.run
@@ -18,7 +18,7 @@ class PlayerControlSystem extends System
 			horizontal = controls.horizontal()
 			vertical = controls.vertical()
 			if horizontal != 0 or vertical != 0
-				newVelocity = Vector(maxSpeed * horizontal * dt, maxSpeed * vertical * dt)
+				newVelocity = Vector({ horizontal, vertical }, maxSpeed) * dt
 				entity\set('velocity', newVelocity)
 				animation.value\resume()
 			else
