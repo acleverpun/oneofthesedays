@@ -65,16 +65,17 @@ class AreaScene extends Scene
 				for boundary in *boundaries
 					-- Map boundaries to directions
 					if boundary.width > boundary.height
-						if not boundaries[Direction.NORTH] or boundary.y < boundaries[Direction.NORTH].y
-							boundaries[Direction.NORTH] = boundary
-						if not boundaries[Direction.SOUTH] or boundary.y > boundaries[Direction.SOUTH].y
-							boundaries[Direction.SOUTH] = boundary
+						if not boundaries.NORTH or boundary.y < boundaries.NORTH.y
+							boundaries.NORTH = boundary
+						if not boundaries.SOUTH or boundary.y > boundaries.SOUTH.y
+							boundaries.SOUTH = boundary
 					else
-						if not boundaries[Direction.WEST] or boundary.x < boundaries[Direction.WEST].x
-							boundaries[Direction.WEST] = boundary
-						if not boundaries[Direction.EAST] or boundary.x > boundaries[Direction.EAST].x
-							boundaries[Direction.EAST] = boundary
-				warp = boundaries[@transition.direction]
+						if not boundaries.WEST or boundary.x < boundaries.WEST.x
+							boundaries.WEST = boundary
+						if not boundaries.EAST or boundary.x > boundaries.EAST.x
+							boundaries.EAST = boundary
+				heading = Direction\getHeading(@transition.direction)
+				warp = boundaries[heading]
 			elseif fromWarp\is('Door')
 				-- Determine which door to spawn at
 				warp = doors[1]

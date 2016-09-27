@@ -4,6 +4,7 @@ class Vector extends Caste
 
 	-- Return vector of specified length
 	@normalize: (vector, length = 1) =>
+		if not _.isFunction(vector.getLength) then vector = Vector(vector)
 		normalized = vector / vector\getLength()
 		if length != 1 then normalized *= length
 		return normalized
