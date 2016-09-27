@@ -61,7 +61,9 @@ class Direction extends Vector
 		if _.isTable(x) then y = 1
 
 		super(x, y)
-		-- @normalize()
+
+		length = @getLength()
+		if length != 0 and length != 1 then return @normalize(1)
 
 	toVector: () => Vector(@x, @y)
 

@@ -11,7 +11,7 @@ class Vector extends Caste
 	new: (x, y) =>
 		-- @param {Vector}
 		-- @param {Number}
-		if @is(x)
+		if _.isTable(x) and _.isNumber(y)
 			x = @@normalize(x, y)
 			y = nil
 
@@ -49,13 +49,13 @@ class Vector extends Caste
 	__lt: (other) => (@x < other.x and @y <= other.y) or (@x <= other.x and @y < other.y)
 
 	__unm: () => @@(-@x, -@y)
-	__add: (other) => @@(@x + other.x, @y + other.y)
-	__sub: (other) => @@(@x - other.x, @y - other.y)
+	__add: (other) => Vector(@x + other.x, @y + other.y)
+	__sub: (other) => Vector(@x - other.x, @y - other.y)
 	__mul: (other) =>
-		if _.isNumber(other) then return @@(@x * other, @y * other)
+		if _.isNumber(other) then return Vector(@x * other, @y * other)
 		-- dot product
 		return @x * other.x + @y * other.y
 	__div: (other) =>
-		if _.isNumber(other) then return @@(@x / other, @y / other)
+		if _.isNumber(other) then return Vector(@x / other, @y / other)
 		-- cross product
 		-- TODO
