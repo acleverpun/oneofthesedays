@@ -4,10 +4,12 @@ class Vector extends Caste
 
 	-- Return normalized vector
 	@normalize: (vector) =>
+		if type(vector.getLength) != 'function' then vector = @(vector)
 		return vector / vector\getLength()
 
 	-- Return vector scaled to a specified length
 	@scale: (vector, length = 1) =>
+		if vector\getLength() == length then return vector
 		vector = @normalize(vector)
 		if length != 1 then vector *= length
 		return vector
@@ -17,13 +19,13 @@ class Vector extends Caste
 		if vector\getLength() <= length then return vector
 		vector = @normalize(vector)
 		if length != 1 then vector *= length
-		return truncated
+		return vector
 
 	new: (x, y) =>
 		-- @param {Vector}
 		-- @param {Number}
 		if _.isTable(x) and _.isNumber(y)
-			x = @@normalize(x, y)
+			x = @@scale(x, y)
 			y = nil
 
 		if _.isTable(x)
@@ -43,10 +45,10 @@ class Vector extends Caste
 
 	getLength: () => math.sqrt(@x^2 + @y^2)
 
-	normalize: () =>
-		normalized = @@normalize(@)
-		@x = normalized.x
-		@y = normalized.y
+	apply: (method, ...) =>
+		vector = @@[method](@, ...)
+		@x = vector.x
+		@y = vector.y
 
 	clone: () => @@(@x, @y)
 
