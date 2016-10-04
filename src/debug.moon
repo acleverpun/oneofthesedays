@@ -6,13 +6,12 @@ love.errhand = (err) ->
 	print('\nERROR:\n', err)
 
 	-- sourcemap
-	print()
 	file, line = string.match(err, '^([^:]+).lua:(%d+)')
 	output = run("moonc -X #{file}.moon | grep '#{line}:'")
 	print('\nSOURCEMAP:\n', output)
 
 	-- stacktrace
-	print('\nSTACKTRACE:')
+	print('STACKTRACE:')
 	print(debug.traceback())
 
 traverse = (value, depth, hideMeta = false) ->
