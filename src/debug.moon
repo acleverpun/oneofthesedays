@@ -1,4 +1,19 @@
 inspect = require('vendor/inspect/inspect')
+{ :run } = require('lib/utils')
+
+love.errhand = (err) ->
+	-- error
+	print('\nERROR:\n', err)
+
+	-- sourcemap
+	print()
+	file, line = string.match(err, '^([^:]+).lua:(%d+)')
+	output = run("moonc -X #{file}.moon | grep '#{line}:'")
+	print('\nSOURCEMAP:\n', output)
+
+	-- stacktrace
+	print('\nSTACKTRACE:')
+	print(debug.traceback())
 
 traverse = (value, depth, hideMeta = false) ->
 	output = ''
