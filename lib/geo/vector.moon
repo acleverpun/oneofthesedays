@@ -2,21 +2,23 @@ Caste = require('vendor/caste/lib/caste')
 
 class Vector extends Caste
 
+	@getLength: (vector) => math.sqrt(vector.x^2 + vector.y^2)
+
 	-- Return normalized vector
 	@normalize: (vector) =>
 		if type(vector.getLength) != 'function' then vector = @(vector)
-		return vector / vector\getLength()
+		return vector / @getLength(vector)
 
 	-- Return vector scaled to a specified length
 	@scale: (vector, length = 1) =>
-		if vector\getLength() == length then return vector
+		if @getLength(vector) == length then return vector
 		vector = @normalize(vector)
 		if length != 1 then vector *= length
 		return vector
 
 	-- Return vector of max length
 	@truncate: (vector, length = 1) =>
-		if vector\getLength() <= length then return vector
+		if @getLength(vector) <= length then return vector
 		vector = @normalize(vector)
 		if length != 1 then vector *= length
 		return vector
