@@ -6,8 +6,8 @@ class Vector extends Caste
 
 	-- Return normalized vector
 	@normalize: (vector) =>
-		if type(vector.getLength) != 'function' then vector = @(vector)
-		return vector / @getLength(vector)
+		length = @getLength(vector)
+		return @(vector.x / length, vector.y / length)
 
 	-- Return vector scaled to a specified length
 	@scale: (vector, length = 1) =>
