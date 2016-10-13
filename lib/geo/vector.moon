@@ -24,12 +24,6 @@ class Vector extends Caste
 		return vector
 
 	new: (x, y) =>
-		-- @param {Vector}
-		-- @param {Number}
-		if _.isTable(x) and _.isNumber(y)
-			x = @@scale(x, y)
-			y = nil
-
 		if _.isTable(x)
 			if x.x or x.y
 				-- @param {Table{/(x|y)/ => Number}}
@@ -39,6 +33,13 @@ class Vector extends Caste
 				-- @param {Array{Number}}
 				@x = x[1]
 				@y = x[2]
+
+			-- @param {Vector}
+			-- @param {Number}
+			if _.isNumber(y)
+				vector = @@scale(@, y)
+				@x = vector.x
+				@y = vector.y
 		else
 			-- @param {Number}
 			-- @param {Number}
