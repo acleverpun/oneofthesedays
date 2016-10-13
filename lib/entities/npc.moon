@@ -1,10 +1,10 @@
-MyEntity = require('lib/entities/my-entity')
+Entity = require('lib/entities/entity')
 Sprite = require('lib/display/sprite')
 Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 Speed = require('lib/physics/speed')
 
-class Npc extends MyEntity
+class Npc extends Entity
 
 	new: (...) =>
 		super(...)

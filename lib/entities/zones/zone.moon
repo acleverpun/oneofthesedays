@@ -1,7 +1,7 @@
 bump = require('vendor/bump/bump')
-MyEntity = require('lib/entities/my-entity')
+Entity = require('lib/entities/entity')
 
-class Zone extends MyEntity
+class Zone extends Entity
 
 	entities: {}
 

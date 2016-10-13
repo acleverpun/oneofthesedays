@@ -1,10 +1,10 @@
-Entity = require('vendor/secs/lib/entity')
+SecsEntity = require('vendor/secs/lib/entity')
 Shape = require('lib/geo/shape')
 Vector = require('lib/geo/vector')
 Direction = require('lib/geo/direction')
 Tile = require('lib/geo/tile')
 
-class MyEntity extends Entity
+class Entity extends SecsEntity
 
 	new: (@scene, data) =>
 		super({
