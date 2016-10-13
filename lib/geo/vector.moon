@@ -44,6 +44,32 @@ class Vector extends Caste
 			@x = x
 			@y = y
 
+	add: (value) =>
+		if _.isNumber(value)
+			@x += value
+			@y += value
+		else
+			@x += value.x
+			@y += value.y
+
+	subtract: (value) =>
+		if _.isNumber(value)
+			@x -= value
+			@y -= value
+		else
+			@x -= value.x
+			@y -= value.y
+
+	multiply: (value) =>
+		if not _.isNumber(value) then error 'lolwut'
+		@x *= value
+		@y *= value
+
+	divide: (value) =>
+		if not _.isNumber(value) then error 'lolwut'
+		@x /= value
+		@y /= value
+
 	getLength: () => math.sqrt(@x^2 + @y^2)
 
 	apply: (method, ...) =>
@@ -58,18 +84,22 @@ class Vector extends Caste
 	toArray: () => { @x, @y }
 	toTable: () => { x: @x, y: @y, length: @getLength() }
 
-	__eq: (other) => @x == other.x and @y == other.y
-	__le: (other) => @x <= other.x and @y <= other.y
-	__lt: (other) => (@x < other.x and @y <= other.y) or (@x <= other.x and @y < other.y)
+	__eq: (value) => @x == value.x and @y == value.y
+	__le: (value) => @x <= value.x and @y <= value.y
+	__lt: (value) => (@x < value.x and @y <= value.y) or (@x <= value.x and @y < value.y)
 
 	__unm: () => @@(-@x, -@y)
-	__add: (other) => Vector(@x + other.x, @y + other.y)
-	__sub: (other) => Vector(@x - other.x, @y - other.y)
-	__mul: (other) =>
-		if _.isNumber(other) then return Vector(@x * other, @y * other)
+	__add: (value) =>
+		if _.isNumber(value) then return Vector(@x + value, @y + value)
+		return Vector(@x + value.x, @y + value.y)
+	__sub: (value) =>
+		if _.isNumber(value) then return Vector(@x - value, @y - value)
+		return Vector(@x - value.x, @y - value.y)
+	__mul: (value) =>
+		if _.isNumber(value) then return Vector(@x * value, @y * value)
 		-- dot product
-		return @x * other.x + @y * other.y
-	__div: (other) =>
-		if _.isNumber(other) then return Vector(@x / other, @y / other)
+		return @x * value.x + @y * value.y
+	__div: (value) =>
+		if _.isNumber(value) then return Vector(@x / value, @y / value)
 		-- cross product
 		-- TODO

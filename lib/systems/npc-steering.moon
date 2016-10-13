@@ -1,6 +1,5 @@
 System = require('vendor/secs/lib/system')
 Vector = require('lib/geo/vector')
-Direction = require('lib/geo/direction')
 
 class NpcSteeringSystem extends System
 

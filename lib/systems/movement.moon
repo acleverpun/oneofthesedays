@@ -17,14 +17,15 @@ class MovementSystem extends System
 			heading = Direction\getHeading(velocity)
 			if heading != 'NONE' then entity\set('heading', heading)
 
-			-- Determine course
-			-- TODO: don't create a vector every frame, but call `position\add`
-			course = position + velocity
-			course.x = math.min(math.max(course.x, 0), @mapWidth - shape.width)
-			course.y = math.min(math.max(course.y, 0), @mapHeight - shape.height)
+			-- Calculate new desired position
+			position\add(velocity)
+
+			-- Restrict position to map
+			position.x = math.min(math.max(position.x, 0), @mapWidth - shape.width)
+			position.y = math.min(math.max(position.y, 0), @mapHeight - shape.height)
 
 			-- Attempt to move entity
-			position.x, position.y, collisions, num = @world\move(entity, course.x, course.y, (other) =>
+			position.x, position.y, collisions, num = @world\move(entity, position.x, position.y, (other) =>
 				if _.isFunction(other.collision) then return 'cross'
 				return 'slide'
 			)
