@@ -37,9 +37,7 @@ class Vector extends Caste
 			-- @param {Vector}
 			-- @param {Number}
 			if _.isNumber(y)
-				vector = @@scale(@, y)
-				@x = vector.x
-				@y = vector.y
+				@apply('scale', y)
 		else
 			-- @param {Number}
 			-- @param {Number}
@@ -49,7 +47,7 @@ class Vector extends Caste
 	getLength: () => math.sqrt(@x^2 + @y^2)
 
 	apply: (method, ...) =>
-		vector = @@[method](@, ...)
+		vector = @@[method](@@, @, ...)
 		@x = vector.x
 		@y = vector.y
 
