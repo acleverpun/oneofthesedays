@@ -11,7 +11,8 @@ class Entity extends SecsEntity
 			["is#{@@name}"]: true,
 			position: Vector(data),
 			Shape(data),
-			Tile(data)
+			Tile(data),
+			maxForce: 0.02
 		})
 
 	---

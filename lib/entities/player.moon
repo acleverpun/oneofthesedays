@@ -4,7 +4,6 @@ Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
-Speed = require('lib/physics/speed')
 Controls = require('lib/input/controls')
 
 class Player extends Entity
@@ -16,7 +15,8 @@ class Player extends Entity
 		runSpeed = maxSpeed * 2
 
 		@addMultiple({
-			Speed(maxSpeed, runSpeed)
+			:maxSpeed,
+			:runSpeed,
 			Controls({
 				vertical: with tactile.newControl()
 					\addButtonPair(tactile.keys('up'), tactile.keys('down'))
