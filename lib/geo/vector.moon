@@ -1,4 +1,6 @@
 Caste = require('vendor/caste/lib/caste')
+moon = require('moon')
+Enum = require('lib/utils/enum')
 
 class Vector extends Caste
 
@@ -102,3 +104,9 @@ class Vector extends Caste
 	__div: (value) =>
 		if _.isNumber(value) then return Vector(@x / value, @y / value)
 		-- TODO: cross product (need angle methods)
+
+moon.mixin(Vector, Enum, {
+	ZERO: Vector(0, 0)
+})
+
+return Vector

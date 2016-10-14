@@ -1,6 +1,6 @@
+Vector = require('lib/geo/vector')
 moon = require('moon')
 Enum = require('lib/utils/enum')
-Vector = require('lib/geo/vector')
 
 class Direction extends Vector
 
