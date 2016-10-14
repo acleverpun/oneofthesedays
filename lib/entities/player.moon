@@ -44,6 +44,6 @@ class Player extends Entity
 				shape: Shape(16, 16),
 				offset: Vector(46, 4),
 				border: 1,
-				duration: 0.2,
-			}),
+				duration: 0.2
+			})
 		})
