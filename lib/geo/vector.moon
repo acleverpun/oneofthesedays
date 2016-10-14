@@ -13,14 +13,14 @@ class Vector extends Caste
 	@scale: (vector, length = 1) =>
 		if @getLength(vector) == length then return vector
 		vector = @normalize(vector)
-		if length != 1 then vector *= length
+		if length != 1 then vector\multiply(length)
 		return vector
 
 	-- Return vector of max length
 	@truncate: (vector, length = 1) =>
 		if @getLength(vector) <= length then return vector
 		vector = @normalize(vector)
-		if length != 1 then vector *= length
+		if length != 1 then vector\multiply(length)
 		return vector
 
 	new: (x, y) =>
@@ -101,5 +101,4 @@ class Vector extends Caste
 		return @x * value.x + @y * value.y
 	__div: (value) =>
 		if _.isNumber(value) then return Vector(@x / value, @y / value)
-		-- cross product
-		-- TODO
+		-- TODO: cross product (need angle methods)
