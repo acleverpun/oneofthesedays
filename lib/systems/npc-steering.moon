@@ -7,13 +7,13 @@ class NpcSteeringSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			velocity = @seek(entity, dt)
+			velocity = @arrive(entity, dt)
 			entity\set('velocity', velocity)
 
 	-- Direct path to target
 	naive: (entity, dt) =>
 		{ :position, :maxSpeed, :target } = entity\get()
-		return Vector(target.position - position, maxSpeed) * dt
+		return Vector(target.position - position, maxSpeed * dt)
 
 	-- Steers toward target
 	seek: (entity, dt) =>
@@ -32,5 +32,22 @@ class NpcSteeringSystem extends System
 		if not velocity then velocity = Vector.ZERO
 		steering = desiredVelocity - velocity
 		steering = Vector\truncate(steering, maxForce)
+		velocity = Vector\truncate(velocity + steering, maxSpeed)
+		return velocity
+
+	-- Arrives at target
+	arrive: (entity, dt) =>
+		{ :position, :velocity, :maxSpeed, :target, :maxForce, :slowingRadius } = entity\get()
+		desiredVelocity = target.position - position
+		distance = desiredVelocity\getLength()
+
+		maxSpeed *= dt
+		if distance < slowingRadius
+			desiredVelocity = Vector(desiredVelocity, maxSpeed * distance / slowingRadius)
+		else
+			desiredVelocity = Vector(desiredVelocity, maxSpeed)
+
+		if not velocity then velocity = Vector.ZERO
+		steering = desiredVelocity - velocity
 		velocity = Vector\truncate(velocity + steering, maxSpeed)
 		return velocity
