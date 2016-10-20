@@ -9,6 +9,7 @@ class Vector extends Caste
 	-- Return normalized vector
 	@normalize: (vector) =>
 		length = @getLength(vector)
+		if length == 0 then length = 1
 		return @(vector.x / length, vector.y / length)
 
 	-- Return vector scaled to a specified length
@@ -71,6 +72,11 @@ class Vector extends Caste
 		if not _.isNumber(value) then error 'lolwut'
 		@x /= value
 		@y /= value
+
+	setAngle: (value) =>
+		length = @getLength()
+		@x = math.cos(value) * length
+		@y = math.sin(value) * length
 
 	getLength: () => math.sqrt(@x^2 + @y^2)
 
