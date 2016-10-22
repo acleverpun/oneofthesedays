@@ -3,14 +3,15 @@ Vector = require('lib/geo/vector')
 
 wanderTheta = math.pi
 
-class NpcSteeringSystem extends System
+class SteeringSystem extends System
 
-	@criteria: System.Criteria({ 'isNpc', 'position', 'maxSpeed', 'maxForce', 'target' })
+	@criteria: System.Criteria({ 'behaviors' })
 
 	update: (dt) =>
 		for entity in *@entities
-			velocity = @wander(entity, dt)
-			entity\set('velocity', velocity)
+			behaviors = entity\get('behaviors')
+			for behavior in *behaviors
+				behavior\update(dt)
 
 	-- Direct path to target
 	naive: (entity, dt, targetPosition) =>

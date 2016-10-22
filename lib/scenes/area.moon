@@ -7,7 +7,7 @@ entities = require('lib/entities')
 RenderSystem = require('lib/systems/render')
 ControlSystem = require('lib/systems/control')
 PlayerControlSystem = require('lib/systems/player-control')
-NpcSteeringSystem = require('lib/systems/npc-steering')
+BehaviorsSystem = require('lib/systems/behaviors')
 MovementSystem = require('lib/systems/movement')
 Color = require('lib/display/color')
 Vector = require('lib/geo/vector')
@@ -31,7 +31,7 @@ class AreaScene extends Scene
 		@entityLayer.secs\addSystem(RenderSystem())
 		@entityLayer.secs\addSystem(ControlSystem())
 		@entityLayer.secs\addSystem(PlayerControlSystem(@world))
-		@entityLayer.secs\addSystem(NpcSteeringSystem())
+		@entityLayer.secs\addSystem(BehaviorsSystem())
 		@entityLayer.secs\addSystem(MovementSystem(@world, @map))
 
 	enter: (previous, @transition) =>
