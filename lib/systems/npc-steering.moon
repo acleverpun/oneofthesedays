@@ -1,10 +1,7 @@
 System = require('vendor/secs/lib/system')
 Vector = require('lib/geo/vector')
 
-CIRCLE_DISTANCE = 1
-CIRCLE_RADIUS = 100
-ANGLE_CHANGE = math.pi
-wanderAngle = 0
+wanderTheta = math.pi
 
 class NpcSteeringSystem extends System
 
@@ -12,38 +9,46 @@ class NpcSteeringSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			velocity = @seek(entity, dt)
+			velocity = @wander(entity, dt)
 			entity\set('velocity', velocity)
 
 	-- Direct path to target
-	naive: (entity, dt) =>
+	naive: (entity, dt, targetPosition) =>
 		{ :position, :maxSpeed, :target } = entity\get()
-		return Vector(target.position - position, maxSpeed * dt)
+		if not targetPosition then targetPosition = target.position
+		return Vector(targetPosition - position, maxSpeed * dt)
 
 	-- Steers toward target
-	seek: (entity, dt) =>
+	seek: (entity, dt, targetPosition) =>
 		{ :position, :velocity, :maxSpeed, :target, :maxForce } = entity\get()
-		desiredVelocity = @naive(entity, dt)
 		if not velocity then velocity = Vector.ZERO
+		if not targetPosition then targetPosition = target.position
+
+		desiredVelocity = @naive(entity, dt, targetPosition)
 		steering = desiredVelocity - velocity
 		steering = steering\truncate(maxForce)
 		velocity = (velocity + steering)\truncate(maxSpeed)
 		return velocity
 
 	-- Steers away from target
-	flee: (entity, dt) =>
+	flee: (entity, dt, targetPosition) =>
 		{ :position, :velocity, :maxSpeed, :target, :maxForce } = entity\get()
-		desiredVelocity = -@naive(entity, dt)
 		if not velocity then velocity = Vector.ZERO
+		if not targetPosition then targetPosition = target.position
+
+		desiredVelocity = -@naive(entity, dt, targetPosition)
 		steering = desiredVelocity - velocity
 		steering = steering\truncate(maxForce)
 		velocity = (velocity + steering)\truncate(maxSpeed)
 		return velocity
 
 	-- Arrives at target
-	arrive: (entity, dt) =>
+	arrive: (entity, dt, targetPosition) =>
 		{ :position, :velocity, :maxSpeed, :target, :maxForce, :slowingRadius } = entity\get()
-		desiredVelocity = target.position - position
+		if not velocity then velocity = Vector.ZERO
+		if not targetPosition then targetPosition = target.position
+
+		desiredVelocity = targetPosition - position
 		distance = desiredVelocity\getLength()
 
 		maxSpeed *= dt
@@ -52,29 +57,27 @@ class NpcSteeringSystem extends System
 		else
 			desiredVelocity = Vector(desiredVelocity, maxSpeed * dt)
 
-		if not velocity then velocity = Vector.ZERO
 		steering = desiredVelocity - velocity
 		velocity = (velocity + steering)\truncate(maxSpeed * dt)
 		return velocity
 
-	wander: (entity, dt) =>
-		{ :position, :velocity, :maxSpeed, :target, :maxForce, :slowingRadius } = entity\get()
-
+	wander: (entity, dt, targetPosition) =>
+		{ :position, :velocity, :maxSpeed, :maxForce, :slowingRadius } = entity\get()
 		if not velocity then velocity = Vector.ZERO
-		circleCenter = velocity\clone()
-		with circleCenter
+
+		wanderR = 25
+		wanderD = 80
+		change = 0.3
+		wanderTheta += math.random(-change, change)
+
+		circlePos = with velocity\clone()
 			\normalize()
-			\scale(CIRCLE_DISTANCE)
+			\multiply(wanderD)
+			\add(position)
 
-		displacement = Vector(0, -1)
-		with displacement
-			\scale(CIRCLE_RADIUS)
-			\setAngle(wanderAngle)
+		h = velocity\getHeading()
 
-		wanderAngle += math.random() * ANGLE_CHANGE - ANGLE_CHANGE * 0.5
-		wanderForce = circleCenter + displacement
+		circleOffset = Vector(wanderR * math.cos(wanderTheta + h), wanderR * math.sin(wanderTheta + h))
+		targetPosition = circlePos + circleOffset
 
-		steering = wanderForce
-		steering = steering\truncate(maxForce)
-		velocity = (velocity + steering)\truncate(maxSpeed)
-		return velocity
+		return @seek(entity, dt, targetPosition)
