@@ -14,7 +14,6 @@ class Vector extends Caste
 				-- @param {Array{Number}}
 				@x = x[1]
 				@y = x[2]
-
 			-- @param {Vector}
 			-- @param {Number}
 			if _.isNumber(y)
@@ -55,7 +54,7 @@ class Vector extends Caste
 		else
 			@x += value.x
 			@y += value.y
-		return self
+		return @
 
 	subtract: (value) =>
 		if _.isNumber(value)
@@ -64,64 +63,87 @@ class Vector extends Caste
 		else
 			@x -= value.x
 			@y -= value.y
-		return self
+		return @
 
 	multiply: (value) =>
 		if not _.isNumber(value) then error 'lolwut'
 		@x *= value
 		@y *= value
-		return self
+		return @
 
 	divide: (value) =>
 		if not _.isNumber(value) then error 'lolwut'
 		@x /= value
 		@y /= value
-		return self
+		return @
 
-	dot: (value) => @x * value.x + @y * value.y
+	equals: (vector) => @x == vector.x and @y == vector.y
 
-	getLengthSq: () => @x^2 + @y^2
-	getLength: () => math.sqrt(@getLengthSq())
+	distance: (vector) => math.sqrt((@x - vector.x)^2 + (@y - vector.y)^2)
 
-	getPerpendicular: () => @@(-@y, @x)
-	getHeading: () => return math.atan2(@y, @x)
+	dot: (vector) => @x * vector.x + @y * vector.y
+
+	angleTo: (vector) =>
+		if (@x == 0 and @y == 0) or (vector.x == 0 and vector.y == 0) then return 0
+		dot = @dot(vector)
+		amount = dot / (@getLength() * vector\getLength())
+		if amount <= -1 then return math.pi
+		if amount >= 1 then return 0
+		return math.acos(amount)
 
 	-- Call static methods, and apply result to self
 	apply: (method, ...) =>
 		vector = @@[method](@@, @, ...)
-		@x = vector.x
-		@y = vector.y
-		return self
+		@set(vector)
+		return @
+
+	rotate: (theta) =>
+		oldX = @x
+		@x = @x * math.cos(theta) - @y * math.sin(theta)
+		@y = oldX * math.sin(theta) + @y * math.cos(theta)
+		return @
 
 	-- Normalize vector
 	normalize: () =>
 		length = @getLength()
-		if length > 0
-			@x /= length
-			@y /= length
-		return self
+		if length != 0 and length != 1 then @divide(length)
+		return @
 
 	-- Scale vector to the specified length
 	scale: (length = 1) =>
-		if @getLength() == length then return self
+		if @getLength() == length then return @
 		@normalize()
 		if length != 1 then @multiply(length)
-		return self
+		return @
 
 	-- Scale vector if bigger than the specified length
 	truncate: (length = 1) =>
-		if @getLength() <= length then return self
+		if @getLength() <= length then return @
 		@normalize()
 		if length != 1 then @multiply(length)
-		return self
-
-	setAngle: (value) =>
-		length = @getLength()
-		@x = math.cos(value) * length
-		@y = math.sin(value) * length
-		return self
+		return @
 
 	clone: () => @@(@x, @y)
+
+	getLengthSq: () => @x^2 + @y^2
+	getLength: () => math.sqrt(@getLengthSq())
+	getPerpendicular: () => @@(-@y, @x)
+	getHeading: () => return math.atan2(@y, @x)
+
+	set: (x, y) =>
+		if type(x) == 'number'
+			@x = x
+			@y = y
+		else
+			@x = x.x
+			@y = x.y
+		return @
+
+	setAngle: (theta) =>
+		length = @getLength()
+		@x = math.cos(theta) * length
+		@y = math.sin(theta) * length
+		return @
 
 moon.mixin(Vector, Enum, {
 	ZERO: Vector(0, 0)
