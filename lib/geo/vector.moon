@@ -25,6 +25,29 @@ class Vector extends Caste
 			@x = x
 			@y = y
 
+	__tostring: () => "#{@@name}(#{@x}, #{@y})##{@getLength()}"
+	toTuple: () => @x, @y
+	toArray: () => { @x, @y }
+	toTable: () => { x: @x, y: @y, length: @getLength() }
+
+	__eq: (value) => @x == value.x and @y == value.y
+	__le: (value) => @x <= value.x and @y <= value.y
+	__lt: (value) => (@x < value.x and @y <= value.y) or (@x <= value.x and @y < value.y)
+
+	__unm: () => @@(-@x, -@y)
+	__add: (value) =>
+		if _.isNumber(value) then return Vector(@x + value, @y + value)
+		return Vector(@x + value.x, @y + value.y)
+	__sub: (value) =>
+		if _.isNumber(value) then return Vector(@x - value, @y - value)
+		return Vector(@x - value.x, @y - value.y)
+	__mul: (value) =>
+		if _.isNumber(value) then return Vector(@x * value, @y * value)
+		return @dot(value)
+	__div: (value) =>
+		if _.isNumber(value) then return Vector(@x / value, @y / value)
+		-- TODO: cross product (need angle methods)
+
 	add: (value) =>
 		if _.isNumber(value)
 			@x += value
@@ -55,7 +78,19 @@ class Vector extends Caste
 		@y /= value
 		return self
 
-	getLength: () => math.sqrt(@x^2 + @y^2)
+	dot: (value) => @x * value.x + @y * value.y
+
+	getLengthSq: () => @x^2 + @y^2
+	getLength: () => math.sqrt(@getLengthSq())
+
+	getPerpendicular: () => @@(-@y, @x)
+
+	-- Call static methods, and apply result to self
+	apply: (method, ...) =>
+		vector = @@[method](@@, @, ...)
+		@x = vector.x
+		@y = vector.y
+		return self
 
 	-- Normalize vector
 	normalize: () =>
@@ -79,13 +114,6 @@ class Vector extends Caste
 		if length != 1 then @multiply(length)
 		return self
 
-	-- Call static methods, and apply result to self
-	apply: (method, ...) =>
-		vector = @@[method](@@, @, ...)
-		@x = vector.x
-		@y = vector.y
-		return self
-
 	setAngle: (value) =>
 		length = @getLength()
 		@x = math.cos(value) * length
@@ -93,30 +121,6 @@ class Vector extends Caste
 		return self
 
 	clone: () => @@(@x, @y)
-
-	__tostring: () => "#{@@name}(#{@x}, #{@y})##{@getLength()}"
-	toTuple: () => @x, @y
-	toArray: () => { @x, @y }
-	toTable: () => { x: @x, y: @y, length: @getLength() }
-
-	__eq: (value) => @x == value.x and @y == value.y
-	__le: (value) => @x <= value.x and @y <= value.y
-	__lt: (value) => (@x < value.x and @y <= value.y) or (@x <= value.x and @y < value.y)
-
-	__unm: () => @@(-@x, -@y)
-	__add: (value) =>
-		if _.isNumber(value) then return Vector(@x + value, @y + value)
-		return Vector(@x + value.x, @y + value.y)
-	__sub: (value) =>
-		if _.isNumber(value) then return Vector(@x - value, @y - value)
-		return Vector(@x - value.x, @y - value.y)
-	__mul: (value) =>
-		if _.isNumber(value) then return Vector(@x * value, @y * value)
-		-- dot product
-		return @x * value.x + @y * value.y
-	__div: (value) =>
-		if _.isNumber(value) then return Vector(@x / value, @y / value)
-		-- TODO: cross product (need angle methods)
 
 moon.mixin(Vector, Enum, {
 	ZERO: Vector(0, 0)

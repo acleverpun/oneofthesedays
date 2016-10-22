@@ -1,5 +1,6 @@
 require('src/debug')
 export _ = require('lib/utils/lodash')
+export math = require('lib/utils/math')
 
 scenes = require('vendor/hump/gamestate')
 TitleScene = require('lib/scenes/title')
