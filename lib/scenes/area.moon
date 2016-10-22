@@ -76,7 +76,7 @@ class AreaScene extends Scene
 							boundaries.WEST = boundary
 						if not boundaries.EAST or boundary.x > boundaries.EAST.x
 							boundaries.EAST = boundary
-				heading = Direction\getHeading(@transition.direction)
+				heading = Direction\getHeadingName(@transition.direction)
 				warp = boundaries[heading]
 			elseif fromWarp\is('Door')
 				-- Determine which door to spawn at

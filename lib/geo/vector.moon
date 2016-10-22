@@ -84,6 +84,7 @@ class Vector extends Caste
 	getLength: () => math.sqrt(@getLengthSq())
 
 	getPerpendicular: () => @@(-@y, @x)
+	getHeading: () => return math.atan2(@y, @x)
 
 	-- Call static methods, and apply result to self
 	apply: (method, ...) =>

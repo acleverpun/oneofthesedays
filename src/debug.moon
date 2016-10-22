@@ -7,7 +7,7 @@ love.errhand = (err) ->
 
 	-- sourcemap
 	file, line = string.match(err, '^([^:]+).lua:(%d+)')
-	output = run("moonc -X #{file}.moon | grep '#{line}:'")
+	output = run("moonc -X #{file}.moon | grep -E '\\s#{line}:'")
 	print('\nSOURCEMAP:\n', output)
 
 	-- stacktrace

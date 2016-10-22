@@ -23,7 +23,7 @@ class DebugSystem extends System
 			x = math.floor(player.position.x)
 			y = math.floor(player.position.y)
 			@debug('position', "#{x}, #{y}")
-			if player.velocity then @debug('direction', "#{Direction\getHeading(player.velocity)}")
+			if player.velocity then @debug('direction', "#{Direction\getHeadingName(player.velocity)}")
 			@debug('animation', "#{player.animationList.current}")
 
 	debug: (key, value) =>

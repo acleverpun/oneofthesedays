@@ -14,7 +14,7 @@ class MovementSystem extends System
 			{ :velocity, :position, :shape } = entity\get()
 
 			-- Set heading
-			heading = Direction\getHeading(velocity)
+			heading = Direction\getHeadingName(velocity)
 			if heading != 'NONE' then entity\set('heading', heading)
 
 			-- Calculate new desired position
