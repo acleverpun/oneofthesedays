@@ -12,7 +12,7 @@ class NpcSteeringSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			velocity = @wander(entity, dt)
+			velocity = @seek(entity, dt)
 			entity\set('velocity', velocity)
 
 	-- Direct path to target
