@@ -26,8 +26,8 @@ class NpcSteeringSystem extends System
 		desiredVelocity = @naive(entity, dt)
 		if not velocity then velocity = Vector.ZERO
 		steering = desiredVelocity - velocity
-		steering = Vector\truncate(steering, maxForce)
-		velocity = Vector\truncate(velocity + steering, maxSpeed)
+		steering = steering\truncate(maxForce)
+		velocity = (velocity + steering)\truncate(maxSpeed)
 		return velocity
 
 	-- Steers away from target
@@ -36,8 +36,8 @@ class NpcSteeringSystem extends System
 		desiredVelocity = -@naive(entity, dt)
 		if not velocity then velocity = Vector.ZERO
 		steering = desiredVelocity - velocity
-		steering = Vector\truncate(steering, maxForce)
-		velocity = Vector\truncate(velocity + steering, maxSpeed)
+		steering = steering\truncate(maxForce)
+		velocity = (velocity + steering)\truncate(maxSpeed)
 		return velocity
 
 	-- Arrives at target
@@ -54,7 +54,7 @@ class NpcSteeringSystem extends System
 
 		if not velocity then velocity = Vector.ZERO
 		steering = desiredVelocity - velocity
-		velocity = Vector\truncate(velocity + steering, maxSpeed * dt)
+		velocity = (velocity + steering)\truncate(maxSpeed * dt)
 		return velocity
 
 	wander: (entity, dt) =>
@@ -62,17 +62,19 @@ class NpcSteeringSystem extends System
 
 		if not velocity then velocity = Vector.ZERO
 		circleCenter = velocity\clone()
-		circleCenter\apply('normalize')
-		circleCenter\apply('scale', CIRCLE_DISTANCE)
+		with circleCenter
+			\normalize()
+			\scale(CIRCLE_DISTANCE)
 
 		displacement = Vector(0, -1)
-		displacement\apply('scale', CIRCLE_RADIUS)
-		displacement\setAngle(wanderAngle)
+		with displacement
+			\scale(CIRCLE_RADIUS)
+			\setAngle(wanderAngle)
 
 		wanderAngle += math.random() * ANGLE_CHANGE - ANGLE_CHANGE * 0.5
 		wanderForce = circleCenter + displacement
 
 		steering = wanderForce
-		steering = Vector\truncate(steering, maxForce)
-		velocity = Vector\truncate(velocity + steering, maxSpeed)
+		steering = steering\truncate(maxForce)
+		velocity = (velocity + steering)\truncate(maxSpeed)
 		return velocity

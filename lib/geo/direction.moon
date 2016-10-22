@@ -63,7 +63,7 @@ class Direction extends Vector
 		super(x, y)
 
 		length = @getLength()
-		if length != 0 and length != 1 then @apply('normalize')
+		if length != 0 and length != 1 then @normalize()
 
 	toVector: () => Vector(@x, @y)
 

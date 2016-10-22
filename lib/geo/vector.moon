@@ -4,28 +4,6 @@ Enum = require('lib/utils/enum')
 
 class Vector extends Caste
 
-	@getLength: (vector) => math.sqrt(vector.x^2 + vector.y^2)
-
-	-- Return normalized vector
-	@normalize: (vector) =>
-		length = @getLength(vector)
-		if length == 0 then length = 1
-		return @(vector.x / length, vector.y / length)
-
-	-- Return vector scaled to a specified length
-	@scale: (vector, length = 1) =>
-		if @getLength(vector) == length then return vector
-		vector = @normalize(vector)
-		if length != 1 then vector\multiply(length)
-		return vector
-
-	-- Return vector of max length
-	@truncate: (vector, length = 1) =>
-		if @getLength(vector) <= length then return vector
-		vector = @normalize(vector)
-		if length != 1 then vector\multiply(length)
-		return vector
-
 	new: (x, y) =>
 		if _.isTable(x)
 			if x.x or x.y
@@ -40,7 +18,7 @@ class Vector extends Caste
 			-- @param {Vector}
 			-- @param {Number}
 			if _.isNumber(y)
-				@apply('scale', y)
+				@scale(y)
 		else
 			-- @param {Number}
 			-- @param {Number}
@@ -54,6 +32,7 @@ class Vector extends Caste
 		else
 			@x += value.x
 			@y += value.y
+		return self
 
 	subtract: (value) =>
 		if _.isNumber(value)
@@ -62,28 +41,56 @@ class Vector extends Caste
 		else
 			@x -= value.x
 			@y -= value.y
+		return self
 
 	multiply: (value) =>
 		if not _.isNumber(value) then error 'lolwut'
 		@x *= value
 		@y *= value
+		return self
 
 	divide: (value) =>
 		if not _.isNumber(value) then error 'lolwut'
 		@x /= value
 		@y /= value
+		return self
+
+	getLength: () => math.sqrt(@x^2 + @y^2)
+
+	-- Normalize vector
+	normalize: () =>
+		length = @getLength()
+		if length > 0
+			@x /= length
+			@y /= length
+		return self
+
+	-- Scale vector to the specified length
+	scale: (length = 1) =>
+		if @getLength() == length then return self
+		@normalize()
+		if length != 1 then @multiply(length)
+		return self
+
+	-- Scale vector if bigger than the specified length
+	truncate: (length = 1) =>
+		if @getLength() <= length then return self
+		@normalize()
+		if length != 1 then @multiply(length)
+		return self
+
+	-- Call static methods, and apply result to self
+	apply: (method, ...) =>
+		vector = @@[method](@@, @, ...)
+		@x = vector.x
+		@y = vector.y
+		return self
 
 	setAngle: (value) =>
 		length = @getLength()
 		@x = math.cos(value) * length
 		@y = math.sin(value) * length
-
-	getLength: () => math.sqrt(@x^2 + @y^2)
-
-	apply: (method, ...) =>
-		vector = @@[method](@@, @, ...)
-		@x = vector.x
-		@y = vector.y
+		return self
 
 	clone: () => @@(@x, @y)
 
