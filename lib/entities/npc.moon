@@ -7,6 +7,7 @@ Direct = require('lib/behaviors/steering/direct')
 Seek = require('lib/behaviors/steering/seek')
 Flee = require('lib/behaviors/steering/flee')
 Arrive = require('lib/behaviors/steering/arrive')
+Wander = require('lib/behaviors/steering/wander')
 
 class Npc extends Entity
 
@@ -19,7 +20,8 @@ class Npc extends Entity
 				-- Direct(@, @scene.player.position)
 				-- Seek(@, Direct(@, @scene.player.position))
 				-- Flee(@, Direct(@, @scene.player.position))
-				Arrive(@, @scene.player.position, 100)
+				-- Arrive(@, @scene.player.position, 100)
+				Wander(@, Seek(@, Direct(@, @scene.player.position)))
 			},
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
 			AnimationList(@, {
