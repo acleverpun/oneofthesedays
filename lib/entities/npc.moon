@@ -6,6 +6,7 @@ AnimationList = require('lib/display/animation-list')
 Direct = require('lib/behaviors/steering/direct')
 Seek = require('lib/behaviors/steering/seek')
 Flee = require('lib/behaviors/steering/flee')
+Arrive = require('lib/behaviors/steering/arrive')
 
 class Npc extends Entity
 
@@ -14,11 +15,11 @@ class Npc extends Entity
 
 		@addMultiple({
 			maxSpeed: 50,
-			slowingRadius: 100,
 			behaviors: {
 				-- Direct(@, @scene.player.position)
 				-- Seek(@, Direct(@, @scene.player.position))
-				Flee(@, Direct(@, @scene.player.position))
+				-- Flee(@, Direct(@, @scene.player.position))
+				Arrive(@, @scene.player.position, 100)
 			},
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
 			AnimationList(@, {

@@ -9,8 +9,9 @@ class Flee extends Steering
 	run: (dt) =>
 		{ :velocity, :maxSpeed, :maxForce } = @entity\get()
 		if not velocity then velocity = Vector.ZERO
+		maxSpeed *= dt
 
 		desiredVelocity = -@behavior\run(dt)
 		steering = (desiredVelocity - velocity)\truncate(maxForce)
-		velocity = (velocity + steering)\truncate(maxSpeed * dt)
+		velocity = (velocity + steering)\truncate(maxSpeed)
 		return velocity

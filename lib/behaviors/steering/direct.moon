@@ -8,4 +8,5 @@ class Direct extends Steering
 
 	run: (dt) =>
 		{ :position, :maxSpeed } = @entity\get()
-		return Vector(@target - position, maxSpeed * dt)
+		maxSpeed *= dt
+		return Vector(@target - position, maxSpeed)
