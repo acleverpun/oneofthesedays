@@ -1,0 +1,16 @@
+Steering = require('lib/behaviors/steering/steering')
+Vector = require('lib/geo/vector')
+
+-- Steers away from target
+class Flee extends Steering
+
+	new: (entity, @behavior) => super(entity)
+
+	run: (dt) =>
+		{ :velocity, :maxSpeed, :maxForce } = @entity\get()
+		if not velocity then velocity = Vector.ZERO
+
+		desiredVelocity = -@behavior\run(dt)
+		steering = (desiredVelocity - velocity)\truncate(maxForce)
+		velocity = (velocity + steering)\truncate(maxSpeed * dt)
+		return velocity
