@@ -3,6 +3,7 @@ Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
+Direct = require('lib/behaviors/steering/direct')
 
 class Npc extends Entity
 
@@ -10,9 +11,11 @@ class Npc extends Entity
 		super(...)
 
 		@addMultiple({
-			target: @scene.player,
 			maxSpeed: 50,
 			slowingRadius: 100,
+			behaviors: {
+				Direct(@, @scene.player.position)
+			},
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
 			AnimationList(@, {
 				default: Animation({ 1, 1 }, { duration: 2 }),
