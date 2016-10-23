@@ -4,7 +4,10 @@ Vector = require('lib/geo/vector')
 -- Arrives at target
 class Arrive extends Steering
 
-	new: (entity, @target, @slowingRadius) => super(entity)
+	new: (entity, @slowingRadius) =>
+		super(entity)
+		@target = entity\get('target')
+		if not @target then error('No target specified.')
 
 	run: (dt) =>
 		{ :position, :velocity, :maxSpeed, :maxForce } = @entity\get()

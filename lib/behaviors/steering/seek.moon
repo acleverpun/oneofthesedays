@@ -1,10 +1,13 @@
 Steering = require('lib/behaviors/steering/steering')
 Vector = require('lib/geo/vector')
+Direct = require('lib/behaviors/steering/direct')
 
 -- Steers toward target
 class Seek extends Steering
 
-	new: (entity, @behavior) => super(entity)
+	new: (entity, @behavior = Direct(entity)) => super(entity)
+
+	setTarget: (target) => @behavior\setTarget(target)
 
 	run: (dt) =>
 		{ :velocity, :maxSpeed, :maxForce } = @entity\get()

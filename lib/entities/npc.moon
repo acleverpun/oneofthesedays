@@ -15,14 +15,8 @@ class Npc extends Entity
 		super(...)
 
 		@addMultiple({
+			target: @scene.player.position,
 			maxSpeed: 50,
-			behaviors: {
-				-- Direct(@, @scene.player.position)
-				-- Seek(@, Direct(@, @scene.player.position))
-				-- Flee(@, Direct(@, @scene.player.position))
-				-- Arrive(@, @scene.player.position, 100)
-				Wander(@, Seek(@, Direct(@, @scene.player.position)))
-			},
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
 			AnimationList(@, {
 				default: Animation({ 1, 1 }, { duration: 2 }),
@@ -37,4 +31,13 @@ class Npc extends Entity
 				border: 1,
 				duration: 0.2
 			})
+		})
+
+		-- NOTE: These are currently added separately because they require a `target`
+		@add('behaviors', {
+			-- Direct(@)
+			-- Seek(@)
+			-- Flee(@)
+			-- Arrive(@, 100)
+			Wander(@)
 		})

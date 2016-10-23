@@ -5,6 +5,8 @@ class Steering extends Caste
 
 	new: (@entity) =>
 
+	setTarget: (@target) =>
+
 	update: (dt) =>
 		velocity = @run(dt)
 		@entity\set('velocity', velocity)

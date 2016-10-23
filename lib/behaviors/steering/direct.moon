@@ -4,7 +4,10 @@ Vector = require('lib/geo/vector')
 -- Direct path to target
 class Direct extends Steering
 
-	new: (entity, @target) => super(entity)
+	new: (entity) =>
+		super(entity)
+		@target = entity\get('target')
+		if not @target then error('No target specified.')
 
 	run: (dt) =>
 		{ :position, :maxSpeed } = @entity\get()
