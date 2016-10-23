@@ -6,7 +6,7 @@ class Steering extends Caste
 	new: (@entity) =>
 
 	update: (dt) =>
-		velocity = @run()\multiply(dt)
+		velocity = @run(dt)
 		@entity\set('velocity', velocity)
 
 	run: () => Vector.ZERO

@@ -4,6 +4,7 @@ Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
 Direct = require('lib/behaviors/steering/direct')
+Seek = require('lib/behaviors/steering/seek')
 
 class Npc extends Entity
 
@@ -14,7 +15,8 @@ class Npc extends Entity
 			maxSpeed: 50,
 			slowingRadius: 100,
 			behaviors: {
-				Direct(@, @scene.player.position)
+				-- Direct(@, @scene.player.position)
+				Seek(@, Direct(@, @scene.player.position))
 			},
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
 			AnimationList(@, {

@@ -13,6 +13,9 @@ class SteeringSystem extends System
 			for behavior in *behaviors
 				behavior\update(dt)
 
+			-- velocity = @seek(entity, dt)
+			-- entity\set('velocity', velocity)
+
 	-- Direct path to target
 	naive: (entity, dt, targetPosition) =>
 		{ :position, :maxSpeed, :target } = entity\get()
@@ -21,7 +24,7 @@ class SteeringSystem extends System
 
 	-- Steers toward target
 	seek: (entity, dt, targetPosition) =>
-		{ :position, :velocity, :maxSpeed, :target, :maxForce } = entity\get()
+		{ :velocity, :maxSpeed, :maxForce, :target } = entity\get()
 		if not velocity then velocity = Vector.ZERO
 		if not targetPosition then targetPosition = target.position
 
