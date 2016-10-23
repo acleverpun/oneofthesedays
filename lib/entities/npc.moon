@@ -16,7 +16,7 @@ class Npc extends Entity
 
 		@addMultiple({
 			target: @scene.player.position,
-			maxSpeed: 50,
+			maxSpeed: 10,
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
 			AnimationList(@, {
 				default: Animation({ 1, 1 }, { duration: 2 }),

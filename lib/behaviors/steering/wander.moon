@@ -7,7 +7,7 @@ class Wander extends Steering
 
 	theta: love.math.random() * math.tau
 
-	new: (entity, @behavior = Seek(entity), @radius = 25, @distance = 80, @thetaLimit = math.pi / 8) => super(entity)
+	new: (entity, @behavior = Seek(entity), @radius = 25, @distance = 80, @thetaLimit = math.tau) => super(entity)
 
 	setTarget: (target) => @behavior\setTarget(target)
 
