@@ -8,6 +8,7 @@ Seek = require('lib/behaviors/steering/seek')
 Flee = require('lib/behaviors/steering/flee')
 Arrive = require('lib/behaviors/steering/arrive')
 Wander = require('lib/behaviors/steering/wander')
+Pursuit = require('lib/behaviors/steering/pursuit')
 
 class Npc extends Entity
 
@@ -39,5 +40,6 @@ class Npc extends Entity
 			-- Seek(@)
 			-- Flee(@)
 			-- Arrive(@, 100)
-			Wander(@)
+			-- Wander(@)
+			Pursuit(@)
 		})
