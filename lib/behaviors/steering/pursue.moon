@@ -3,9 +3,9 @@ Vector = require('lib/geo/vector')
 Seek = require('lib/behaviors/steering/seek')
 
 -- Steers toward target
-class Pursuit extends Steering
+class Pursue extends Steering
 
-	new: (entity, @behavior = Seek(entity), @projection = 3) => super(entity)
+	new: (entity, @target, @behavior = Seek(entity), @projection = 3) => super(entity)
 
 	setTarget: (target) => @behavior\setTarget(target)
 
@@ -14,7 +14,7 @@ class Pursuit extends Steering
 		if not velocity then velocity = Vector.ZERO
 		maxSpeed *= dt
 
-		target = position + velocity * @projection
+		target = @target.position + (@target.velocity or 0) * @projection
 		@setTarget(target)
 
 		return @behavior\run(dt)

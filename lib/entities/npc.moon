@@ -8,7 +8,7 @@ Seek = require('lib/behaviors/steering/seek')
 Flee = require('lib/behaviors/steering/flee')
 Arrive = require('lib/behaviors/steering/arrive')
 Wander = require('lib/behaviors/steering/wander')
-Pursuit = require('lib/behaviors/steering/pursuit')
+Pursue = require('lib/behaviors/steering/pursue')
 
 class Npc extends Entity
 
@@ -17,7 +17,7 @@ class Npc extends Entity
 
 		@addMultiple({
 			target: @scene.player.position,
-			maxSpeed: 10,
+			maxSpeed: 20,
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
 			AnimationList(@, {
 				default: Animation({ 1, 1 }, { duration: 2 }),
@@ -41,5 +41,5 @@ class Npc extends Entity
 			-- Flee(@)
 			-- Arrive(@, 100)
 			-- Wander(@)
-			Pursuit(@)
+			Pursue(@, @scene.player)
 		})
