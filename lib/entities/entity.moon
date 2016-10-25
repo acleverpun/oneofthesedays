@@ -12,7 +12,8 @@ class Entity extends SecsEntity
 			position: Vector(data),
 			Shape(data),
 			Tile(data),
-			maxForce: 0.02
+			maxForce: 0.02,
+			mass: 1
 		})
 
 	---
