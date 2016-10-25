@@ -9,6 +9,7 @@ Flee = require('lib/behaviors/steering/flee')
 Arrive = require('lib/behaviors/steering/arrive')
 Wander = require('lib/behaviors/steering/wander')
 Pursue = require('lib/behaviors/steering/pursue')
+Evade = require('lib/behaviors/steering/evade')
 
 class Npc extends Entity
 
@@ -41,5 +42,6 @@ class Npc extends Entity
 			-- Flee(@)
 			-- Arrive(@, 100)
 			-- Wander(@)
-			Pursue(@, @scene.player)
+			-- Pursue(@, @scene.player)
+			Evade(@, @scene.player)
 		})
