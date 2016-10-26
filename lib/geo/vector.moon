@@ -79,6 +79,8 @@ class Vector extends Caste
 
 	equals: (vector) => @x == vector.x and @y == vector.y
 
+	zero: () => @set(0, 0)
+
 	distance: (vector) => math.sqrt((@x - vector.x)^2 + (@y - vector.y)^2)
 
 	dot: (vector) => @x * vector.x + @y * vector.y

@@ -3,13 +3,7 @@ Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
-Direct = require('lib/behaviors/steering/direct')
-Seek = require('lib/behaviors/steering/seek')
-Flee = require('lib/behaviors/steering/flee')
-Arrive = require('lib/behaviors/steering/arrive')
-Wander = require('lib/behaviors/steering/wander')
-Pursue = require('lib/behaviors/steering/pursue')
-Evade = require('lib/behaviors/steering/evade')
+Steering = require('lib/behaviors/steering')
 
 class Npc extends Entity
 
@@ -19,6 +13,7 @@ class Npc extends Entity
 		@addMultiple({
 			target: @scene.player.position,
 			maxSpeed: 50,
+			Steering(@),
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
 			AnimationList(@, {
 				default: Animation({ 1, 1 }, { duration: 2 }),
@@ -33,15 +28,4 @@ class Npc extends Entity
 				border: 1,
 				duration: 0.2
 			})
-		})
-
-		-- NOTE: These are currently added separately because they require a `target`
-		@add('behaviors', {
-			-- Direct(@)
-			-- Seek(@)
-			-- Flee(@)
-			-- Arrive(@, 100)
-			-- Wander(@)
-			-- Pursue(@, @scene.player)
-			Evade(@, @scene.player)
 		})

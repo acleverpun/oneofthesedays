@@ -1,11 +1,14 @@
 System = require('vendor/secs/lib/system')
 
-class SteeringSystem extends System
+class NpcSystem extends System
 
-	@criteria: System.Criteria({ 'behaviors' })
+	@criteria: System.Criteria({ 'isNpc', 'steering' })
+
+	new: (@scene) =>
 
 	update: (dt) =>
 		for entity in *@entities
-			behaviors = entity\get('behaviors')
-			for behavior in *behaviors
-				behavior\update(dt)
+			-- entity.velocity\multiply(dt)
+			-- entity.steering\direct(@scene.player.position)
+			entity.steering\seek(@scene.player.position)
+			entity.steering\update(dt)
