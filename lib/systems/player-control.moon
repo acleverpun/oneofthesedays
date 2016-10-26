@@ -22,7 +22,7 @@ class PlayerControlSystem extends System
 				entity\set('velocity', velocity)
 				animation.value\resume()
 			else
-				velocity\zero()
+				velocity\reset()
 				animation.value\pause()
 
 			if heading and controls.use\pressed()

@@ -4,41 +4,50 @@ Vector = require('lib/geo/vector')
 class Steering extends Caste
 
 	new: (@host) =>
-		@reset()
+		@steering = Vector.ZERO
 		if not @host.velocity then @host\set('velocity', Vector.ZERO)
 
-	direct: (...) => @steering\add(@doSeek(...))
-	seek: (target, slowingRadius = 100) => @steering\add(@doSeek(target, slowingRadius))
-	flee: (...) => @steering\add(@doFlee(...))
-	wander: (...) => @steering\add(@doWander(...))
-	evade: (...) => @steering\add(@doEvade(...))
-	pursuit: (...) => @steering\add(@doPursuit(...))
+	reset: () =>
+		@steering\reset()
+		return @
 
-	reset: () => @steering = Vector.ZERO\clone()
+	add: (vector) =>
+		@steering\add(vector)
+		return @
+
+	init: (dt) =>
+		@maxSpeed = @host.maxSpeed * dt
+		return @
 
 	update: (dt) =>
-		{ :position, :velocity, :mass, :maxSpeed, :maxForce } = @host\get()
-		if not velocity then velocity = Vector.ZERO
+		{ :position, :velocity, :mass, :maxForce } = @host\get()
 		@steering\truncate(maxForce)
 		@steering\scale(1 / mass)
 		velocity\add(@steering)
-		velocity\truncate(maxSpeed * dt)
-		@host\set('velocity', velocity)
+		velocity\truncate(@maxSpeed)
+		return @
+
+	direct: (...) => @add(@doDirect(...))
+	seek: (target, slowingRadius = 100) => @add(@doSeek(target, slowingRadius))
+	flee: (...) => @add(@doFlee(...))
+	wander: (...) => @add(@doWander(...))
+	evade: (...) => @add(@doEvade(...))
+	pursuit: (...) => @add(@doPursuit(...))
 
 	doDirect: (target) =>
 		{ :position } = @host\get()
 		return target - position
 
 	doSeek: (target, slowingRadius = 0) =>
-		{ :position, :velocity, :maxSpeed } = @host\get()
+		{ :position, :velocity } = @host\get()
 		desiredVelocity = target - position
 		distance = desiredVelocity\getLength()
 		desiredVelocity\normalize()
 
 		if distance < slowingRadius
-			desiredVelocity\scale(maxSpeed * distance / slowingRadius)
+			desiredVelocity\scale(@maxSpeed * distance / slowingRadius)
 		else
-			desiredVelocity\scale(maxSpeed)
+			desiredVelocity\scale(@maxSpeed)
 
 		return desiredVelocity\subtract(velocity)
 
@@ -49,5 +58,3 @@ class Steering extends Caste
 	doEvade: (target) =>
 
 	doPursuit: (target) =>
-
-	run: () => Vector.ZERO
