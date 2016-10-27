@@ -4,8 +4,8 @@ Vector = require('lib/geo/vector')
 class Steering extends Caste
 
 	new: (@host) =>
-		@steering = Vector.ZERO
-		if not @host.velocity then @host\set('velocity', Vector.ZERO)
+		@steering = Vector.ZERO\clone()
+		if not @host.velocity then @host\set('velocity', Vector.ZERO\clone())
 
 	reset: () =>
 		@steering\reset()
@@ -22,21 +22,19 @@ class Steering extends Caste
 	update: (dt) =>
 		{ :position, :velocity, :mass, :maxForce } = @host\get()
 		@steering\truncate(maxForce)
-		@steering\scale(1 / mass)
+		-- @steering\scale(1 / mass)
 		velocity\add(@steering)
 		velocity\truncate(@maxSpeed)
 		return @
 
 	direct: (...) => @add(@doDirect(...))
-	seek: (target, slowingRadius = 100) => @add(@doSeek(target, slowingRadius))
+	seek: (target, slowingRadius = 50) => @add(@doSeek(target, slowingRadius))
 	flee: (...) => @add(@doFlee(...))
 	wander: (...) => @add(@doWander(...))
 	evade: (...) => @add(@doEvade(...))
 	pursuit: (...) => @add(@doPursuit(...))
 
-	doDirect: (target) =>
-		{ :position } = @host\get()
-		return target - position
+	doDirect: (target) => target - @host.position
 
 	doSeek: (target, slowingRadius = 0) =>
 		{ :position, :velocity } = @host\get()

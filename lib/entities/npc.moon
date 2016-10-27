@@ -4,7 +4,6 @@ Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
 Steering = require('lib/behaviors/steering')
-Seek = require('lib/behaviors/steering/seek')
 
 class Npc extends Entity
 
@@ -12,7 +11,7 @@ class Npc extends Entity
 		super(...)
 
 		@addMultiple({
-			target: @scene.player.position,
+			target: @scene.player,
 			maxSpeed: 50,
 			Steering(@),
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
@@ -30,5 +29,3 @@ class Npc extends Entity
 				duration: 0.2
 			})
 		})
-
-		@add(Seek(@))

@@ -8,9 +8,9 @@ class NpcSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			entity.seek\update(dt)
-			-- entity.steering\init(dt)
-			-- -- entity.velocity\multiply(dt)
-			-- entity.steering\direct(@scene.player.position)
-			-- -- entity.steering\seek(@scene.player.position)
-			-- entity.steering\update(dt)
+			entity.steering\init(dt)
+
+			-- entity.steering\direct(entity.target.position)
+			entity.steering\seek(entity.target.position)
+
+			entity.steering\update(dt)

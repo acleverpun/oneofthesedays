@@ -31,7 +31,7 @@ class AreaScene extends Scene
 		@entityLayer.secs\addSystem(RenderSystem())
 		@entityLayer.secs\addSystem(ControlSystem())
 		@entityLayer.secs\addSystem(PlayerControlSystem(@world))
-		@entityLayer.secs\addSystem(BehaviorsSystem(@))
+		@entityLayer.secs\addSystem(BehaviorsSystem())
 		@entityLayer.secs\addSystem(MovementSystem(@world, @map))
 
 	enter: (previous, @transition) =>
