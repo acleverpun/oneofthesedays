@@ -12,7 +12,7 @@ class Steering extends Caste
 		return @
 
 	add: (vector) =>
-		@steering\add(vector)
+		if vector then @steering\add(vector)
 		return @
 
 	init: (dt) =>
@@ -29,7 +29,7 @@ class Steering extends Caste
 
 	direct: (...) => @add(@doDirect(...))
 	seek: (target, slowingRadius = 50) => @add(@doSeek(target, slowingRadius))
-	flee: (...) => @add(@doFlee(...))
+	flee: (target, fleeRadius = 50) => @add(@doFlee(target, fleeRadius))
 	wander: (...) => @add(@doWander(...))
 	evade: (...) => @add(@doEvade(...))
 	pursuit: (...) => @add(@doPursuit(...))
@@ -37,19 +37,27 @@ class Steering extends Caste
 	doDirect: (target) => target - @host.position
 
 	doSeek: (target, slowingRadius = 0) =>
-		{ :position, :velocity } = @host\get()
-		desiredVelocity = target - position
-		distance = desiredVelocity\getLength()
-		desiredVelocity\normalize()
+		idealVelocity = @doDirect(target)
+		distance = idealVelocity\getLength()
 
-		if distance < slowingRadius
-			desiredVelocity\scale(@maxSpeed * distance / slowingRadius)
-		else
-			desiredVelocity\scale(@maxSpeed)
+		factor = @maxSpeed
+		if distance < slowingRadius then factor *= distance / slowingRadius
 
-		return desiredVelocity\subtract(velocity)
+		return with idealVelocity
+			\normalize()
+			\scale(factor)
+			\subtract(@host.velocity)
 
-	doFlee: (target) =>
+	doFlee: (target, fleeRadius = 0) =>
+		idealVelocity = -@doDirect(target)
+		distance = idealVelocity\getLength()
+
+		if distance >= fleeRadius then return
+
+		return with idealVelocity
+			\normalize()
+			\scale(@maxSpeed)
+			\subtract(@host.velocity)
 
 	doWander: () =>
 
