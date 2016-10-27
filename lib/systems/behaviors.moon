@@ -11,6 +11,9 @@ class NpcSystem extends System
 			entity.steering\init(dt)
 
 			-- entity.steering\direct(entity.target.position)
-			entity.steering\seek(entity.target.position)
+			-- entity.steering\seek(entity.target.position)
+			-- entity.steering\flee(entity.target.position)
+			-- entity.steering\pursue(entity.target)
+			entity.steering\evade(entity.target)
 
 			entity.steering\update(dt)

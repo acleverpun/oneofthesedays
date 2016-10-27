@@ -30,9 +30,9 @@ class Steering extends Caste
 	direct: (...) => @add(@doDirect(...))
 	seek: (target, slowingRadius = 50) => @add(@doSeek(target, slowingRadius))
 	flee: (target, fleeRadius = 50) => @add(@doFlee(target, fleeRadius))
+	pursue: (target, slowingRadius = 50) => @add(@doPursue(target, slowingRadius))
+	evade: (target, fleeRadius = 50) => @add(@doEvade(target, fleeRadius))
 	wander: (...) => @add(@doWander(...))
-	evade: (...) => @add(@doEvade(...))
-	pursuit: (...) => @add(@doPursuit(...))
 
 	doDirect: (target) => target - @host.position
 
@@ -48,7 +48,7 @@ class Steering extends Caste
 			\scale(factor)
 			\subtract(@host.velocity)
 
-	doFlee: (target, fleeRadius = 0) =>
+	doFlee: (target, fleeRadius = math.huge) =>
 		idealVelocity = -@doDirect(target)
 		distance = idealVelocity\getLength()
 
@@ -59,8 +59,20 @@ class Steering extends Caste
 			\scale(@maxSpeed)
 			\subtract(@host.velocity)
 
+	doPursue: (target, slowingRadius) =>
+		distance = target.position\distanceTo(@host.position)
+		updatesNeeded = distance / @maxSpeed
+		tv = target.velocity or Vector.ZERO
+		tv = tv\clone()\scale(updatesNeeded)
+		targetFuturePosition = target.position\clone()\add(tv)
+		return @doSeek(targetFuturePosition, slowingRadius)
+
+	doEvade: (target, fleeRadius) =>
+		distance = target.position\distanceTo(@host.position)
+		updatesNeeded = distance / @maxSpeed
+		tv = target.velocity or Vector.ZERO
+		tv = tv\clone()\scale(updatesNeeded)
+		targetFuturePosition = target.position\clone()\add(tv)
+		return @doFlee(targetFuturePosition, fleeRadius)
+
 	doWander: () =>
-
-	doEvade: (target) =>
-
-	doPursuit: (target) =>

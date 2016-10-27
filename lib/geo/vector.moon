@@ -81,7 +81,7 @@ class Vector extends Caste
 
 	reset: () => @set(0, 0)
 
-	distance: (vector) => math.sqrt((@x - vector.x)^2 + (@y - vector.y)^2)
+	distanceTo: (vector) => math.sqrt((@x - vector.x)^2 + (@y - vector.y)^2)
 
 	dot: (vector) => @x * vector.x + @y * vector.y
 
