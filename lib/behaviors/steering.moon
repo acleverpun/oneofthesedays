@@ -34,8 +34,10 @@ class Steering extends Caste
 	evade: (target, fleeRadius = 50) => @add(@doEvade(target, fleeRadius))
 	wander: (...) => @add(@doWander(...))
 
+	-- Direct path to target
 	doDirect: (target) => target - @host.position
 
+	-- Steers toward target
 	doSeek: (target, slowingRadius = 0) =>
 		idealVelocity = @doDirect(target)
 		distance = idealVelocity\getLength()
@@ -48,6 +50,7 @@ class Steering extends Caste
 			\scale(factor)
 			\subtract(@host.velocity)
 
+	-- Steers away from target
 	doFlee: (target, fleeRadius = math.huge) =>
 		idealVelocity = -@doDirect(target)
 		distance = idealVelocity\getLength()
@@ -59,6 +62,7 @@ class Steering extends Caste
 			\scale(@maxSpeed)
 			\subtract(@host.velocity)
 
+	-- Steers toward target's future projection
 	doPursue: (target, slowingRadius) =>
 		distance = target.position\distanceTo(@host.position)
 		updatesNeeded = distance / @maxSpeed
@@ -67,6 +71,7 @@ class Steering extends Caste
 		targetFuturePosition = target.position\clone()\add(tv)
 		return @doSeek(targetFuturePosition, slowingRadius)
 
+	-- Steers away from target's future projection
 	doEvade: (target, fleeRadius) =>
 		distance = target.position\distanceTo(@host.position)
 		updatesNeeded = distance / @maxSpeed
@@ -75,4 +80,21 @@ class Steering extends Caste
 		targetFuturePosition = target.position\clone()\add(tv)
 		return @doFlee(targetFuturePosition, fleeRadius)
 
-	doWander: () =>
+	wanderTheta: love.math.random() * math.tau
+
+	-- Roams the land
+	doWander: (radius = 25, distance = 80, thetaLimit = math.tau) =>
+		@wanderTheta += love.math.random() * thetaLimit - 0.5 * thetaLimit
+
+		circlePos = with @host.velocity\clone()
+			\normalize()
+			\multiply(distance)
+			\add(@host.position)
+
+		heading = @host.velocity\getHeading()
+		angle = @wanderTheta + heading
+
+		circleOffset = Vector(radius * math.cos(angle), radius * math.sin(angle))
+		target = circlePos + circleOffset
+
+		return @doSeek(target)
