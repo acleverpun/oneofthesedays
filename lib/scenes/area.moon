@@ -28,11 +28,11 @@ class AreaScene extends Scene
 			if layer.properties.hidden then layer.visible = false
 
 		@entityLayer = MapLayer(@map, '__entities', 'entities')
-		@entityLayer.secs\addSystem(RenderSystem())
-		@entityLayer.secs\addSystem(ControlSystem())
-		@entityLayer.secs\addSystem(PlayerControlSystem(@world))
-		@entityLayer.secs\addSystem(BehaviorsSystem())
-		@entityLayer.secs\addSystem(MovementSystem(@world, @map))
+		@entityLayer\addSystem(RenderSystem())
+		@entityLayer\addSystem(ControlSystem())
+		@entityLayer\addSystem(PlayerControlSystem(@world))
+		@entityLayer\addSystem(BehaviorsSystem())
+		@entityLayer\addSystem(MovementSystem(@world, @map))
 
 	enter: (previous, @transition) =>
 		super(previous)
@@ -114,7 +114,7 @@ class AreaScene extends Scene
 	addEntityToWorld: (entity) =>
 		{ :position, :shape } = entity\get()
 		@world\add(entity, position.x, position.y, shape.width, shape.height)
-		@entityLayer.secs\addEntity(entity)
+		@entityLayer\addEntity(entity)
 
 	update: (dt) =>
 		super(dt)

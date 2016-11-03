@@ -1,9 +1,10 @@
-Caste = require('vendor/caste/lib/caste')
 Secs = require('vendor/secs/lib/secs')
 
-class MapLayer extends Caste
+class MapLayer extends Secs
 
 	new: (@map, @name, index) =>
+		super()
+
 		exists = false
 
 		-- Support using an existing layer
@@ -33,11 +34,3 @@ class MapLayer extends Caste
 		-- Replace original layer with this instance
 		@map.layers[index] = @
 		@map.layers[@name] = @
-
-		@secs = Secs()
-
-	update: (dt) =>
-		@secs\update(dt)
-
-	draw: () =>
-		@secs\draw()

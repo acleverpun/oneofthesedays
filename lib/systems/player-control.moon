@@ -32,3 +32,6 @@ class PlayerControlSystem extends System
 				for item in *items
 					if _.isFunction(item.onUse)
 						item\onUse(entity)
+
+			if controls.attack\pressed()
+				log true
