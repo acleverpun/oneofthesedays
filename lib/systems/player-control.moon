@@ -28,7 +28,7 @@ class PlayerControlSystem extends System
 			if heading and controls.use\pressed()
 				direction = Direction[heading]
 				point = entity\getPoint(direction)\add(direction)
-				items = @map.world\queryPoint(point.x, point.y)
+				items = @map\queryPoint(point)
 				for item in *items
 					if _.isFunction(item.onUse)
 						item\onUse(entity)

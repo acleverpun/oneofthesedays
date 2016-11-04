@@ -8,7 +8,6 @@ ControlSystem = require('lib/systems/control')
 PlayerControlSystem = require('lib/systems/player-control')
 BehaviorsSystem = require('lib/systems/behaviors')
 MovementSystem = require('lib/systems/movement')
-Color = require('lib/display/color')
 Vector = require('lib/geo/vector')
 Direction = require('lib/geo/direction')
 
@@ -21,10 +20,10 @@ class AreaScene extends Scene
 		@scale = 1
 
 		-- Hide hidden layers without being hidden in the editor
-		for layer in *@map.tiled.layers
+		for layer in *@map\getTiledLayers()
 			if layer.properties.hidden then layer.visible = false
 
-		@entityLayer = MapLayer(@map.tiled, '__entities', 'entities')
+		@entityLayer = MapLayer(@map, '__entities', 'entities')
 		@entityLayer\addSystem(RenderSystem())
 		@entityLayer\addSystem(ControlSystem())
 		@entityLayer\addSystem(PlayerControlSystem(@map))
@@ -41,7 +40,7 @@ class AreaScene extends Scene
 
 		boundaries = {}
 		doors = {}
-		for object in *@map.tiled.objects
+		for object in *@map\getTiledObjects()
 			if not object then continue
 			if object.type == 'Player' and @player then continue
 			if object.type == 'zones/Boundary' then _.push(boundaries, object)
@@ -109,8 +108,7 @@ class AreaScene extends Scene
 		@addEntityToWorld(@player)
 
 	addEntityToWorld: (entity) =>
-		{ :position, :shape } = entity\get()
-		@map.world\add(entity, position.x, position.y, shape.width, shape.height)
+		@map\addEntity(entity)
 		@entityLayer\addEntity(entity)
 
 	update: (dt) =>
@@ -124,15 +122,14 @@ class AreaScene extends Scene
 
 	draw: () =>
 		love.graphics.push()
+
 		love.graphics.scale(@scale)
 		love.graphics.translate(-@translation.x, -@translation.y)
-		@map.tiled\setDrawRange(@translation.x, @translation.y, @windowWidth, @windowHeight)
+
+		@map\setDrawRange(@translation.x, @translation.y, @windowWidth, @windowHeight)
 		@map\draw()
 
-		if @DEBUG
-			love.graphics.setColor(Color(255, 0, 0, 255))
-			@map.tiled\bump_draw(@map.world)
-			love.graphics.setColor(Color(255, 255, 255, 255))
+		if @DEBUG then @map\drawCollisions()
 
 		love.graphics.pop()
 
@@ -148,5 +145,5 @@ class AreaScene extends Scene
 			-- TODO: Make work not just for player
 			position = eventPosition + @translation - Vector(200, 150)
 
-			items, len = @map.world\queryPoint(position\toTuple())
+			items, len = @map\queryPoint(position)
 			if len > 0 then dump items

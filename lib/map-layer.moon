@@ -2,13 +2,14 @@ Secs = require('vendor/secs/lib/secs')
 
 class MapLayer extends Secs
 
-	new: (@map, @name, index) =>
+	new: (map, @name, index) =>
 		super()
 
+		layers = map\getTiledLayers()
 		exists = false
 
 		-- Support using an existing layer
-		for l, layer in ipairs @map.layers
+		for l, layer in ipairs layers
 			if _.isString(@name) and layer.name == @name
 				exists = true
 				index = l
@@ -16,15 +17,15 @@ class MapLayer extends Secs
 				index = l
 
 		-- Default to adding to the top
-		if not _.isNumber(index) then index = #@map.layers + 1
+		if not _.isNumber(index) then index = #layers + 1
 
 		-- Create STI layer, and store properties here
 		layer = nil
 		if exists then
-			layer = @map\convertToCustomLayer(index)
+			layer = map.tiled\convertToCustomLayer(index)
 			@name = layer.name
 		else
-			layer = @map\addCustomLayer(@name, index)
+			layer = map.tiled\addCustomLayer(@name, index)
 
 		@type = layer.type
 		@visible = layer.visible
@@ -32,5 +33,5 @@ class MapLayer extends Secs
 		@properties = layer.properties
 
 		-- Replace original layer with this instance
-		@map.layers[index] = @
-		@map.layers[@name] = @
+		layers[index] = @
+		layers[@name] = @

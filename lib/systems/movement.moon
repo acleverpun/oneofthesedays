@@ -5,9 +5,10 @@ class MovementSystem extends System
 
 	@criteria: System.Criteria({ 'velocity', 'position', 'shape' })
 
-	new: (@map) =>
-		@mapWidth = @map.tiled.width * @map.tiled.tilewidth
-		@mapHeight = @map.tiled.height * @map.tiled.tileheight
+	new: (map) =>
+		@world = map.world
+		@mapWidth = map.tiled.width * map.tiled.tilewidth
+		@mapHeight = map.tiled.height * map.tiled.tileheight
 
 	update: (dt) =>
 		for entity in *@entities
@@ -25,7 +26,7 @@ class MovementSystem extends System
 			position.y = math.min(math.max(position.y, 0), @mapHeight - shape.height)
 
 			-- Attempt to move entity
-			position.x, position.y, collisions, num = @map.world\move(entity, position.x, position.y, (other) =>
+			position.x, position.y, collisions, num = @world\move(entity, position.x, position.y, (other) =>
 				if _.isFunction(other.collision) then return 'cross'
 				return 'slide'
 			)
