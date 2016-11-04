@@ -9,7 +9,7 @@ class Audio extends Caste
 	getSound: () => @sound
 
 	proxy: (method, ...) =>
-		args = ...
+		-- args = ...
 		-- pcall(() -> @sound\play(args))
 
 	play: (...) => @proxy('play', ...)

@@ -6,7 +6,7 @@ class PlayerControlSystem extends System
 
 	@criteria: System.Criteria({ 'isPlayer', 'controls', 'position', 'animation', 'maxSpeed' })
 
-	new: (@world) =>
+	new: (@map) =>
 
 	update: (dt) =>
 		for entity in *@entities
@@ -28,7 +28,7 @@ class PlayerControlSystem extends System
 			if heading and controls.use\pressed()
 				direction = Direction[heading]
 				point = entity\getPoint(direction)\add(direction)
-				items = @world\queryPoint(point.x, point.y)
+				items = @map.world\queryPoint(point.x, point.y)
 				for item in *items
 					if _.isFunction(item.onUse)
 						item\onUse(entity)

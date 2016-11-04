@@ -27,9 +27,9 @@ class AreaScene extends Scene
 		@entityLayer = MapLayer(@map.tiled, '__entities', 'entities')
 		@entityLayer\addSystem(RenderSystem())
 		@entityLayer\addSystem(ControlSystem())
-		@entityLayer\addSystem(PlayerControlSystem(@map.world))
+		@entityLayer\addSystem(PlayerControlSystem(@map))
 		@entityLayer\addSystem(BehaviorsSystem())
-		@entityLayer\addSystem(MovementSystem(@map.world, @map.tiled))
+		@entityLayer\addSystem(MovementSystem(@map))
 
 	enter: (previous, @transition) =>
 		super(previous)
@@ -115,7 +115,7 @@ class AreaScene extends Scene
 
 	update: (dt) =>
 		super(dt)
-		@map.tiled\update(dt)
+		@map\update(dt)
 		@windowWidth = love.graphics.getWidth()
 		@windowHeight = love.graphics.getHeight()
 		tx = math.floor(@player.position.x - @windowWidth / @scale / 2)
@@ -127,7 +127,7 @@ class AreaScene extends Scene
 		love.graphics.scale(@scale)
 		love.graphics.translate(-@translation.x, -@translation.y)
 		@map.tiled\setDrawRange(@translation.x, @translation.y, @windowWidth, @windowHeight)
-		@map.tiled\draw()
+		@map\draw()
 
 		if @DEBUG
 			love.graphics.setColor(Color(255, 0, 0, 255))

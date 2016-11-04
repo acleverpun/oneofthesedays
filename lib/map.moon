@@ -8,3 +8,9 @@ class Map extends Caste
 		@tiled = STI("assets/maps/#{@id}", { 'bump' })
 		@world = bump.newWorld(@tiled.tilewidth)
 		@tiled\bump_init(@world)
+
+	update: (dt) =>
+		@tiled\update(dt)
+
+	draw: () =>
+		@tiled\draw()
