@@ -10,7 +10,7 @@ class Warp extends Zone
 	enter: (entity, collision) =>
 		-- TODO: Move some of this logic to Transition
 		{ :map } = @tile.properties
-		if not map then map = @scene.previous.mapName
+		if not map then map = @scene.previous.map.id
 
 		-- TODO: Wat?
 		@scene\switch(@scene.__class(map), @getTransitionData(collision))

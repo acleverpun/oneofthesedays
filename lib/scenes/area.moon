@@ -1,6 +1,5 @@
-STI = require('vendor/sti/sti')
-bump = require('vendor/bump/bump')
 Scene = require('lib/scenes/scene')
+Map = require('lib/map')
 MapLayer = require('lib/map-layer')
 PauseScene = require('lib/scenes/pause')
 entities = require('lib/entities')
@@ -15,24 +14,22 @@ Direction = require('lib/geo/direction')
 
 class AreaScene extends Scene
 
-	new: (@mapName) =>
+	new: (mapId) =>
 		super()
 
-		@map = STI("assets/maps/#{@mapName}", { 'bump' })
-		@world = bump.newWorld(@map.tilewidth)
-		@map\bump_init(@world)
+		@map = Map(mapId)
 		@scale = 1
 
 		-- Hide hidden layers without being hidden in the editor
-		for layer in *@map.layers
+		for layer in *@map.tiled.layers
 			if layer.properties.hidden then layer.visible = false
 
-		@entityLayer = MapLayer(@map, '__entities', 'entities')
+		@entityLayer = MapLayer(@map.tiled, '__entities', 'entities')
 		@entityLayer\addSystem(RenderSystem())
 		@entityLayer\addSystem(ControlSystem())
-		@entityLayer\addSystem(PlayerControlSystem(@world))
+		@entityLayer\addSystem(PlayerControlSystem(@map.world))
 		@entityLayer\addSystem(BehaviorsSystem())
-		@entityLayer\addSystem(MovementSystem(@world, @map))
+		@entityLayer\addSystem(MovementSystem(@map.world, @map.tiled))
 
 	enter: (previous, @transition) =>
 		super(previous)
@@ -44,7 +41,7 @@ class AreaScene extends Scene
 
 		boundaries = {}
 		doors = {}
-		for object in *@map.objects
+		for object in *@map.tiled.objects
 			if not object then continue
 			if object.type == 'Player' and @player then continue
 			if object.type == 'zones/Boundary' then _.push(boundaries, object)
@@ -113,12 +110,12 @@ class AreaScene extends Scene
 
 	addEntityToWorld: (entity) =>
 		{ :position, :shape } = entity\get()
-		@world\add(entity, position.x, position.y, shape.width, shape.height)
+		@map.world\add(entity, position.x, position.y, shape.width, shape.height)
 		@entityLayer\addEntity(entity)
 
 	update: (dt) =>
 		super(dt)
-		@map\update(dt)
+		@map.tiled\update(dt)
 		@windowWidth = love.graphics.getWidth()
 		@windowHeight = love.graphics.getHeight()
 		tx = math.floor(@player.position.x - @windowWidth / @scale / 2)
@@ -129,12 +126,12 @@ class AreaScene extends Scene
 		love.graphics.push()
 		love.graphics.scale(@scale)
 		love.graphics.translate(-@translation.x, -@translation.y)
-		@map\setDrawRange(@translation.x, @translation.y, @windowWidth, @windowHeight)
-		@map\draw()
+		@map.tiled\setDrawRange(@translation.x, @translation.y, @windowWidth, @windowHeight)
+		@map.tiled\draw()
 
 		if @DEBUG
 			love.graphics.setColor(Color(255, 0, 0, 255))
-			@map\bump_draw(@world)
+			@map.tiled\bump_draw(@map.world)
 			love.graphics.setColor(Color(255, 255, 255, 255))
 
 		love.graphics.pop()
@@ -151,5 +148,5 @@ class AreaScene extends Scene
 			-- TODO: Make work not just for player
 			position = eventPosition + @translation - Vector(200, 150)
 
-			items, len = @world\queryPoint(position\toTuple())
+			items, len = @map.world\queryPoint(position\toTuple())
 			if len > 0 then dump items

@@ -17,7 +17,7 @@ class DebugSystem extends System
 		@debug('FPS', @fps)
 		@debug('scene', @scene.__class.__name)
 
-		if @scene.mapName then @debug('map', @scene.mapName)
+		if @scene.map.id then @debug('map', @scene.map.id)
 
 		if player = @scene.player
 			x = math.floor(player.position.x)
