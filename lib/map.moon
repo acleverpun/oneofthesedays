@@ -34,16 +34,21 @@ class Map extends Secs
 		{ :position, :shape } = entity\get()
 		@world\add(entity, position.x, position.y, shape.width, shape.height)
 		if type(layer) == 'string' then layer = @layers[layer]
-		if layer then layer\addEntity(entity)
+		if layer
+			layer\addEntity(entity)
+		else
+			super(entity)
 		return @
 
 	queryPoint: (point) => @world\queryPoint(point\toTuple())
 
 	update: (dt) =>
 		@tiled\update(dt)
+		super(dt)
 
 	draw: () =>
 		@tiled\draw()
+		super()
 
 	setDrawRange: (...) => @tiled\setDrawRange(...)
 
