@@ -1,6 +1,5 @@
 Scene = require('lib/scenes/scene')
 Map = require('lib/map')
-MapLayer = require('lib/map-layer')
 PauseScene = require('lib/scenes/pause')
 entities = require('lib/entities')
 RenderSystem = require('lib/systems/render')
@@ -23,12 +22,14 @@ class AreaScene extends Scene
 		for layer in *@map\getTiledLayers()
 			if layer.properties.hidden then layer.visible = false
 
-		@entityLayer = MapLayer(@map, '__entities', 'entities')
-		@entityLayer\addSystem(RenderSystem())
-		@entityLayer\addSystem(ControlSystem())
-		@entityLayer\addSystem(PlayerControlSystem(@map))
-		@entityLayer\addSystem(BehaviorsSystem())
-		@entityLayer\addSystem(MovementSystem(@map))
+		@entityLayerName = '__entities'
+		with @map
+			\addLayer(@entityLayerName, 'entities')
+			\addSystem(RenderSystem(), @entityLayerName)
+			\addSystem(ControlSystem(), @entityLayerName)
+			\addSystem(PlayerControlSystem(@map), @entityLayerName)
+			\addSystem(BehaviorsSystem(), @entityLayerName)
+			\addSystem(MovementSystem(@map), @entityLayerName)
 
 	enter: (previous, @transition) =>
 		super(previous)
@@ -51,7 +52,7 @@ class AreaScene extends Scene
 			if object.type == 'Player'
 				@player = entity
 				continue
-			@addEntityToWorld(entity)
+			@map\addEntity(entity, @entityLayerName)
 
 		unless @player then error 'No player found.'
 
@@ -105,11 +106,7 @@ class AreaScene extends Scene
 				if @transition.direction == Direction.WEST then @player.position.x += warp.width
 				if @transition.direction == Direction.EAST then @player.position.x -= warp.width
 
-		@addEntityToWorld(@player)
-
-	addEntityToWorld: (entity) =>
-		@map\addEntity(entity)
-		@entityLayer\addEntity(entity)
+		@map\addEntity(@player, @entityLayerName)
 
 	update: (dt) =>
 		super(dt)
