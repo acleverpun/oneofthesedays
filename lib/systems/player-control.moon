@@ -1,6 +1,7 @@
 System = require('vendor/secs/lib/system')
 Vector = require('lib/geo/vector')
-Direction = require('lib/geo/direction')
+UseCommand = require('lib/commands/use')
+AttackCommand = require('lib/commands/attack')
 
 class PlayerControlSystem extends System
 
@@ -26,12 +27,7 @@ class PlayerControlSystem extends System
 				animation.value\pause()
 
 			if heading and controls.use\pressed()
-				direction = Direction[heading]
-				point = entity\getPoint(direction)\add(direction)
-				items = @map\queryPoint(point)
-				for item in *items
-					if _.isFunction(item.onUse)
-						item\onUse(entity)
+				_.push(entity.commandQueue, UseCommand(entity, @map))
 
 			if controls.attack\pressed()
-				log true
+				_.push(entity.commandQueue, AttackCommand())

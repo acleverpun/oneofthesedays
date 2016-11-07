@@ -17,6 +17,7 @@ class Player extends Entity
 		@addMultiple({
 			:maxSpeed,
 			:runSpeed,
+			commandQueue: {},
 			Controls({
 				vertical: with tactile.newControl()
 					\addButtonPair(tactile.keys('up'), tactile.keys('down'))

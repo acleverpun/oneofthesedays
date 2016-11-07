@@ -5,8 +5,9 @@ entities = require('lib/entities')
 RenderSystem = require('lib/systems/render')
 ControlSystem = require('lib/systems/control')
 PlayerControlSystem = require('lib/systems/player-control')
-BehaviorsSystem = require('lib/systems/behaviors')
 MovementSystem = require('lib/systems/movement')
+BehaviorsSystem = require('lib/systems/behaviors')
+CommandSystem = require('lib/systems/command')
 Vector = require('lib/geo/vector')
 Direction = require('lib/geo/direction')
 
@@ -29,6 +30,7 @@ class AreaScene extends Scene
 			\addSystem(ControlSystem(), @entityLayerName)
 			\addSystem(PlayerControlSystem(@map), @entityLayerName)
 			\addSystem(BehaviorsSystem(), @entityLayerName)
+			\addSystem(CommandSystem(), @entityLayerName)
 			\addSystem(MovementSystem(@map), @entityLayerName)
 
 	enter: (previous, @transition) =>
