@@ -1,5 +1,5 @@
 Scene = require('lib/scenes/scene')
-Map = require('lib/map')
+Map = require('lib/geo/map')
 PauseScene = require('lib/scenes/pause')
 entities = require('lib/entities')
 RenderSystem = require('lib/systems/render')
