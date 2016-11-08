@@ -1,5 +1,6 @@
 System = require('vendor/secs/lib/system')
 Vector = require('lib/geo/vector')
+MoveCommand = require('lib/commands/move')
 UseCommand = require('lib/commands/use')
 AttackCommand = require('lib/commands/attack')
 
@@ -11,8 +12,7 @@ class PlayerInputSystem extends System
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :input, :velocity, :position, :animation, :maxSpeed, :runSpeed, :heading } = entity\get()
-			if not velocity then velocity = Vector.ZERO
+			{ :input, :velocity, :animation, :maxSpeed, :runSpeed, :heading } = entity\get()
 
 			useCmd = entity.cache.useCmd or UseCommand(entity, @map)
 			attackCmd = entity.cache.attackCmd or AttackCommand()
@@ -24,10 +24,9 @@ class PlayerInputSystem extends System
 
 			if horizontal != 0 or vertical != 0
 				velocity = Vector({ horizontal, vertical }, maxSpeed * dt)
-				entity\set('velocity', velocity)
-				animation.value\resume()
+				entity.commandQueue\add(MoveCommand(entity, velocity))
 			else
-				velocity\reset()
+				if velocity then velocity\reset()
 				animation.value\pause()
 
 			if heading and input\pressed('use')
