@@ -3,24 +3,25 @@ Vector = require('lib/geo/vector')
 UseCommand = require('lib/commands/use')
 AttackCommand = require('lib/commands/attack')
 
-class PlayerControlSystem extends System
+class PlayerInputSystem extends System
 
-	@criteria: System.Criteria({ 'isPlayer', 'controls', 'position', 'animation', 'maxSpeed' })
+	@criteria: System.Criteria({ 'isPlayer', 'input', 'position', 'animation', 'maxSpeed' })
 
 	new: (@map) =>
 
 	update: (dt) =>
 		for entity in *@entities
-			{ :controls, :velocity, :position, :animation, :maxSpeed, :runSpeed, :heading } = entity\get()
+			{ :input, :velocity, :position, :animation, :maxSpeed, :runSpeed, :heading } = entity\get()
 			if not velocity then velocity = Vector.ZERO
 
 			useCmd = entity.cache.useCmd or UseCommand(entity, @map)
 			attackCmd = entity.cache.attackCmd or AttackCommand()
 
-			if controls.run\isDown() then maxSpeed = runSpeed
+			if input\down('run') then maxSpeed = runSpeed
 
-			horizontal = controls.horizontal()
-			vertical = controls.vertical()
+			horizontal = input\get('right') - input\get('left')
+			vertical = input\get('down') - input\get('up')
+
 			if horizontal != 0 or vertical != 0
 				velocity = Vector({ horizontal, vertical }, maxSpeed * dt)
 				entity\set('velocity', velocity)
@@ -29,8 +30,8 @@ class PlayerControlSystem extends System
 				velocity\reset()
 				animation.value\pause()
 
-			if heading and controls.use\pressed()
+			if heading and input\pressed('use')
 				entity.commandQueue\add(useCmd)
 
-			if controls.attack\pressed()
+			if input\pressed('attack')
 				entity.commandQueue\add(attackCmd)

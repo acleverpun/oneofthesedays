@@ -4,9 +4,6 @@
 [submodule "vendor/SUIT"]
 	path = vendor/SUIT
 	url = https://github.com/vrld/SUIT.git
-[submodule "vendor/tactile"]
-	path = vendor/tactile
-	url = https://github.com/tesselode/tactile.git
 [submodule "vendor/wave"]
 	path = vendor/wave
 	url = https://github.com/Ulydev/wave.git
@@ -31,3 +28,6 @@
 [submodule "vendor/secs"]
 	path = vendor/secs
 	url = https://github.com/acleverpun/secs.git
+[submodule "vendor/baton"]
+	path = vendor/baton
+	url = https://github.com/tesselode/baton.git

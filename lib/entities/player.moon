@@ -1,10 +1,9 @@
-tactile = require('vendor/tactile/tactile')
 Entity = require('lib/entities/entity')
 Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
-Controls = require('lib/input/controls')
+Input = require('lib/input/input')
 Queue = require('lib/utils/queue')
 
 class Player extends Entity
@@ -19,21 +18,14 @@ class Player extends Entity
 			:maxSpeed,
 			:runSpeed,
 			commandQueue: Queue(),
-			Controls({
-				vertical: with tactile.newControl()
-					\addButtonPair(tactile.keys('up'), tactile.keys('down'))
-					\addButtonPair(tactile.keys('w'), tactile.keys('s'))
-					\addButtonPair(tactile.keys('k'), tactile.keys('j'))
-				horizontal: with tactile.newControl()
-					\addButtonPair(tactile.keys('left'), tactile.keys('right'))
-					\addButtonPair(tactile.keys('a'), tactile.keys('d'))
-					\addButtonPair(tactile.keys('h'), tactile.keys('l'))
-				run: with tactile.newControl()
-					\addButton(tactile.keys('lshift', 'rshift'))
-				attack: with tactile.newControl()
-					\addButton(tactile.keys('space'))
-				use: with tactile.newControl()
-					\addButton(tactile.keys('return'))
+			Input({
+				left: { 'key:left', 'key:a', 'key:h', 'axis:leftx-', 'button:dpleft' },
+				right: { 'key:right', 'key:d', 'key:l', 'axis:leftx+', 'button:dpright' },
+				up: { 'key:up', 'key:w', 'key:k', 'axis:lefty-', 'button:dpup' },
+				down: { 'key:down', 'key:s', 'key:j', 'axis:lefty+', 'button:dpdown' },
+				run: { 'key:lshift', 'key:rshift', 'button:b' },
+				attack: { 'key:space', 'button:a' },
+				use: { 'key:return', 'button:x' }
 			}),
 			AnimationList(@, {
 				default: Animation({ 1, 1 }, { duration: 2 }),
