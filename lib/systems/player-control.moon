@@ -27,7 +27,7 @@ class PlayerControlSystem extends System
 				animation.value\pause()
 
 			if heading and controls.use\pressed()
-				_.push(entity.commandQueue, UseCommand(entity, @map))
+				entity.commandQueue\add(UseCommand(entity, @map))
 
 			if controls.attack\pressed()
-				_.push(entity.commandQueue, AttackCommand())
+				entity.commandQueue\add(AttackCommand())

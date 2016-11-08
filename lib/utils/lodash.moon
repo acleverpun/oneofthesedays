@@ -2,7 +2,10 @@ _ = require('vendor/lodash/src/lodash')
 
 -- ARRAY
 
-_.push = (array, value) -> table.insert(array, value)
+_.push = (array, ...) ->
+	args = { ... }
+	for value in *args
+		table.insert(array, value)
 
 _.join = (value, delimiter) -> table.concat(value, delimiter)
 

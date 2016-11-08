@@ -8,7 +8,5 @@ class CommandSystem extends System
 		for entity in *@entities
 			{ :commandQueue } = entity\get()
 
-			while #commandQueue > 0
-				command = commandQueue[1]
+			for command in entity.commandQueue\process()
 				command\exec()
-				table.remove(commandQueue)

@@ -5,6 +5,7 @@ Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
 Controls = require('lib/input/controls')
+Queue = require('lib/utils/queue')
 
 class Player extends Entity
 
@@ -17,7 +18,7 @@ class Player extends Entity
 		@addMultiple({
 			:maxSpeed,
 			:runSpeed,
-			commandQueue: {},
+			commandQueue: Queue(),
 			Controls({
 				vertical: with tactile.newControl()
 					\addButtonPair(tactile.keys('up'), tactile.keys('down'))
