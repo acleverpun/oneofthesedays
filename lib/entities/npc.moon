@@ -1,9 +1,10 @@
 Entity = require('lib/entities/entity')
 Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
+Queue = require('lib/utils/queue')
+Steering = require('lib/behaviors/steering')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
-Steering = require('lib/behaviors/steering')
 
 class Npc extends Entity
 
@@ -13,6 +14,7 @@ class Npc extends Entity
 		@addMultiple({
 			target: @scene.player,
 			maxSpeed: 50,
+			commandQueue: Queue(),
 			Steering(@),
 			-- Sprite('ff4-characters.png', Vector(64, 119), Shape(16, 16))
 			AnimationList(@, {

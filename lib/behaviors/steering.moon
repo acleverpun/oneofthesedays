@@ -25,7 +25,6 @@ class Steering extends Caste
 		-- @steering\scale(1 / mass)
 		velocity\add(@steering)
 		velocity\truncate(@maxSpeed)
-		return @
 
 	direct: (...) => @add(@doDirect(...))
 	seek: (target, slowingRadius = 50) => @add(@doSeek(target, slowingRadius))
