@@ -24,10 +24,12 @@ class Vector extends Caste
 			@x = x
 			@y = y
 
-	__tostring: () => "#{@@name}(#{@x}, #{@y})##{@getLength()}"
+	__tostring: () => "#{@@name}(#{@x}, #{@y})##{#@}"
 	toTuple: () => @x, @y
 	toArray: () => { @x, @y }
-	toTable: () => { x: @x, y: @y, length: @getLength() }
+	toTable: () => { x: @x, y: @y, length: #@ }
+
+	__len: () => math.sqrt(@getLengthSq())
 
 	__eq: (value) => @x == value.x and @y == value.y
 	__le: (value) => @x <= value.x and @y <= value.y
@@ -88,7 +90,7 @@ class Vector extends Caste
 	angleTo: (vector) =>
 		if (@x == 0 and @y == 0) or (vector.x == 0 and vector.y == 0) then return 0
 		dot = @dot(vector)
-		amount = dot / (@getLength() * vector\getLength())
+		amount = dot / (#@ * #vector)
 		if amount <= -1 then return math.pi
 		if amount >= 1 then return 0
 		return math.acos(amount)
@@ -107,28 +109,28 @@ class Vector extends Caste
 
 	-- Normalize vector
 	normalize: () =>
-		length = @getLength()
+		length = #@
 		if length != 0 and length != 1 then @divide(length)
 		return @
 
 	-- Scale vector to the specified length
 	scale: (length = 1) =>
-		if @getLength() == length then return @
+		if #@ == length then return @
 		@normalize()
 		if length != 1 then @multiply(length)
 		return @
 
 	-- Scale vector if bigger than the specified length
 	truncate: (length = 1) =>
-		if @getLength() <= length then return @
+		if #@ <= length then return @
 		@normalize()
 		if length != 1 then @multiply(length)
 		return @
 
 	clone: () => @@(@x, @y)
 
+	getLength: () => #@
 	getLengthSq: () => @x^2 + @y^2
-	getLength: () => math.sqrt(@getLengthSq())
 	getPerpendicular: () => @@(-@y, @x)
 	getHeading: () => return math.atan2(@y, @x)
 
@@ -142,7 +144,7 @@ class Vector extends Caste
 		return @
 
 	setAngle: (theta) =>
-		length = @getLength()
+		length = #@
 		@x = math.cos(theta) * length
 		@y = math.sin(theta) * length
 		return @

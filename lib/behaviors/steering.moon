@@ -40,7 +40,7 @@ class Steering extends Caste
 	-- Steers toward target
 	doSeek: (target, slowingRadius = 0) =>
 		idealVelocity = @doDirect(target)
-		distance = idealVelocity\getLength()
+		distance = #idealVelocity
 
 		factor = @maxSpeed
 		if distance < slowingRadius then factor *= distance / slowingRadius
@@ -53,7 +53,7 @@ class Steering extends Caste
 	-- Steers away from target
 	doFlee: (target, fleeRadius = math.huge) =>
 		idealVelocity = -@doDirect(target)
-		distance = idealVelocity\getLength()
+		distance = #idealVelocity
 
 		if distance >= fleeRadius then return
 

@@ -35,7 +35,7 @@ class Direction extends Vector
 	--
 	@align: (vector, allowIntermediate = false) =>
 		heading = @getHeadingName(vector, allowIntermediate)
-		return Vector(@[heading], vector\getLength())
+		return Vector(@[heading], #vector)
 
 	---
 	-- Returns whether a vector is a standard direction
@@ -62,7 +62,7 @@ class Direction extends Vector
 
 		super(x, y)
 
-		length = @getLength()
+		length = #@
 		if length != 0 and length != 1 then @normalize()
 
 	toVector: () => Vector(@x, @y)
