@@ -16,6 +16,8 @@ class Entity extends SecsEntity
 			mass: 1
 		})
 
+		@cache = {}
+
 	---
 	-- Returns a point found on the entity
 	--

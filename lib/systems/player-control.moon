@@ -14,6 +14,9 @@ class PlayerControlSystem extends System
 			{ :controls, :velocity, :position, :animation, :maxSpeed, :runSpeed, :heading } = entity\get()
 			if not velocity then velocity = Vector.ZERO
 
+			useCmd = entity.cache.useCmd or UseCommand(entity, @map)
+			attackCmd = entity.cache.attackCmd or AttackCommand()
+
 			if controls.run\isDown() then maxSpeed = runSpeed
 
 			horizontal = controls.horizontal()
@@ -27,7 +30,7 @@ class PlayerControlSystem extends System
 				animation.value\pause()
 
 			if heading and controls.use\pressed()
-				entity.commandQueue\add(UseCommand(entity, @map))
+				entity.commandQueue\add(useCmd)
 
 			if controls.attack\pressed()
-				entity.commandQueue\add(AttackCommand())
+				entity.commandQueue\add(attackCmd)
