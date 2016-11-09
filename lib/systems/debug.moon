@@ -32,5 +32,5 @@ class DebugSystem extends System
 
 	onToggle: (isActive) =>
 		if not @scene.map then return
-		if entityLayer = @scene.map\getTiledLayers().entities
+		if entityLayer = @scene.map\getTiledLayers().actors
 			entityLayer.visible = isActive

@@ -43,7 +43,7 @@ class AreaScene extends Scene
 
 		boundaries = {}
 		doors = {}
-		for object in *@map\getTiledObjects()
+		for id, object in pairs(@map\getTiledObjects())
 			if not object then continue
 			if object.type == 'Player' and @player then continue
 			if object.type == 'zones/Boundary' then _.push(boundaries, object)

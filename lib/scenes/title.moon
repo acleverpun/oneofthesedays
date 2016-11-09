@@ -36,7 +36,8 @@ class TitleScene extends GuiScene
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
-		@switch(AreaScene('sample_map.lua'))
+		-- @switch(AreaScene('sample_map.lua'))
+		@switch(AreaScene('rocket.lua'))
 		@sound\play()
 
 	quitGame: () =>
