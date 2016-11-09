@@ -23,9 +23,9 @@ class AreaScene extends Scene
 		for layer in *@map\getTiledLayers()
 			if layer.properties.hidden then layer.visible = false
 
-		@entityLayerName = '__entities'
+		@entityLayerName = 'entities'
 		with @map
-			\addLayer(@entityLayerName, 'entities')
+			\addLayer(@entityLayerName, 'actors')
 			\addSystem(RenderSystem(), @entityLayerName)
 			\addSystem(InputSystem(), @entityLayerName)
 			\addSystem(PlayerInputSystem(@map), @entityLayerName)

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" backgroundcolor="#000000" nextobjectid="4">
- <tileset firstgid="1" name="roguelikeSheet_transparent" tilewidth="16" tileheight="16" spacing="1" tilecount="1767" columns="57">
-  <image source="../sprites/roguelikeSheet_transparent.png" width="968" height="526"/>
- </tileset>
+ <tileset firstgid="1" source="../tilesets/roguelike.tsx"/>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztk1sKwjAQRYdkrZW2bkC3Zh+7qvnVgPky95IpiaUyB+andDgknIgYhmF8sziRiczq9HtoJ8f2/nf0eJ7AEcjepvR3Hs8AHFeyo/XfBc8FOHqPd2r6b2T+wY/6Sh0zP3oDQeFHfaWOmR+9ndhmKaivrtCP2qxBib8lR/tZm9rO9sDa1Ha2B9Zmzc4Qj88954jf58b3n86f4xfnNwzj/LwAOb+HQA==
@@ -13,7 +11,7 @@
    eJzt08EJgDAQRNHF5Kr2ZVuWoXalRrsxxyVgwiLu6T+Y25A5LBEBAABWSxBZVbbgu7/nvUPldN7vo8igMkbffW9T92+/ZTa+Z+2jrrxnyv/tUrlDvf9Vec/WPvcH8OYBaiATgA==
   </data>
  </layer>
- <objectgroup name="entities">
+ <objectgroup name="actors">
   <properties>
    <property name="hidden" type="bool" value="true"/>
   </properties>

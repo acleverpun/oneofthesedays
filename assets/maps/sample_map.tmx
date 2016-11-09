@@ -20,7 +20,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="entities">
+ <objectgroup name="actors">
   <properties>
    <property name="hidden" type="bool" value="true"/>
   </properties>
