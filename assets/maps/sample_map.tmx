@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" nextobjectid="14">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" nextobjectid="15">
  <tileset firstgid="1" name="Roguelike" tilewidth="16" tileheight="16" spacing="1" tilecount="1767" columns="57">
   <image source="../sprites/roguelikeSheet_transparent.png" width="968" height="526"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="1000"/>
+    <frame tileid="1" duration="600"/>
+   </animation>
+  </tile>
  </tileset>
  <layer name="ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1UkKgDAQRNGAw6EcL+VwfSMoSBODgtCF/MXbf6oDGUMII6TUhndPrk2tkb5vu1T67jq9e6wiKo1KoOvURb0xCO01ifWl9qLvH33720u9N5W+3HZNtBxWwT7PN/e2z+svmS83bM1tvW76ZEuF2+a2VNsOAAAAgIYNUsGBXg==
+   eJzt1UkKgDAQRNGIw6EcL+VwfbOIEBoNCkLX4i/e/lMdyBJCWCClM7x7Sm1qjfT926XS99Tp3WPVUWO0Al2XMaqMWWivNTVNIn35XnmTyn5396Tv/du73ptiX2m7PtqTQ7DP88197fP6S7bshoO5rddN32ypcNvSlmrbAQAAANBwAs2Fc04=
   </data>
  </layer>
  <layer name="roads" width="40" height="40">
