@@ -21,9 +21,11 @@ class TitleScene extends GuiScene
 		@gui.layout\row(0, 200)
 
 		self.buttonStart = @gui\Button('Start', @gui.layout\row(200, 20))
+		self.buttonPlayground = @gui\Button('Playground', @gui.layout\row(200, 20))
 		self.buttonQuit = @gui\Button('Quit', @gui.layout\row(200, 20))
 
 		if self.buttonStart.hit then @\startGame()
+		if self.buttonPlayground.hit then @\startPlayground()
 		if self.buttonQuit.hit then @\quitGame()
 
 	draw: (...) =>
@@ -36,8 +38,11 @@ class TitleScene extends GuiScene
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
-		-- @switch(AreaScene('sample_map.lua'))
 		@switch(AreaScene('rocket.lua'))
+		@sound\play()
+
+	startPlayground: () =>
+		@switch(AreaScene('sample_map.lua'))
 		@sound\play()
 
 	quitGame: () =>
