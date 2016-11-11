@@ -1,3 +1,4 @@
+spine = require('vendor/spine-love/spine')
 Entity = require('lib/entities/entity')
 Vector = require('lib/geo/vector')
 Shape = require('lib/geo/shape')
@@ -41,3 +42,29 @@ class Player extends Entity
 				duration: 0.2
 			})
 		})
+
+		@skeleton = @loadSkeleton('raptor', 'walk')
+
+	loadImage: (path) -> love.graphics.newImage("assets/animations/#{path}")
+
+	loadSkeleton: (name, animation, skin, scale = 0.25, x = @position.x, y = @position.y) =>
+		atlas = spine.TextureAtlas.new(spine.utils.readFile("assets/animations/#{name}.atlas"), @loadImage)
+
+		atlasAttachmentLoader = spine.AtlasAttachmentLoader.new(atlas)
+		json = spine.SkeletonJson.new(atlasAttachmentLoader)
+		json.scale = scale
+
+		skeletonData = json\readSkeletonDataFile("assets/animations/#{name}.json")
+		skeleton = spine.Skeleton.new(skeletonData)
+		skeleton.x = x
+		skeleton.y = y
+		skeleton.flipX = false
+		skeleton.flipY = true
+		if skin then skeleton\setSkin(skin)
+		skeleton\setToSetupPose()
+
+		stateData = spine.AnimationStateData.new(skeletonData)
+		state = spine.AnimationState.new(stateData)
+		state\setAnimationByName(0, animation, true)
+
+		return { :state, :skeleton }

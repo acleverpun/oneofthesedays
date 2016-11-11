@@ -1,3 +1,4 @@
+spine = require('vendor/spine-love/spine')
 System = require('vendor/secs/lib/system')
 Vector = require('lib/geo/vector')
 MoveCommand = require('lib/commands/move')
@@ -9,6 +10,7 @@ class PlayerInputSystem extends System
 	@criteria: System.Criteria({ 'isPlayer', 'input', 'position', 'animation', 'maxSpeed' })
 
 	new: (@map) =>
+		@skeletonRenderer = spine.SkeletonRenderer.new()
 
 	update: (dt) =>
 		for entity in *@entities
@@ -34,3 +36,13 @@ class PlayerInputSystem extends System
 
 			if input\pressed('attack')
 				entity.commandQueue\add(attackCmd)
+
+			{ :state, :skeleton } = entity.skeleton
+			state\update(dt)
+			state\apply(skeleton)
+			skeleton\updateWorldTransform()
+
+	draw: () =>
+		for entity in *@entities
+			{ :skeleton } = entity.skeleton
+			@skeletonRenderer\draw(skeleton)
