@@ -31,3 +31,9 @@
 [submodule "vendor/baton"]
 	path = vendor/baton
 	url = https://github.com/tesselode/baton.git
+[submodule "vendor/luajson"]
+	path = vendor/luajson
+	url = https://github.com/harningt/luajson.git
+[submodule "vendor/love-spriter"]
+	path = vendor/love-spriter
+	url = https://github.com/karai17/love-spriter.git
