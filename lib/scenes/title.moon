@@ -34,7 +34,8 @@ class TitleScene extends GuiScene
 
 	keypressed: (key) =>
 		super(key)
-		if key == 'return' then @\startGame()
+		if key == 'space' then @\startGame()
+		if key == 'return' then @\startPlayground()
 		if key == 'escape' then @\quitGame()
 
 	startGame: () =>
