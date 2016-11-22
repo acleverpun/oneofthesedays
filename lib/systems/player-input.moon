@@ -34,3 +34,9 @@ class PlayerInputSystem extends System
 
 			if input\pressed('attack')
 				entity.commandQueue\add(attackCmd)
+
+			entity.spriter\update(dt)
+
+	draw: () =>
+		for entity in *@entities
+			entity.spriter\draw(0, 0)

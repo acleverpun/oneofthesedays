@@ -36,4 +36,4 @@
 	url = https://github.com/harningt/luajson.git
 [submodule "vendor/love-spriter"]
 	path = vendor/love-spriter
-	url = https://github.com/karai17/love-spriter.git
+	url = https://github.com/acleverpun/love-spriter.git

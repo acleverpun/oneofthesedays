@@ -5,6 +5,7 @@ Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
 Input = require('lib/input/input')
 Queue = require('lib/utils/queue')
+Spriter = require('vendor/love-spriter/libs/Spriter')
 
 class Player extends Entity
 
@@ -41,3 +42,7 @@ class Player extends Entity
 				duration: 0.2
 			})
 		})
+
+		@spriter = Spriter\loadSpriter('assets/animations', 'GreyGuy')
+		animationNames = @spriter\getAnimationNames()
+		@spriter\setCurrentAnimationName('idle')
