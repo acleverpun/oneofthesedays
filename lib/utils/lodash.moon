@@ -28,8 +28,8 @@ _.isClass = (value) -> not not value.isClass
 
 -- MATH
 
-_.round = (value, precision) ->
-	factor = 10^(precision or 0)
+_.round = (value, precision = 0) ->
+	factor = 10^(precision)
 	return math.floor(value * factor + 0.5) / factor
 
 -- OBJECT
