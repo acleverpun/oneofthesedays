@@ -1,5 +1,5 @@
 System = require('vendor/secs/lib/system')
-Direction = require('lib/geo/direction')
+{ :Direction } = require('vendor/hug/lib/geo')
 
 class MovementSystem extends System
 

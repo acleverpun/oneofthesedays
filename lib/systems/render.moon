@@ -1,5 +1,5 @@
 System = require('vendor/secs/lib/system')
-Color = require('lib/display/color')
+Color = require('vendor/hug/lib/display/color')
 
 class RenderSystem extends System
 

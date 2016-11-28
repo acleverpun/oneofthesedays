@@ -31,3 +31,6 @@
 [submodule "vendor/baton"]
 	path = vendor/baton
 	url = https://github.com/tesselode/baton.git
+[submodule "vendor/hug"]
+	path = vendor/hug
+	url = https://github.com/acleverpun/hug.git

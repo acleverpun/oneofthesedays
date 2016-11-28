@@ -1,6 +1,5 @@
 Command = require('lib/commands/command')
-Vector = require('lib/geo/vector')
-Direction = require('lib/geo/direction')
+{ :Vector, :Direction } = require('vendor/hug/lib/geo')
 
 class MoveCommand extends Command
 

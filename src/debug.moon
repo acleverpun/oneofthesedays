@@ -1,5 +1,5 @@
 inspect = require('vendor/inspect/inspect')
-{ :run } = require('lib/utils')
+{ :run } = require('vendor/hug')
 
 love.errhand = (err) ->
 	-- error

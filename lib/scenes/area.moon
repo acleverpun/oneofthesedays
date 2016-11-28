@@ -8,8 +8,7 @@ PlayerInputSystem = require('lib/systems/player-input')
 MovementSystem = require('lib/systems/movement')
 BehaviorsSystem = require('lib/systems/behaviors')
 CommandSystem = require('lib/systems/command')
-Vector = require('lib/geo/vector')
-Direction = require('lib/geo/direction')
+{ :Vector, :Direction } = require('vendor/hug/lib/geo')
 
 class AreaScene extends Scene
 

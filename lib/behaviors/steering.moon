@@ -1,5 +1,5 @@
 Caste = require('vendor/caste/lib/caste')
-Vector = require('lib/geo/vector')
+{ :Vector } = require('vendor/hug/lib/geo')
 
 class Steering extends Caste
 

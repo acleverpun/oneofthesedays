@@ -1,5 +1,5 @@
 System = require('vendor/secs/lib/system')
-Vector = require('lib/geo/vector')
+{ :Vector } = require('vendor/hug/lib/geo')
 MoveCommand = require('lib/commands/move')
 UseCommand = require('lib/commands/use')
 AttackCommand = require('lib/commands/attack')

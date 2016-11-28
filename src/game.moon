@@ -1,6 +1,7 @@
 require('src/debug')
-export _ = require('lib/utils/lodash')
-export math = require('lib/utils/math')
+hug = require('vendor/hug')
+export _ = hug._
+export math = hug.math
 
 scenes = require('vendor/hump/gamestate')
 TitleScene = require('lib/scenes/title')

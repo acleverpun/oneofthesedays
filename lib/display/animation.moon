@@ -1,6 +1,6 @@
 anim8 = require('vendor/anim8/anim8')
 Caste = require('vendor/caste/lib/caste')
-Vector = require('lib/geo/vector')
+{ :Vector } = require('vendor/hug/lib/geo')
 
 class Animation extends Caste
 

@@ -1,7 +1,7 @@
 Audio = require('lib/utils/audio')
 GuiScene = require('lib/scenes/gui')
 AreaScene = require('lib/scenes/area')
-Color = require('lib/display/color')
+{ :Color } = require('vendor/hug/lib/display')
 
 class TitleScene extends GuiScene
 

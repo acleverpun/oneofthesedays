@@ -1,5 +1,5 @@
 Command = require('lib/commands/command')
-Direction = require('lib/geo/direction')
+{ :Direction } = require('vendor/hug/lib/geo')
 
 class UseCommand extends Command
 

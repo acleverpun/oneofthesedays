@@ -1,6 +1,6 @@
 System = require('vendor/secs/lib/system')
-Color = require('lib/display/color')
-Direction = require('lib/geo/direction')
+Color = require('vendor/hug/lib/display/color')
+{ :Direction } = require('vendor/hug/lib/geo')
 
 class DebugSystem extends System
 

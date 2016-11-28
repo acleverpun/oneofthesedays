@@ -1,10 +1,10 @@
 Entity = require('lib/entities/entity')
-Vector = require('lib/geo/vector')
+{ :Vector } = require('vendor/hug/lib/geo')
 Shape = require('lib/geo/shape')
 Animation = require('lib/display/animation')
 AnimationList = require('lib/display/animation-list')
 Input = require('lib/input/input')
-Queue = require('lib/utils/queue')
+Queue = require('vendor/hug/lib/queue')
 
 class Player extends Entity
 

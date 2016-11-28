@@ -2,7 +2,7 @@ Secs = require('vendor/secs/lib/secs')
 STI = require('vendor/sti/sti')
 bump = require('vendor/bump/bump')
 MapLayer = require('lib/geo/map-layer')
-Color = require('lib/display/color')
+{ :Color } = require('vendor/hug/lib/display')
 
 class Map extends Secs
 
