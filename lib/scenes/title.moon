@@ -8,7 +8,7 @@ class TitleScene extends GuiScene
 	new: (...) =>
 		super(...)
 		@music = Audio('vendor/wave/music.wav', 'stream')
-		@music\getSound()\setLooping(true)
+		@music\setLooping(true)
 		@sound = Audio('vendor/wave/sound.wav', 'static')
 
 	enter: (...) =>
